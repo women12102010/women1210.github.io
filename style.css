@@ -1,1 +1,138 @@
 
+/* 1. Thiết lập chung */
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: dark;
+    --bg: #10090d;
+    --pink: #f1b6c8;
+    --gold: #d8b779;
+    --text: #f7edf0;
+    --muted: #bbaab2;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            ellipse at 50% 45%,
+            #42202e 0%,
+            var(--bg) 65%
+        );
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+/* 2. Mỗi cảnh chiếm toàn màn hình */
+.scene {
+    min-height: 100vh;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* 3. Dòng chữ nhỏ phía trên */
+.eyebrow {
+    color: var(--gold);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* 4. Tiêu đề chính */
+h1 {
+    max-width: 800px;
+    font-size: clamp(36px, 7vw, 76px);
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+h1 span {
+    display: block;
+    color: var(--pink);
+    font-style: italic;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    line-height: 1.8;
+}
+
+/* 5. Nút mở lời nhắn */
+button {
+    margin-top: 28px;
+    padding: 15px 28px;
+    border: 1px solid var(--gold);
+    border-radius: 3px;
+    background: transparent;
+    color: var(--text);
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+button:hover {
+    background: var(--gold);
+    color: var(--bg);
+    transform: translateY(-3px);
+}
+
+/* 6. Cảnh lời nhắn */
+.scene-message h2 {
+    color: var(--pink);
+    font-size: clamp(30px, 5vw, 52px);
+    font-weight: normal;
+}
+
+.scene-message #messageText {
+    max-width: 620px;
+    min-height: 100px;
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.9;
+}
+
+/* 7. Chuyển cảnh */
+.scene-message:not([hidden]) {
+    animation: fadeIn 1.2s ease both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 8. Hỗ trợ người không thích chuyển động */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
