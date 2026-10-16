@@ -22,7 +22,18 @@
   .pill{border:1px solid #53598b;border-radius:999px;padding:5px 10px;color:#dce0ff;font-size:11px;white-space:nowrap}
   .stage{position:relative;background:#a8d9ef;line-height:0}
   canvas{display:block;width:100%;height:auto;aspect-ratio:900/440;outline:none;touch-action:none}
-  .overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;background:#11152e9c;line-height:1.5;backdrop-filter:blur(4px)}
+  .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: #11152e9c;
+    line-height: 1.5;
+    backdrop-filter: blur(4px);
+    overflow-y: auto;
+  }
   .panel{width:min(100%,440px);padding:clamp(20px,4vw,34px);text-align:center;color:var(--ink);background:#fff8e7;border:3px solid #f5d98b;border-radius:18px;box-shadow:0 12px 0 #cba95d,0 25px 55px #0a0d2b55}
   .panel .emoji{font-size:35px;line-height:1.2;margin-bottom:8px}
   .panel h1,.panel h2{font-family:Georgia,'Times New Roman',serif;margin:0 0 10px;line-height:1.08;color:#34345f}
@@ -42,6 +53,15 @@
   .hidden{display:none!important}
   @media(max-width:600px){body{padding:12px 9px;align-items:flex-start}.top{margin-bottom:9px}.subtitle{max-width:45%}.hud{padding:10px 11px}.help{font-size:10px;padding:10px 11px}.mobile-controls{display:flex}.ctrl{width:54px;height:50px}.ctrl.jump{width:78px}.panel p{font-size:13px}}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  #winOverlay {
+    overflow-y: auto;
+    align-items: flex-start;
+  }
+
+  #winOverlay .panel {
+    margin: auto;
+    flex-shrink: 0;
+  }
 </style>
 </head>
 <body>
