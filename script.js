@@ -1,10 +1,6 @@
-/*
-  THE SECRET LETTER — cấu hình 14 mã tại đây.
-  GitHub Pages là hosting tĩnh: mã và đường dẫn trong file JS có thể được xem,
-  nên cách này chỉ dùng để điều hướng, không bảo vệ nội dung nhạy cảm.
-*/
+
 const CODE_ROUTES = {
-  "TUAT01": "ban-01.html",
+  "TUAT01": "wuman01.html",
   "WOMEN02": "ban-02.html",
   "WOMEN03": "ban-03.html",
   "WOMEN04": "ban-04.html",
