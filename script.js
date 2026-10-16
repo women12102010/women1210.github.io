@@ -14,7 +14,6 @@ const CODE_ROUTES = {
   "13TRINH": "ban-13.html",
   "14TRINH": "ban-14.html"
 };
-
 const form = document.querySelector("#codeForm");
 const codeInput = document.querySelector("#secretCode");
 const openButton = document.querySelector("#openButton");
