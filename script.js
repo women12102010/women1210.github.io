@@ -1,6 +1,6 @@
 
 const CODE_ROUTES = {
-  "TUAT01": "wuman01.html",
+  "TUAT01": "ban-01.html",
   "WOMEN02": "ban-02.html",
   "WOMEN03": "ban-03.html",
   "WOMEN04": "ban-04.html",
