@@ -1,7 +1,7 @@
 
 const CODE_ROUTES = {
   "1KANH": "ban-01.html",
-  "WOMEN02": "ban-02.html",
+  "2HGIANG": "ban-02.html",
   "WOMEN03": "ban-03.html",
   "WOMEN04": "ban-04.html",
   "WOMEN05": "ban-05.html",
