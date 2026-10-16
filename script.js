@@ -1,4 +1,3 @@
-
 const CODE_ROUTES = {
   "1KANH": "ban-01.html",
   "2HGIANG": "ban-02.html",
