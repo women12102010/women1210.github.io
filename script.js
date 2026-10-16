@@ -2,18 +2,18 @@
 const CODE_ROUTES = {
   "1KANH": "ban-01.html",
   "2HGIANG": "ban-02.html",
-  "WOMEN03": "ban-03.html",
-  "WOMEN04": "ban-04.html",
-  "WOMEN05": "ban-05.html",
-  "WOMEN06": "ban-06.html",
-  "WOMEN07": "ban-07.html",
-  "WOMEN08": "ban-08.html",
-  "WOMEN09": "ban-09.html",
-  "WOMEN10": "ban-10.html",
-  "WOMEN11": "ban-11.html",
-  "WOMEN12": "ban-12.html",
-  "WOMEN13": "ban-13.html",
-  "WOMEN14": "ban-14.html"
+  "3HAN": "ban-03.html",
+  "4MHIEN": "ban-04.html",
+  "5THIEN": "ban-05.html",
+  "6GLINH": "ban-06.html",
+  "7HTLINH": "ban-07.html",
+  "8TTLINH": "ban-08.html",
+  "9NGUYEN": "ban-09.html",
+  "10PHUONG": "ban-10.html",
+  "11QUY": "ban-11.html",
+  "12THY": "ban-12.html",
+  "13TRINH": "ban-13.html",
+  "14TRINH": "ban-14.html"
 };
 
 const form = document.querySelector("#codeForm");
