@@ -34,6 +34,7 @@
     backdrop-filter: blur(4px);
     overflow-y: auto;
   }
+  .overlayy{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;background:#11152e9c;line-height:1.5;backdrop-filter:blur(4px)}
   .panel{width:min(100%,440px);padding:clamp(20px,4vw,34px);text-align:center;color:var(--ink);background:#fff8e7;border:3px solid #f5d98b;border-radius:18px;box-shadow:0 12px 0 #cba95d,0 25px 55px #0a0d2b55}
   .panel .emoji{font-size:35px;line-height:1.2;margin-bottom:8px}
   .panel h1,.panel h2{font-family:Georgia,'Times New Roman',serif;margin:0 0 10px;line-height:1.08;color:#34345f}
@@ -71,7 +72,7 @@
     <div class="hud"><div class="stars-count"><span aria-hidden="true">★</span><span id="starCount">0 / 10 stars</span></div><div class="pill" id="stateLabel">READY PLAYER ONE</div><div class="pill">♥ <span id="lives">3</span></div></div>
     <div class="stage">
       <canvas id="game" width="900" height="440" tabindex="0" aria-label="Game đi cảnh. Dùng phím A D hoặc mũi tên để di chuyển, Space để nhảy."></canvas>
-      <div class="overlay" id="startOverlay">
+      <div class="overlayy" id="startOverlay">
         <div class="panel"><div class="emoji">🕹️ ⭐</div><h1>Little Quest</h1><p>Một chuyến phiêu lưu nho nhỏ đang chờ bạn. Chạy, nhảy qua chướng ngại vật và thu thập những ngôi sao trên đường nhé!</p><p><strong>Mục tiêu:</strong> đến cánh cổng cuối màn.</p><button class="primary" id="startBtn">Bắt đầu chơi ✦</button></div>
       </div>
       <div class="overlay hidden" id="winOverlay">
