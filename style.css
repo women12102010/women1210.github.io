@@ -1,5 +1,4 @@
 
-/* 1. Thiết lập chung */
 * {
     box-sizing: border-box;
 }
@@ -29,8 +28,6 @@ body {
     color: var(--text);
     font-family: Georgia, "Times New Roman", serif;
 }
-
-/* 2. Mỗi cảnh chiếm toàn màn hình */
 .scene {
     min-height: 100vh;
     padding: 32px 24px;
@@ -40,8 +37,6 @@ body {
     justify-content: center;
     text-align: center;
 }
-
-/* 3. Dòng chữ nhỏ phía trên */
 .eyebrow {
     color: var(--gold);
     font-family: Arial, sans-serif;
@@ -49,8 +44,6 @@ body {
     letter-spacing: 4px;
     text-transform: uppercase;
 }
-
-/* 4. Tiêu đề chính */
 h1 {
     max-width: 800px;
     font-size: clamp(36px, 7vw, 76px);
@@ -70,7 +63,6 @@ h1 span {
     line-height: 1.8;
 }
 
-/* 5. Nút mở lời nhắn */
 button {
     margin-top: 28px;
     padding: 15px 28px;
@@ -93,7 +85,6 @@ button:hover {
     transform: translateY(-3px);
 }
 
-/* 6. Cảnh lời nhắn */
 .scene-message h2 {
     color: var(--pink);
     font-size: clamp(30px, 5vw, 52px);
@@ -109,7 +100,6 @@ button:hover {
     line-height: 1.9;
 }
 
-/* 7. Chuyển cảnh */
 .scene-message:not([hidden]) {
     animation: fadeIn 1.2s ease both;
 }
@@ -125,8 +115,6 @@ button:hover {
         transform: translateY(0);
     }
 }
-
-/* 8. Hỗ trợ người không thích chuyển động */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
