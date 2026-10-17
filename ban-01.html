@@ -2,741 +2,618 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Little Chameleon 🦎</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F8E9D0">
+  <meta name="description" content="Một lời chúc nhỏ dành riêng cho bạn nhân ngày 20/10.">
 
-<style>
-:root {
-  --ink: #263b2d;
-  --cream: #fff5dc;
-  --green: #77c568;
-  --pink: #f4b6bd;
-}
+  <title>gâu gâu · 20.10</title>
 
-* {
-  box-sizing: border-box;
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 16px;
-  font-family: "Courier New", monospace;
-  color: var(--ink);
-  background-color: #d9edc8;
-  background-image:
-    linear-gradient(45deg, #c4e1b4 25%, transparent 25%),
-    linear-gradient(-45deg, #c4e1b4 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, #c4e1b4 75%),
-    linear-gradient(-45deg, transparent 75%, #c4e1b4 75%);
-  background-size: 32px 32px;
-  background-position: 0 0, 0 16px, 16px -16px, -16px 0;
-}
+  <style>
+    :root {
+      color-scheme: light;
 
-button {
-  font: inherit;
-  cursor: pointer;
-}
-
-.game {
-  width: min(760px, 100%);
-  background: var(--cream);
-  border: 5px solid var(--ink);
-  box-shadow: 8px 8px 0 #8eae7b;
-  overflow: hidden;
-}
-
-.header {
-  padding: 14px;
-  background: #f8dba6;
-  border-bottom: 4px solid var(--ink);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-weight: bold;
-}
-
-.hearts {
-  color: #d96d83;
-  font-size: 17px;
-}
-
-.scene {
-  height: 410px;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(
-    to bottom,
-    #bce5e1 0%,
-    #d9edc8 65%,
-    #8fc47b 65%,
-    #8fc47b 100%
-  );
-}
-
-.sun {
-  position: absolute;
-  right: 12%;
-  top: 35px;
-  width: 48px;
-  height: 48px;
-  background: #ffe49b;
-  box-shadow: 0 0 0 8px #ffe49b55;
-}
-
-.cloud {
-  position: absolute;
-  top: 50px;
-  left: 12%;
-  color: white;
-  font-size: 36px;
-}
-
-.plant {
-  position: absolute;
-  bottom: 25px;
-  font-size: 36px;
-}
-
-.plant.left {
-  left: 20px;
-}
-
-.plant.right {
-  right: 20px;
-}
-
-.branch {
-  position: absolute;
-  top: 65%;
-  left: -5%;
-  width: 110%;
-  height: 20px;
-  background: #966b49;
-  border: 4px solid var(--ink);
-  transform: rotate(-3deg);
-}
-
-.speech {
-  position: absolute;
-  top: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
-  width: max-content;
-  max-width: 90%;
-  padding: 10px 14px;
-  text-align: center;
-  font-size: 12px;
-  font-weight: bold;
-  background: #fffdf1;
-  border: 3px solid var(--ink);
-  box-shadow: 4px 4px 0 #263b2d33;
-}
-
-.lizard {
-  position: absolute;
-  left: 50%;
-  top: 125px;
-  width: 240px;
-  height: 190px;
-  transform: translateX(-50%);
-  transition: transform .2s;
-}
-
-.body {
-  position: absolute;
-  top: 45px;
-  left: 20px;
-  width: 175px;
-  height: 95px;
-  background: var(--green);
-  border: 5px solid var(--ink);
-  border-radius: 48% 45% 40% 42%;
-  box-shadow: inset -10px -8px #55a852;
-}
-
-.belly {
-  position: absolute;
-  left: 55px;
-  top: 96px;
-  width: 100px;
-  height: 35px;
-  background: #c3e58a;
-  border: 4px solid var(--ink);
-  border-radius: 50%;
-}
-
-.head {
-  position: absolute;
-  z-index: 3;
-  top: 20px;
-  left: 130px;
-  width: 100px;
-  height: 85px;
-  background: #83d16c;
-  border: 5px solid var(--ink);
-  border-radius: 45% 50% 40% 35%;
-}
-
-.snout {
-  position: absolute;
-  right: -23px;
-  top: 43px;
-  width: 48px;
-  height: 28px;
-  background: #83d16c;
-  border: 5px solid var(--ink);
-  border-left: none;
-  border-radius: 0 45% 45% 0;
-}
-
-.eye {
-  position: absolute;
-  top: -17px;
-  left: 15px;
-  width: 39px;
-  height: 39px;
-  background: #fff2bf;
-  border: 5px solid var(--ink);
-  border-radius: 50%;
-}
-
-.eye::after {
-  content: "";
-  position: absolute;
-  top: 7px;
-  left: 12px;
-  width: 9px;
-  height: 14px;
-  background: var(--ink);
-}
-
-.nose {
-  position: absolute;
-  top: 48px;
-  right: 5px;
-  width: 5px;
-  height: 5px;
-  background: var(--ink);
-}
-
-.tail {
-  position: absolute;
-  z-index: 2;
-  left: 35px;
-  top: 55px;
-  width: 55px;
-  height: 55px;
-  border: 12px solid #9bdb72;
-  border-right-color: var(--ink);
-  border-radius: 50%;
-}
-
-.tail::after {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border: 4px solid var(--ink);
-  border-left-color: transparent;
-  border-radius: 50%;
-}
-
-.leg {
-  position: absolute;
-  z-index: 1;
-  width: 45px;
-  height: 19px;
-  background: var(--green);
-  border: 4px solid var(--ink);
-  border-radius: 10px;
-}
-
-.leg.one {
-  left: 55px;
-  top: 125px;
-  transform: rotate(25deg);
-}
-
-.leg.two {
-  left: 140px;
-  top: 125px;
-  transform: rotate(-20deg);
-}
-
-.tongue {
-  position: absolute;
-  z-index: 4;
-  left: 222px;
-  top: 101px;
-  width: 0;
-  height: 7px;
-  background: #ef7c9c;
-  transition: width .15s ease-out;
-}
-
-.tongue::after {
-  content: "";
-  position: absolute;
-  right: -8px;
-  top: -4px;
-  width: 12px;
-  height: 12px;
-  background: #ef7c9c;
-  border: 3px solid var(--ink);
-  border-radius: 50%;
-}
-
-.lizard.eating .tongue {
-  width: 105px;
-  border-top: 3px solid var(--ink);
-  border-bottom: 3px solid var(--ink);
-}
-
-.lizard.eating {
-  animation: chomp .3s steps(2) 2;
-}
-
-@keyframes chomp {
-  50% {
-    transform: translateX(-50%) rotate(-3deg) scale(1.04);
-  }
-}
-
-.foods {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 12px;
-  z-index: 6;
-}
-
-.food {
-  width: 58px;
-  height: 58px;
-  display: grid;
-  place-items: center;
-  font-size: 27px;
-  border: 4px solid var(--ink);
-  background: #fff8e7;
-  box-shadow: 4px 4px 0 #263b2d55;
-  transition: transform .15s, opacity .15s;
-}
-
-.food:hover:not(:disabled) {
-  transform: translateY(-5px);
-}
-
-.food:disabled {
-  cursor: default;
-  opacity: .3;
-}
-
-.hud {
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  border-top: 4px solid var(--ink);
-  background: #fff9e9;
-}
-
-.progress-title {
-  font-weight: bold;
-  font-size: 13px;
-}
-
-.meter {
-  display: flex;
-  gap: 5px;
-  margin-top: 8px;
-}
-
-.pip {
-  width: 22px;
-  height: 12px;
-  background: #e8dfc8;
-  border: 3px solid var(--ink);
-}
-
-.pip.active {
-  background: #f19a79;
-}
-
-.hint {
-  margin-top: 7px;
-  font-size: 10px;
-}
-
-.pixel-button {
-  padding: 11px 13px;
-  font-weight: bold;
-  background: var(--pink);
-  border: 3px solid var(--ink);
-  box-shadow: 4px 4px 0 var(--ink);
-}
-
-.pixel-button:active {
-  transform: translate(3px, 3px);
-  box-shadow: 1px 1px 0 var(--ink);
-}
-
-.overlay {
-  display: none;
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  padding: 18px;
-  place-items: center;
-  background: #20372ddd;
-}
-
-.overlay.show {
-  display: grid;
-}
-
-.letter {
-  width: min(430px, 100%);
-  padding: 24px;
-  text-align: center;
-  background: var(--cream);
-  border: 5px solid var(--ink);
-  box-shadow: 7px 7px 0 #efb2b2;
-  animation: pop .3s steps(4);
-}
-
-@keyframes pop {
-  from { transform: scale(.75); }
-  to { transform: scale(1); }
-}
-
-.big {
-  font-size: 45px;
-}
-
-.letter h2 {
-  font-size: 20px;
-}
-
-.letter p {
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-.secret {
-  padding: 12px;
-  background: #e2f0d2;
-  border: 2px dashed var(--ink);
-}
-
-.secret[hidden] {
-  display: none;
-}
-
-.footer {
-  padding: 8px;
-  text-align: center;
-  font-size: 10px;
-  opacity: .7;
-  background: #fff9e9;
-}
-
-@media (max-width: 480px) {
-  .scene {
-    height: 420px;
-  }
-
-  .lizard {
-    top: 130px;
-    transform: translateX(-50%) scale(.85);
-  }
-
-  .lizard.eating {
-    animation: chompMobile .3s steps(2) 2;
-  }
-
-  @keyframes chompMobile {
-    50% {
-      transform: translateX(-50%) scale(.89) rotate(-3deg);
+      --cream: #F8E9D0;
+      --rose: #D98B42;
+      --deep-rose: #B96B2D;
+      --brown: #553721;
+      --muted: #927458;
+      --paper: #FFF8EC;
+      --line: #C99B6755;
     }
-  }
 
-  .speech {
-    font-size: 11px;
-  }
+    * {
+      box-sizing: border-box;
+    }
 
-  .food {
-    width: 52px;
-    height: 52px;
-  }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 26px 18px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      isolation: isolate;
+      overflow-x: hidden;
 
-  .foods {
-    gap: 9px;
-  }
+      color: var(--brown);
+      font-family: 'Be Vietnam Pro', sans-serif;
 
-  .header {
-    font-size: 9px;
-  }
-}
-  .secret {
-  max-height: 180px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  overflow-wrap: anywhere;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: #77c568 #e2f0d2;
-  line-height: 1.8;
-  text-align: left;
-  padding: 12px;
-}
-</style>
+      background:
+        radial-gradient(
+          ellipse at 50% 5%,
+          #FFF5D7 0%,
+          transparent 48%
+        ),
+        radial-gradient(
+          ellipse at 8% 75%,
+          #EBC28D 0%,
+          transparent 42%
+        ),
+        radial-gradient(
+          ellipse at 95% 65%,
+          #F0D2A3 0%,
+          transparent 38%
+        ),
+        linear-gradient(
+          155deg,
+          #F8E9D0 0%,
+          #F4D9B2 52%,
+          #E9C394 100%
+        );
+    }
+
+    .top {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      font-size: 10px;
+      letter-spacing: .2em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .card {
+      position: relative;
+      width: min(100%, 560px);
+      margin: 22px auto 14px;
+      padding: 30px 32px;
+
+      background: linear-gradient(
+        145deg,
+        #FFF9EEF5,
+        #FFF3E2F2
+      );
+
+      border: 1px solid #C99B6770;
+      border-radius: 4px;
+
+      box-shadow:
+        0 18px 55px #75471D20,
+        0 0 35px #E9B66B25;
+
+      backdrop-filter: blur(8px);
+      animation: card-glow 5s ease-in-out infinite alternate;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid #C99B6740;
+      pointer-events: none;
+    }
+
+    @keyframes card-glow {
+      0% {
+        box-shadow:
+          0 18px 45px #75471D18,
+          0 0 20px #E9B66B12;
+        border-color: #C99B6750;
+      }
+
+      50% {
+        box-shadow:
+          0 18px 50px #75471D20,
+          0 0 35px #E9B66B35;
+        border-color: #D49A586D;
+      }
+
+      100% {
+        box-shadow:
+          0 18px 55px #75471D24,
+          0 0 45px #E9B66B40;
+        border-color: #C28A4D90;
+      }
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--deep-rose);
+    }
+
+    .flower {
+      margin-bottom: 6px;
+      text-align: center;
+      font-size: 25px;
+      color: var(--rose);
+      text-shadow: 0 0 18px #D98B4240;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 7vw, 56px);
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+    }
+
+    h1 em {
+      color: var(--deep-rose);
+      font-weight: 600;
+      text-shadow: 0 0 25px #D98B4220;
+    }
+
+    .intro {
+      max-width: 430px;
+      margin: 0 auto 30px;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 14px 0;
+      color: var(--rose);
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      width: 42px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .letter {
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 2px;
+
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      line-height: 1.65;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .letter p {
+      width: 100%;
+      margin: 0;
+      white-space: normal;
+    }
+
+    .letter-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .letter-nav button {
+      padding: 9px 12px;
+      border: 1px solid #C99B6780;
+      border-radius: 3px;
+      background: #D98B4210;
+      color: var(--brown);
+      font: 11px 'Be Vietnam Pro', sans-serif;
+      cursor: pointer;
+
+      transition:
+        background .25s ease,
+        border-color .25s ease,
+        opacity .25s ease,
+        transform .25s ease;
+    }
+
+    .letter-nav button:hover:not(:disabled) {
+      background: #D98B4225;
+      border-color: var(--deep-rose);
+      transform: translateY(-1px);
+    }
+
+    .letter-nav button:disabled {
+      opacity: .3;
+      cursor: default;
+    }
+
+    #sentence-count {
+      color: var(--muted);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .sign {
+      margin-top: 26px;
+      text-align: right;
+      color: var(--deep-rose);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-style: italic;
+    }
+
+    .back {
+      display: block;
+      margin: 17px auto 0;
+      text-align: center;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .04em;
+      transition: color .25s ease;
+    }
+
+    .back:hover {
+      color: var(--deep-rose);
+    }
+
+    footer {
+      text-align: center;
+      color: #9A7857;
+      font-size: 10px;
+      letter-spacing: .08em;
+    }
+
+    footer .heart {
+      color: var(--deep-rose);
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    /* Bầu trời mùa thu */
+    .sky {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Lá rơi */
+    .falling-leaf {
+      position: absolute;
+      top: -50px;
+      left: var(--left);
+      font-size: var(--size);
+      opacity: 0;
+      line-height: 1;
+
+      filter: drop-shadow(0 2px 3px #84501D20);
+
+      animation:
+        leaf-fall var(--duration) linear var(--delay) infinite;
+
+      will-change: transform, opacity;
+    }
+
+    @keyframes leaf-fall {
+      0% {
+        transform:
+          translate3d(0, -5vh, 0)
+          rotate(0deg);
+        opacity: 0;
+      }
+
+      8% {
+        opacity: var(--opacity);
+      }
+
+      25% {
+        transform:
+          translate3d(35px, 25vh, 0)
+          rotate(100deg);
+      }
+
+      50% {
+        transform:
+          translate3d(-25px, 52vh, 0)
+          rotate(220deg);
+      }
+
+      75% {
+        transform:
+          translate3d(40px, 78vh, 0)
+          rotate(310deg);
+      }
+
+      92% {
+        opacity: var(--opacity);
+      }
+
+      100% {
+        transform:
+          translate3d(-20px, 110vh, 0)
+          rotate(450deg);
+        opacity: 0;
+      }
+    }
+
+    /* Vệt nắng mùa thu */
+    .sunlight {
+      position: fixed;
+      top: -20%;
+      left: -30%;
+      width: 65vw;
+      height: 140vh;
+      pointer-events: none;
+      z-index: 0;
+
+      background: linear-gradient(
+        110deg,
+        transparent 25%,
+        #FFF3C020 48%,
+        #FFF8DB35 52%,
+        transparent 75%
+      );
+
+      transform: rotate(8deg);
+      animation: sunlight-drift 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes sunlight-drift {
+      from {
+        transform: translateX(-5%) rotate(8deg);
+        opacity: .5;
+      }
+
+      to {
+        transform: translateX(25%) rotate(8deg);
+        opacity: 1;
+      }
+    }
+
+    /* Hiệu ứng từng ký tự */
+    #sentence-text {
+      opacity: 1;
+      overflow-wrap: anywhere;
+    }
+
+    #sentence-text span {
+      display: inline;
+      opacity: 0;
+      filter: blur(3px);
+      animation: letter-appear .28s ease-out forwards;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes letter-appear {
+      from {
+        opacity: 0;
+        filter: blur(3px);
+      }
+
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 14px 12px;
+      }
+
+      .card {
+        margin: 12px auto;
+        padding: 24px 20px;
+      }
+
+      .letter {
+        min-height: 110px;
+        font-size: 20px;
+      }
+
+      .letter-nav {
+        gap: 6px;
+      }
+
+      .letter-nav button {
+        padding: 9px 8px;
+        font-size: 10px;
+      }
+
+      .falling-leaf {
+        font-size: calc(var(--size) * .8);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card,
+      .sunlight {
+        animation: none;
+      }
+
+      .falling-leaf {
+        display: none;
+      }
+
+      #sentence-text span {
+        animation: none;
+        opacity: 1;
+        filter: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<main class="game">
+  <div class="sunlight" aria-hidden="true"></div>
+  <div class="sky" id="sky" aria-hidden="true"></div>
 
-  <header class="header">
-    <span class="hearts">♥ ♥ ♥</span>
-    <span>MINI GAME 01</span>
-  </header>
+  <main class="wrap">
+    <header class="top">
+      <span>20 · 10 · 2026</span>
+    </header>
 
-  <section class="scene">
+    <article class="card">
+      <div class="flower" aria-hidden="true">❀</div>
 
-    <div class="sun"></div>
-    <div class="cloud">☁</div>
-    <div class="plant left">🌿</div>
-    <div class="plant right">🍀</div>
-    <div class="branch"></div>
+      <h1>
+        <em>gâu gâu</em>
+      </h1>
 
-    <div class="speech" id="speech">
-      Đói...
-    </div>
+      <div class="divider" aria-hidden="true">♡</div>
 
-    <div class="lizard" id="lizard">
-      <div class="body"></div>
-      <div class="belly"></div>
-      <div class="tail"></div>
+      <section class="letter" aria-label="Lời chúc">
+        <p id="sentence-text" aria-live="polite">
+         Chúc bạn Kỳ nhông có một ngày 20/10
+      </section>
 
-      <div class="leg one"></div>
-      <div class="leg two"></div>
-
-      <div class="head">
-        <div class="eye"></div>
-        <div class="snout"></div>
-        <div class="nose"></div>
-      </div>
-
-      <div class="tongue"></div>
-    </div>
-
-    <div class="foods" id="foods">
-      <button class="food" aria-label="Cho ăn ruồi">🪰</button>
-      <button class="food" aria-label="Cho ăn muỗi">🦟</button>
-      <button class="food" aria-label="Cho ăn sâu">🐛</button>
-    </div>
-
-    <div class="overlay" id="overlay">
-      <div class="letter">
-        <div class="big">🦎💚</div>
-
-        <h2 id="endTitle">Hehe, no r</h2>
-
-        <p>
-          há há há há
-        </p>
-
-        <button class="pixel-button" id="giftButton">
-          Mở lời nhắn 💗
+      <div class="letter-nav">
+        <button id="prev-btn" type="button" disabled>
+          ← Câu trước
         </button>
 
-        <p class="secret" id="secret" hidden>
-          Chúc bạn Kỳ nhông có một ngày 20/10 ngập tràn niềm vui, luôn giữ tinh thần lạc quan, tích cực và cũng như mọi năm thì năm nay  cũng cố gắng hết sức nhé, chúc bạn thi cử thật tốt và gặt hái nhiều thành công trên con đường phía trước !
-        </p>
+        <span id="sentence-count">1 / 6</span>
 
-        <button class="pixel-button" id="backButton">
-          Chơi lại một lần nữa ↻
+        <button id="next-btn" type="button">
+          Câu tiếp theo →
         </button>
       </div>
-    </div>
 
-  </section>
+      <a class="back" href="https://women12102010.github.io/women1210.github.io/">
+        ← Quay lại phong bì
+      </a>
+    </article>
 
-  <section class="hud">
-    <div>
-      <div class="progress-title" id="countText">
-        Cho ăn nhé: 0 / 5
-      </div>
+    <footer>
+      gâu gâu <span class="heart">gâu</span>
+    </footer>
+  </main>
 
-      <div class="meter">
-        <span class="pip"></span>
-        <span class="pip"></span>
-        <span class="pip"></span>
-        <span class="pip"></span>
-        <span class="pip"></span>
-      </div>
+  <script>
+    const sky = document.getElementById('sky');
 
-      <div class="hint">
-        Chọn thức ăn để bắt mồi!
-      </div>
-    </div>
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
 
-    <button class="pixel-button" id="restart">
-      ↻ Chơi lại
-    </button>
-  </section>
+    // Tạo những chiếc lá mùa thu rơi ngẫu nhiên
+    const leafTypes = ['🍂', '🍁', '🍂', '🍁', '🍃'];
 
-  <footer class="footer">
-    LITTLE GARDEN
-  </footer>
+    if (!reduceMotion) {
+      for (let i = 0; i < 24; i++) {
+        const leaf = document.createElement('span');
 
-</main>
+        leaf.className = 'falling-leaf';
+        leaf.textContent =
+          leafTypes[Math.floor(Math.random() * leafTypes.length)];
 
-<script>
-(() => {
-  const TOTAL = 5;
+        leaf.style.setProperty('--left', `${Math.random() * 100}%`);
+        leaf.style.setProperty(
+          '--size',
+          `${14 + Math.random() * 15}px`
+        );
+        leaf.style.setProperty(
+          '--duration',
+          `${10 + Math.random() * 14}s`
+        );
+        leaf.style.setProperty(
+          '--delay',
+          `${-Math.random() * 24}s`
+        );
+        leaf.style.setProperty(
+          '--opacity',
+          `${0.35 + Math.random() * 0.5}`
+        );
 
-  let fed = 0;
-  let busy = false;
-
-  const lizard = document.getElementById("lizard");
-  const speech = document.getElementById("speech");
-  const countText = document.getElementById("countText");
-  const pips = [...document.querySelectorAll(".pip")];
-  const foods = [...document.querySelectorAll(".food")];
-
-  const overlay = document.getElementById("overlay");
-  const giftButton = document.getElementById("giftButton");
-  const secret = document.getElementById("secret");
-
-  const messages = [
-    "quá ngon",
-    "quá sướng",
-    "dìa dia",
-    "booyah",
-    "muahahaha"
-  ];
-
-  // Lời thoại sau mỗi lần ăn
-  const nextMessages = [
-    "chưa đủ",
-    "Thêm miếng nữa",
-    "Há há",
-    "thêm đi",
-    "sao ít v"
-  ];
-
-  function updateHUD() {
-    countText.textContent = `Cho ăn: ${fed} / ${TOTAL}`;
-
-    pips.forEach((pip, index) => {
-      pip.classList.toggle("active", index < fed);
-    });
-  }
-
-  
-function feed(button) {
-  if (busy || fed >= TOTAL) return;
-
-  busy = true;
-
-  foods.forEach(food => {
-    food.disabled = true;
-  });
-
-  speech.textContent = messages[fed % messages.length];
-
-  lizard.classList.remove("eating");
-  void lizard.offsetWidth;
-  lizard.classList.add("eating");
-
-  button.style.transform = "translateY(-100px) scale(.2)";
-  button.style.opacity = "0";
-
-  window.setTimeout(() => {
-    fed++;
-    updateHUD();
-
-    lizard.classList.remove("eating");
-
-    if (fed >= TOTAL) {
-      speech.textContent = "NO CĂNGGG!!";
-
-      window.setTimeout(() => {
-        overlay.classList.add("show");
-      }, 450);
-    } else {
-      speech.textContent =
-        nextMessages[(fed - 1) % nextMessages.length];
-      window.setTimeout(() => {
-        foods.forEach(food => {
-          food.style.opacity = "";
-          food.style.transform = "";
-          food.disabled = false;
-        });
-
-        busy = false;
-      }, 300);
-
-      return;
+        sky.appendChild(leaf);
+      }
     }
 
-    busy = false;
-  }, 430);
-}
+    // Nội dung từng câu chúc
+    const sentences = [
+      "Chúc bạn Kỳ nhông có một ngày 20/10",
 
+      "ngập tràn niềm vui,",
 
-  function restart() {
-    fed = 0;
-    busy = false;
+      "luôn giữ tinh thần lạc quan,",
 
-    foods.forEach(food => {
-      food.disabled = false;
-      food.style.opacity = "";
-      food.style.transform = "";
+      "tích cực và cũng như mọi năm thì năm nay  cũng cố gắng hết sức nhé,",
+
+      "chúc bạn thi cử thật tốt và gặt hái nhiều thành công trên con đường phía trước !"
+
+    ];
+
+    let currentSentence = 0;
+
+    const sentenceText = document.getElementById('sentence-text');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const sentenceCount = document.getElementById('sentence-count');
+
+    function showSentence(index) {
+      currentSentence = index;
+
+      const text = sentences[currentSentence];
+      sentenceText.replaceChildren();
+
+      if (reduceMotion) {
+        sentenceText.textContent = text;
+      } else {
+        [...text].forEach((char, i) => {
+          const span = document.createElement('span');
+
+          span.textContent = char === ' ' ? '\u00A0' : char;
+          span.style.setProperty('--delay', `${i * 0.025}s`);
+
+          sentenceText.appendChild(span);
+        });
+      }
+
+      sentenceCount.textContent =
+        `${currentSentence + 1} / ${sentences.length}`;
+
+      prevBtn.disabled = currentSentence === 0;
+      nextBtn.disabled =
+        currentSentence === sentences.length - 1;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentSentence > 0) {
+        showSentence(currentSentence - 1);
+      }
     });
 
-    overlay.classList.remove("show");
+    nextBtn.addEventListener('click', () => {
+      if (currentSentence < sentences.length - 1) {
+        showSentence(currentSentence + 1);
+      }
+    });
 
-    secret.hidden = true;
-    giftButton.disabled = false;
-    giftButton.textContent = "Mở lời nhắn";
-
-    speech.textContent = "Đói...";
-
-    lizard.classList.remove("eating");
-
-    updateHUD();
-  }
-
-  foods.forEach(button => {
-    button.addEventListener("click", () => feed(button));
-  });
-
-  document.getElementById("restart")
-    .addEventListener("click", restart);
-
-  document.getElementById("backButton")
-    .addEventListener("click", restart);
-
-  giftButton.addEventListener("click", () => {
-    secret.hidden = false;
-    giftButton.textContent = "Đã mở quà";
-    giftButton.disabled = true;
-  });
-
-  updateHUD();
-})();
-</script>
-
+    showSentence(0);
+  </script>
 </body>
 </html>
