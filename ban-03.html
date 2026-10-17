@@ -121,7 +121,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .ground {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
@@ -129,6 +129,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   background: #354451;
   border-top: 8px solid #718b78;
   box-shadow: inset 0 12px #455a54;
+  z-index: 3;
 }
 .ground::before {
   content: "";
@@ -223,15 +224,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .card {
   position: relative;
-  margin: 20px auto 14px;
-  padding: 30px 28px 24px;
-  color: var(--ink);
-  background: var(--cream);
-  border: 4px solid #e8c2c8;
-  box-shadow:
-    0 0 0 4px #453b60,
-    8px 8px 0 #29244255;
-  animation: card-idle 4s ease-in-out infinite alternate;
+  z-index: 4;
 }
 
 @keyframes card-idle {
