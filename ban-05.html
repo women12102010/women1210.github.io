@@ -862,7 +862,7 @@ button {
       resultIcon.textContent = "🎉💌";
       resultTitle.textContent = "Bắt hết được rồi!";
       resultText.textContent =
-        "Phần thưởng bí mật đã được mở khóa. " +
+        "Phần thưởng bí mật đã được mở khóa. " ;
         
 
       resultButtons.innerHTML = `
@@ -874,8 +874,8 @@ button {
         </button>
       `;
 
-      document.getElementById("letter-button").addEventListener("click", openLetter);
-      document.getElementById("retry-button").addEventListener("click", startGame);
+      document.getElementById("letter-button").onclick = openLetter;
+      document.getElementById("retry-button").onclick = startGame;
     } else {
       resultIcon.textContent = "⏰🦆";
       resultTitle.textContent = "Vịt chạy thoát mất rồi!";
@@ -889,7 +889,7 @@ button {
         </button>
       `;
 
-      document.getElementById("retry-button").addEventListener("click", startGame);
+      document.getElementById("retry-button").onclick = startGame;
     }
   }
 
