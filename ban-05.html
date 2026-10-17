@@ -768,6 +768,7 @@
 
       // Mở lá thư sau khi thắng.
       
+
 function openLetter() {
   const dialog = document.getElementById("result-dialog");
 
@@ -776,10 +777,32 @@ function openLetter() {
 
     <h2>Một lá thư dành cho bạn</h2>
 
-    <div class="letter" tabindex="0"
-         aria-label="thấm thoát ms chỉ 2 năm trôi qa mà chừ Trịnh Thúy Hiền đã thống nhất TCV r. Vậy là cbi ph xa nhau r bn tôi ơi, cx k lâu nx thì chúng mik ph bc đi trên đoạn đg tương lai của riêng mik r nên cơ hội để gặp lại nhau cs vẻ là rất khó nên qa ngày 20/10 này chúng mik cs lm vài món quà để gửi đến bn Hiền cùng lời chúc cùng lời chào trân trọng nhất. Chúc bn Hiền cs một ngày 20/10 tht là đáng nhớ, hạnh phúc và đầy niềm vui, mong cho phút giây này sẽ là 1 kỉ niệm đáng nhớ sẽ theo bn trên con đg tương lai. Chúc Hiền lun lun xinh đẹp, bùng nổ, đẳng cấp, sức khỏe mạnh mẽ bomchakalaka, đạt đc nguyện vọng là đi du hc Pháp để mở 1 quầy chuối chiên dưới tháp effiel nè và nhớ là luôn luôn ph giữ 1 tinh thần tích cực và nỡ nụ cười trên môi nha. Au revoir et à bientôt.
-     
+    <div class="letter"
+         tabindex="0"
+         aria-label="Lá thư chúc mừng, cuộn để đọc hết">
+
+      Thấm thoắt mới chỉ 2 năm trôi qua mà chừ Trịnh Thúy Hiền đã thống nhất TCV rồi.
+
+      Vậy là chuẩn bị phải xa nhau rồi, bạn tôi ơi. Cũng không lâu nữa thì chúng mình phải bước đi trên đoạn đường tương lai của riêng mình rồi, nên cơ hội để gặp lại nhau có vẻ là rất khó.
+
+      Nhân ngày 20/10 này, chúng mình có làm vài món quà để gửi đến bạn Hiền cùng lời chúc và lời chào trân trọng nhất.
+
+      Chúc bạn Hiền có một ngày 20/10 thật đáng nhớ, hạnh phúc và đầy niềm vui. Mong rằng phút giây này sẽ là một kỉ niệm đáng nhớ, theo bạn trên con đường tương lai.
+
+      Chúc Hiền luôn luôn xinh đẹp, bùng nổ, đẳng cấp, sức khỏe mạnh mẽ bomchakalaka, đạt được nguyện vọng là đi du học Pháp để mở một quầy chuối chiên dưới tháp Eiffel nè.
+
+      Và nhớ là luôn luôn phải giữ một tinh thần tích cực và nở nụ cười trên môi nha.
+
+      Au revoir et à bientôt. 🇫🇷
+
+      <span class="letter-sign">
+        — Gửi Hiền, với thật nhiều lời chúc tốt đẹp ♡ —
+      </span>
     </div>
+
+    <p style="font-size:12px;margin:0 0 16px">
+      ↓ Cuộn trong khung thư để đọc hết lời chúc nhé!
+    </p>
 
     <button class="pixel-button"
             id="letter-close-button"
@@ -792,6 +815,7 @@ function openLetter() {
     .getElementById("letter-close-button")
     .addEventListener("click", resetGame);
 }
+
 
       // Trở về màn hình bắt đầu.
       function resetGame() {
