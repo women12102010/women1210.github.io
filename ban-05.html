@@ -1,957 +1,743 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bắt vịt chạy loạn 🦆</title>
-
-<style>
-:root {
-  --ink: #344b3a;
-  --cream: #fff7df;
-  --green: #83c96d;
-  --dark-green: #477c4d;
-  --pink: #f5b9c5;
-  --brown: #926344;
-  --gold: #f4cf75;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-  color: var(--ink);
-  background:
-    radial-gradient(circle at 15% 20%, #fff8df 0 3px, transparent 4px),
-    radial-gradient(circle at 85% 70%, #ffffff80 0 4px, transparent 5px),
-    #dff2d4;
-  font-family: "Courier New", monospace;
-}
-
-button {
-  font-family: inherit;
-  touch-action: manipulation;
-  cursor: pointer;
-}
-
-.game-shell {
-  width: min(100%, 650px);
-  padding: 15px;
-  border: 4px solid #557b4c;
-  border-radius: 8px;
-  background: var(--cream);
-  box-shadow: 0 8px 0 #b5d5a2, 0 14px 30px #496b4430;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.header h1 {
-  margin: 0;
-  font-size: clamp(18px, 4vw, 26px);
-}
-
-.subtitle {
-  margin: 5px 0 0;
-  font-size: 11px;
-  color: #71876a;
-}
-
-.pixel-flower {
-  font-size: 32px;
-  flex-shrink: 0;
-}
-
-.hud {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.hud-item {
-  padding: 9px 5px;
-  border: 2px solid #a5c891;
-  background: #f4f8df;
-  text-align: center;
-}
-
-.hud-label {
-  display: block;
-  font-size: 10px;
-  color: #75886c;
-  margin-bottom: 5px;
-}
-
-.hud-value {
-  font-size: 19px;
-  font-weight: bold;
-}
-
-#time {
-  color: #bc6c55;
-}
-
-.arena {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1.2 / 1;
-  min-height: 300px;
-  overflow: hidden;
-  isolation: isolate;
-  border: 4px solid #557b4c;
-  background: #b9e6a0;
-  image-rendering: pixelated;
-}
-
-/* Bầu trời và những đám mây */
-.sky {
-  position: absolute;
-  inset: 0 0 47%;
-  z-index: -3;
-  background: linear-gradient(#b8e8f2, #e0f7e8);
-}
-
-.cloud {
-  position: absolute;
-  width: 76px;
-  height: 19px;
-  border-radius: 3px;
-  background: #ffffffc9;
-  box-shadow:
-    12px -12px 0 -2px #ffffffc9,
-    29px -8px 0 2px #ffffffc9,
-    40px 0 0 -2px #ffffffc9;
-  opacity: .8;
-}
-
-.cloud-one {
-  top: 13%;
-  left: 10%;
-}
-
-.cloud-two {
-  top: 24%;
-  right: 10%;
-  transform: scale(.7);
-}
-
-/* Đồi phía xa */
-.hill {
-  position: absolute;
-  z-index: -2;
-  bottom: 32%;
-  width: 75%;
-  height: 29%;
-  border-radius: 50% 50% 0 0;
-  background: #9bd48b;
-}
-
-.hill-left {
-  left: -22%;
-}
-
-.hill-right {
-  right: -25%;
-  height: 24%;
-  background: #8bc97e;
-}
-
-/* Mặt đất */
-.ground {
-  position: absolute;
-  z-index: -1;
-  inset: 54% 0 0;
-  background:
-    radial-gradient(circle, #ffffff70 0 2px, transparent 3px) 0 0 / 29px 27px,
-    linear-gradient(#9bd77c, #75bd68);
-  border-top: 5px solid #6fae5c;
-}
-
-.grass {
-  position: absolute;
-  bottom: 11%;
-  font-size: 21px;
-  color: #427c43;
-}
-
-.grass-one {
-  left: 5%;
-}
-
-.grass-two {
-  right: 7%;
-}
-
-.flower {
-  position: absolute;
-  bottom: 19%;
-  font-size: 20px;
-}
-
-.flower-one {
-  left: 17%;
-}
-
-.flower-two {
-  right: 19%;
-}
-
-/* Hồ nước pixel art */
-.pond {
-  position: absolute;
-  left: 30%;
-  top: 59%;
-  width: 40%;
-  height: 23%;
-  border: 5px solid #398b9c;
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse at 27% 25%, #d9ffff 0 3%, transparent 4%),
-    radial-gradient(ellipse at 68% 62%, #c6faff 0 2%, transparent 3%),
-    repeating-linear-gradient(
-      165deg,
-      transparent 0 17px,
-      #ffffff30 18px 20px,
-      transparent 21px 31px
-    ),
-    linear-gradient(
-      145deg,
-      #b1f4ee 0%,
-      #64d2df 38%,
-      #48afcb 72%,
-      #328da9 100%
-    );
-  box-shadow:
-    inset 0 0 0 4px #d5ffff80,
-    inset 0 -12px 18px #247a9a45,
-    0 5px 0 #34434a22;
-  transform: rotate(-8deg);
-  pointer-events: none;
-}
-
-.pond::before {
-  content: "🪷";
-  position: absolute;
-  top: -13%;
-  left: 17%;
-  font-size: clamp(18px, 3vw, 28px);
-  filter: drop-shadow(1px 3px 0 #247a9a35);
-  transform: rotate(8deg);
-}
-
-.pond::after {
-  content: "〰 〰 〰";
-  position: absolute;
-  top: 28%;
-  left: 22%;
-  color: #f2ffff;
-  font-size: clamp(16px, 2.5vw, 23px);
-  letter-spacing: 3px;
-  text-shadow: 0 2px 0 #398b9c50;
-  animation: water-shimmer 2s ease-in-out infinite alternate;
-}
-
-@keyframes water-shimmer {
-  from {
-    transform: translateX(-3px);
-    opacity: .6;
-  }
-  to {
-    transform: translateX(5px);
-    opacity: 1;
-  }
-}
-
-/* Vịt */
-.duck {
-  position: absolute;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  font-size: 47px;
-  line-height: 1;
-  filter: drop-shadow(2px 4px 0 #344b3a35);
-  transform: translate(-50%, -50%);
-  transition:
-    left .16s ease-out,
-    top .16s ease-out,
-    transform .12s ease-out;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.duck:hover {
-  transform: translate(-50%, -50%) scale(1.12) rotate(-7deg);
-}
-
-.duck:active {
-  transform: translate(-50%, -50%) scale(.85);
-}
-
-.duck.caught {
-  animation: duck-caught .3s ease-out forwards;
-  pointer-events: none;
-}
-
-@keyframes duck-caught {
-  to {
-    opacity: 0;
-    transform: translate(-50%, -100%) scale(.3) rotate(30deg);
-  }
-}
-
-.floating-text {
-  position: absolute;
-  z-index: 7;
-  pointer-events: none;
-  color: #fff9d7;
-  font-size: 17px;
-  font-weight: bold;
-  text-shadow:
-    2px 2px #527849,
-    -1px -1px #527849;
-  animation: float-up .65s ease-out forwards;
-}
-
-@keyframes float-up {
-  to {
-    opacity: 0;
-    transform: translateY(-35px) scale(1.2);
-  }
-}
-
-.arena-message {
-  position: absolute;
-  z-index: 8;
-  top: 12px;
-  left: 50%;
-  width: max-content;
-  max-width: 90%;
-  padding: 7px 11px;
-  border: 2px solid #557b4c;
-  background: #fff9dfeb;
-  transform: translateX(-50%);
-  text-align: center;
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-.controls {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 13px;
-}
-
-.pixel-button {
-  padding: 12px 16px;
-  border: 3px solid #54784a;
-  border-radius: 3px;
-  background: #8dce75;
-  color: #29472e;
-  font-size: 12px;
-  font-weight: bold;
-  box-shadow: 0 4px 0 #54784a;
-  transition: transform .1s, box-shadow .1s;
-}
-
-.pixel-button:hover {
-  background: #a8e18b;
-}
-
-.pixel-button:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #54784a;
-}
-
-.pixel-button.secondary {
-  background: #f6dca0;
-}
-
-.instructions {
-  margin: 14px 0 2px;
-  color: #6f8265;
-  font-size: 11px;
-  line-height: 1.8;
-  text-align: center;
-}
-
-/* Màn hình bắt đầu / kết quả */
-.overlay {
-  position: absolute;
-  z-index: 10;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 15px;
-  background: #344b3acb;
-}
-
-.overlay.hidden {
-  display: none;
-}
-
-.dialog {
-  width: min(100%, 390px);
-  max-height: 100%;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding: 23px 19px;
-  border: 4px solid #9a7653;
-  background:
-    radial-gradient(circle, #d6b98b40 0 1px, transparent 2px) 0 0 / 13px 13px,
-    #fff6dd;
-  text-align: center;
-  box-shadow: 0 7px 0 #344b3a60;
-}
-
-.dialog-icon {
-  margin-bottom: 8px;
-  font-size: 43px;
-}
-
-.dialog h2 {
-  margin: 7px 0 12px;
-  color: #6a563d;
-  font-size: 20px;
-}
-
-.dialog p {
-  font-size: 12px;
-  line-height: 1.9;
-}
-
-.dialog-buttons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 17px;
-}
-
-/* Lá thư */
-.letter-eyebrow {
-  margin: 0 0 10px;
-  color: #a77850;
-  font-size: 10px !important;
-  font-weight: bold;
-  letter-spacing: 3px;
-}
-
-.letter-title {
-  color: #72503f;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 21px !important;
-  font-weight: normal;
-  letter-spacing: -.5px;
-}
-
-.letter {
-  max-height: 220px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding: 14px;
-  border: 2px dashed #d7b58a;
-  background: #fffaf0;
-  text-align: left;
-  scrollbar-color: #d5a36d #fff3d9;
-  scrollbar-width: thin;
-  -webkit-overflow-scrolling: touch;
-}
-
-.letter p {
-  margin: 0 0 16px;
-  font-family: Arial, "Segoe UI", sans-serif;
-  font-size: 14px;
-  line-height: 1.9;
-  white-space: normal;
-}
-
-.letter .letter-opening {
-  color: #875d42;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 17px;
-  font-style: italic;
-}
-
-.letter .letter-highlight {
-  padding: 12px;
-  border-left: 3px solid #d5a36d;
-  background: #fff3d9;
-  color: #875d42;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 17px;
-}
-
-.letter .letter-ending {
-  margin-top: 22px;
-  color: #875d42;
-  font-weight: bold;
-}
-
-.letter-sign {
-  padding-top: 14px;
-  border-top: 1px dashed #d5a36d;
-  color: #a77850;
-  text-align: right;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 13px;
-  font-style: italic;
-  line-height: 1.9;
-}
-
-.letter-scroll-hint {
-  margin: 9px 0 !important;
-  color: #8b6a51;
-  font-size: 10px !important;
-}
-
-@media (max-width: 430px) {
-  body {
-    padding: 9px;
-  }
-
-  .game-shell {
-    padding: 10px;
-  }
-
-  .arena {
-    min-height: 280px;
-  }
-
-  .duck {
-    width: 57px;
-    height: 57px;
-    font-size: 42px;
-  }
-
-  .dialog {
-    padding: 17px 12px;
-  }
-
-  .letter {
-    max-height: 200px;
-    padding: 11px;
-  }
-
-  .pixel-button {
-    padding: 11px 12px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#DFF1FF">
+  <meta name="description" content="Một lời chúc nhỏ dành riêng cho bạn nhân ngày 20/10.">
+
+  <title>gâu gâu · 20.10</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: light;
+      --cream: #EAF6FF;
+      --rose: #F2AFA9;
+      --deep-rose: #D98285;
+      --brown: #40536B;
+      --muted: #71839B;
+      --paper: #FFFFFF;
+      --line: #D9828550;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 26px 18px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      isolation: isolate;
+      overflow-x: hidden;
+      color: var(--brown);
+      font-family: 'Be Vietnam Pro', sans-serif;
+
+      background:
+        radial-gradient(
+          ellipse at 92% 8%,
+          #FFF2C7 0%,
+          transparent 24%
+        ),
+        linear-gradient(
+          180deg,
+          #C7E6FF 0%,
+          #E4F2FF 42%,
+          #FFF0E5 100%
+        );
+    }
+
+    /* =========================
+       BẦU TRỜI
+    ========================= */
+
+    .sky {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Mặt trời */
+
+    .sun {
+      position: absolute;
+      top: -65px;
+      right: -55px;
+      width: 270px;
+      height: 270px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      opacity: .95;
+      filter: drop-shadow(0 0 35px #FFE8A888);
+    }
+
+    .sun-rays {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: repeating-conic-gradient(
+        from 0deg,
+        #FFE9A880 0deg 5deg,
+        transparent 5deg 15deg
+      );
+      -webkit-mask: radial-gradient(
+        circle,
+        transparent 0 38%,
+        #000 43% 68%,
+        transparent 74%
+      );
+      mask: radial-gradient(
+        circle,
+        transparent 0 38%,
+        #000 43% 68%,
+        transparent 74%
+      );
+      animation: sun-rays-rotate 100s linear infinite;
+    }
+
+    .sun-core {
+      position: absolute;
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 35% 30%,
+        #FFF9D8,
+        #FFE8A0 60%,
+        #FFD58B
+      );
+      box-shadow:
+        0 0 35px #FFE9A888,
+        0 0 75px #FFE9A855;
+      animation: sun-breathe 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes sun-rays-rotate {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes sun-breathe {
+      from {
+        transform: scale(.97);
+        box-shadow:
+          0 0 30px #FFE9A866,
+          0 0 60px #FFE9A844;
+      }
+
+      to {
+        transform: scale(1.04);
+        box-shadow:
+          0 0 42px #FFE9A899,
+          0 0 85px #FFE9A866;
+      }
+    }
+
+    /* Mây CSS */
+
+    .cloud {
+      --cloud-color: #FFFFFF;
+      position: absolute;
+      width: 120px;
+      height: 35px;
+      background: var(--cloud-color);
+      border-radius: 50px;
+      opacity: .78;
+      filter: drop-shadow(0 5px 8px #91B8D622);
+      animation: cloud-drift var(--drift, 45s) ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: '';
+      position: absolute;
+      bottom: 8px;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .cloud::before {
+      width: 55px;
+      height: 55px;
+      left: 17px;
+    }
+
+    .cloud::after {
+      width: 72px;
+      height: 70px;
+      right: 13px;
+    }
+
+    .cloud span {
+      position: absolute;
+      z-index: 1;
+      width: 42px;
+      height: 30px;
+      left: 48px;
+      bottom: 8px;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    /* Mây lớn bên trái */
+
+    .cloud-1 {
+      top: 17%;
+      left: -45px;
+      transform: scale(1.15);
+      --drift: 32s;
+      --cloud-color: #FFFFFF;
+    }
+
+    /* Mây nhỏ phía trên */
+
+    .cloud-2 {
+      top: 31%;
+      left: 33%;
+      transform: scale(.65);
+      opacity: .6;
+      --drift: 42s;
+      --cloud-color: #FFFDF8;
+      animation-delay: -8s;
+    }
+
+    /* Mây bông bên phải */
+
+    .cloud-3 {
+      top: 48%;
+      right: -35px;
+      transform: scale(1.1);
+      opacity: .55;
+      --drift: 38s;
+      --cloud-color: #FFFFFF;
+      animation-delay: -14s;
+    }
+
+    /* Mây xa */
+
+    .cloud-4 {
+      top: 70%;
+      left: 12%;
+      transform: scale(.7);
+      opacity: .48;
+      --drift: 48s;
+      --cloud-color: #FFF8F0;
+      animation-delay: -20s;
+    }
+
+    /* Mây nhỏ gần chân trời */
+
+    .cloud-5 {
+      top: 84%;
+      right: 15%;
+      transform: scale(.85);
+      opacity: .55;
+      --drift: 35s;
+      --cloud-color: #FFFFFF;
+      animation-delay: -11s;
+    }
+
+    /* Mây dài, thấp */
+
+    .cloud-6 {
+      top: 58%;
+      left: 48%;
+      transform: scale(.5);
+      opacity: .4;
+      --drift: 55s;
+      --cloud-color: #FFFDFB;
+      animation-delay: -25s;
+    }
+
+    @keyframes cloud-drift {
+      0% {
+        translate: -12px 0;
+      }
+
+      50% {
+        translate: 25px -9px;
+      }
+
+      100% {
+        translate: 65px 4px;
+      }
+    }
+
+    /* =========================
+       NỘI DUNG LÁ THƯ
+    ========================= */
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 10px;
+      letter-spacing: .2em;
+      color: #637D9A;
+      text-transform: uppercase;
+    }
+
+    .top span:last-child {
+      letter-spacing: .12em;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      margin: 22px auto 14px;
+      padding: 30px 32px;
+
+      background: linear-gradient(
+        145deg,
+        #FFFFFFF2,
+        #FFFDF8ED
+      );
+
+      border: 1px solid #FFFFFF;
+      border-radius: 5px;
+
+      box-shadow:
+        0 18px 55px #7298B52B,
+        0 0 35px #FFFFFF50;
+
+      backdrop-filter: blur(8px);
+      animation: card-glow 5s ease-in-out infinite alternate;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid #E5B8A650;
+      pointer-events: none;
+    }
+
+    @keyframes card-glow {
+      0% {
+        box-shadow:
+          0 18px 55px #7298B520,
+          0 0 18px #FFFFFF30;
+        border-color: #FFFFFF;
+      }
+
+      50% {
+        box-shadow:
+          0 18px 55px #7298B535,
+          0 0 28px #FFF9E866;
+        border-color: #FFFFFF;
+      }
+
+      100% {
+        box-shadow:
+          0 18px 55px #7298B530,
+          0 0 38px #FFE8C655;
+        border-color: #FFEEDB;
+      }
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--deep-rose);
+    }
+
+    .flower {
+      margin-bottom: 6px;
+      text-align: center;
+      font-size: 23px;
+      color: var(--rose);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 7vw, 56px);
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+    }
+
+    h1 em {
+      color: var(--deep-rose);
+      font-weight: 600;
+      text-shadow: 0 0 32px #D9828528;
+    }
+
+    .intro {
+      max-width: 430px;
+      margin: 0 auto 30px;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 14px 0;
+      color: var(--rose);
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      width: 42px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .letter {
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 2px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      line-height: 1.65;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .letter p {
+      width: 100%;
+      margin: 0;
+      white-space: normal;
+    }
+
+    /* Nút chuyển câu */
+
+    .letter-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .letter-nav button {
+      padding: 9px 12px;
+      border: 1px solid #D9828555;
+      border-radius: 3px;
+      background: #D982850D;
+      color: var(--brown);
+      font: 11px 'Be Vietnam Pro', sans-serif;
+      cursor: pointer;
+      transition:
+        background .25s ease,
+        border-color .25s ease,
+        opacity .25s ease;
+    }
+
+    .letter-nav button:hover:not(:disabled) {
+      background: #D9828520;
+      border-color: var(--deep-rose);
+    }
+
+    .letter-nav button:disabled {
+      opacity: .3;
+      cursor: default;
+    }
+
+    #sentence-count {
+      color: var(--muted);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .sign {
+      margin-top: 26px;
+      text-align: right;
+      color: var(--deep-rose);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-style: italic;
+    }
+
+    .back {
+      display: block;
+      margin: 17px auto 0;
+      text-align: center;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .04em;
+    }
+
+    .back:hover {
+      color: var(--deep-rose);
+    }
+
+    footer {
+      text-align: center;
+      color: #71839B;
+      font-size: 10px;
+      letter-spacing: .08em;
+    }
+
+    footer .heart {
+      color: var(--deep-rose);
+    }
+
+    /* Chữ xuất hiện từng ký tự */
+
+    #sentence-text {
+      opacity: 1;
+      overflow-wrap: anywhere;
+    }
+
+    #sentence-text span {
+      display: inline;
+      opacity: 0;
+      filter: blur(3px);
+      animation: letter-appear .28s ease-out forwards;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes letter-appear {
+      from {
+        opacity: 0;
+        filter: blur(3px);
+      }
+
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    /* Tối ưu điện thoại */
+
+    @media (max-width: 480px) {
+      body {
+        padding: 14px 12px;
+      }
+
+      .sun {
+        top: -80px;
+        right: -95px;
+        transform: scale(.85);
+      }
+
+      .cloud-1 {
+        top: 12%;
+      }
+
+      .cloud-2 {
+        left: 20%;
+      }
+
+      .cloud-4 {
+        left: -12%;
+      }
+
+      .card {
+        margin: 12px auto;
+        padding: 24px 20px;
+      }
+
+      .letter {
+        min-height: 110px;
+        font-size: 20px;
+      }
+
+      .letter-nav {
+        gap: 6px;
+      }
+
+      .letter-nav button {
+        padding: 9px 8px;
+        font-size: 10px;
+      }
+    }
+
+    /* Tôn trọng cài đặt giảm chuyển động */
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+
+      #sentence-text span {
+        animation: none;
+        opacity: 1;
+        filter: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<main class="game-shell">
-  <header class="header">
-    <div>
-      <h1>🦆 Bắt vịt chạy loạn!</h1>
-      <p class="subtitle">20/10</p>
-    </div>
-    <div class="pixel-flower" aria-hidden="true">🌼</div>
-  </header>
+  <div class="sky" id="sky" aria-hidden="true">
 
-  <section class="hud" aria-label="Thông tin trò chơi">
-    <div class="hud-item">
-      <span class="hud-label">ĐÃ BẮT</span>
-      <span class="hud-value"><span id="score">0</span>/5</span>
-    </div>
-    <div class="hud-item">
-      <span class="hud-label">THỜI GIAN</span>
-      <span class="hud-value" id="time">15s</span>
-    </div>
-    <div class="hud-item">
-      <span class="hud-label">MỤC TIÊU</span>
-      <span class="hud-value">🦆 × 5</span>
-    </div>
-  </section>
-
-  <section class="arena" id="arena" aria-label="Khu vườn bắt vịt">
-    <div class="sky"></div>
-    <div class="cloud cloud-one"></div>
-    <div class="cloud cloud-two"></div>
-    <div class="hill hill-left"></div>
-    <div class="hill hill-right"></div>
-    <div class="ground"></div>
-    <div class="pond"></div>
-
-    <span class="grass grass-one" aria-hidden="true">♣ ♣</span>
-    <span class="grass grass-two" aria-hidden="true">♣ ♣</span>
-    <span class="flower flower-one" aria-hidden="true">🌼</span>
-    <span class="flower flower-two" aria-hidden="true">🌷</span>
-
-    <div class="arena-message" id="arena-message">
-      Bắt được 5 chú vịt trước khi hết giờ nhé!
+    <!-- Mặt trời và những tia nắng -->
+    <div class="sun">
+      <div class="sun-rays"></div>
+      <div class="sun-core"></div>
     </div>
 
-    <div class="overlay" id="start-overlay">
-      <div class="dialog">
-        <div class="dialog-icon">🦆🌿</div>
-        <h2>Bắt Vịt gogogo!</h2>
-        <p>
-          Có đúng một chú vịt tinh nghịch đang lẩn trốn
-          trong khu vườn này.
-          <br><br>
-          Bắt đủ <strong>5 chú vịt</strong> trong vòng
-          <strong>30 giây</strong> để mở khóa một món quà bí mật!
-        </p>
+    <!-- Những đám mây trôi trên bầu trời -->
+    <div class="cloud cloud-1"><span></span></div>
+    <div class="cloud cloud-2"><span></span></div>
+    <div class="cloud cloud-3"><span></span></div>
+    <div class="cloud cloud-4"><span></span></div>
+    <div class="cloud cloud-5"><span></span></div>
+    <div class="cloud cloud-6"><span></span></div>
 
-        <div class="dialog-buttons">
-          <button class="pixel-button" id="start-button" type="button">
-            BẮT ĐẦU! ▶
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="overlay hidden" id="result-overlay">
-      <div class="dialog" id="result-dialog">
-        <div class="dialog-icon" id="result-icon">🎉</div>
-        <h2 id="result-title">Tuyệt vời!</h2>
-        <p id="result-text"></p>
-        <div class="dialog-buttons" id="result-buttons">
-          <button class="pixel-button" id="letter-button" type="button">
-            MỞ QUÀ 💌
-          </button>
-          <button class="pixel-button secondary" id="retry-button" type="button">
-            CHƠI LẠI ↻
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="controls">
-    <button class="pixel-button" id="start-again-button" type="button">
-      CHƠI LẠI ↻
-    </button>
   </div>
 
-  
-</main>
+  <main class="wrap">
 
-<script>
-(() => {
-  "use strict";
+    <header class="top">
+      <span>20 · 10 · 2026</span>
+    </header>
 
-  const TARGET = 5;
-  const ROUND_SECONDS = 15;
-  const MOVE_INTERVAL = 100;
+    <article class="card">
 
-  const arena = document.getElementById("arena");
-  const scoreElement = document.getElementById("score");
-  const timeElement = document.getElementById("time");
-  const messageElement = document.getElementById("arena-message");
+      <div class="flower" aria-hidden="true">❀</div>
 
-  const startOverlay = document.getElementById("start-overlay");
-  const resultOverlay = document.getElementById("result-overlay");
+      <h1>
+        <em>gâu gâu</em>
+      </h1>
 
-  const resultIcon = document.getElementById("result-icon");
-  const resultTitle = document.getElementById("result-title");
-  const resultText = document.getElementById("result-text");
-  const resultButtons = document.getElementById("result-buttons");
+      <div class="divider" aria-hidden="true">♡</div>
 
-  let score = 0;
-  let timeLeft = ROUND_SECONDS;
-  let active = false;
-  let duck = null;
-  let moveTimer = null;
-  let countdownTimer = null;
-  let spawnTimer = null;
-  let roundId = 0;
-
-  function randomPosition() {
-    const rect = arena.getBoundingClientRect();
-    const duckSize = 65;
-
-    const marginX = duckSize / 2 + 5;
-    const marginY = duckSize / 2 + 5;
-
-    const minX = marginX;
-    const maxX = Math.max(minX, rect.width - marginX);
-
-    const minY = 65;
-    const maxY = Math.max(minY, rect.height - marginY);
-
-    return {
-      x: minX + Math.random() * (maxX - minX),
-      y: minY + Math.random() * (maxY - minY)
-    };
-  }
-
-  function moveDuck() {
-    if (!active || !duck || !duck.isConnected) return;
-
-    const pos = randomPosition();
-    duck.style.left = `${pos.x}px`;
-    duck.style.top = `${pos.y}px`;
-
-    // Thỉnh thoảng vịt quay mặt theo hướng khác.
-    duck.style.filter = Math.random() > 0.5
-      ? "drop-shadow(2px 4px 0 #344b3a35)"
-      : "drop-shadow(2px 4px 0 #344b3a35)";
-
-    if (Math.random() > 0.72) {
-      duck.textContent = "🐤";
-    } else {
-      duck.textContent = "🦆";
-    }
-  }
-
-  function makeDuck() {
-    if (!active || duck) return;
-
-    const newDuck = document.createElement("button");
-    newDuck.type = "button";
-    newDuck.className = "duck";
-    newDuck.textContent = "🦆";
-    newDuck.setAttribute("aria-label", "Bắt chú vịt");
-
-    const pos = randomPosition();
-    newDuck.style.left = `${pos.x}px`;
-    newDuck.style.top = `${pos.y}px`;
-
-    newDuck.addEventListener("pointerdown", catchDuck);
-
-    arena.appendChild(newDuck);
-    duck = newDuck;
-  }
-
-  function showFloatingText(text, x, y) {
-    const pop = document.createElement("div");
-    pop.className = "floating-text";
-    pop.textContent = text;
-    pop.style.left = `${x}px`;
-    pop.style.top = `${y}px`;
-
-    arena.appendChild(pop);
-
-    window.setTimeout(() => pop.remove(), 700);
-  }
-
-  function catchDuck(event) {
-    if (!active || !duck) return;
-
-    event.preventDefault();
-
-    const caughtDuck = duck;
-    const rect = caughtDuck.getBoundingClientRect();
-    const arenaRect = arena.getBoundingClientRect();
-
-    const x = rect.left - arenaRect.left + rect.width / 2;
-    const y = rect.top - arenaRect.top;
-
-    caughtDuck.classList.add("caught");
-    caughtDuck.removeEventListener("pointerdown", catchDuck);
-    duck = null;
-
-    score++;
-    scoreElement.textContent = score;
-    showFloatingText(["BẮT ĐƯỢC!", "Ú ÒA!", "DÍNH RỒI!", "QUÁ ĐỈNH!"][Math.floor(Math.random() * 4)], x, y);
-
-    messageElement.textContent = score >= TARGET
-      ? "Đã hoàn thành thử thách!"
-      : `Bắt được ${score}/${TARGET} chú rồi! Còn nữa đó!`;
-
-    if (score >= TARGET) {
-      finishGame(true);
-      return;
-    }
-
-    // Xóa vịt cũ rồi mới xuất hiện vịt tiếp theo.
-    window.setTimeout(() => {
-      caughtDuck.remove();
-      if (active && !duck) makeDuck();
-    }, 180);
-  }
-
-  function stopTimers() {
-    window.clearInterval(moveTimer);
-    window.clearInterval(countdownTimer);
-    window.clearTimeout(spawnTimer);
-
-    moveTimer = null;
-    countdownTimer = null;
-    spawnTimer = null;
-  }
-
-  function startGame() {
-    roundId++;
-    stopTimers();
-
-    if (duck) {
-      duck.remove();
-      duck = null;
-    }
-
-    score = 0;
-    timeLeft = ROUND_SECONDS;
-    active = true;
-
-    scoreElement.textContent = "0";
-    timeElement.textContent = `${timeLeft}s`;
-    messageElement.textContent = "Bắt được 5 chú vịt trước khi hết giờ nhé!";
-
-    startOverlay.classList.add("hidden");
-    resultOverlay.classList.add("hidden");
-
-    makeDuck();
-
-    // Vịt đổi chỗ nhanh gấp đôi: 850ms -> 425ms.
-    moveTimer = window.setInterval(moveDuck, MOVE_INTERVAL);
-
-    countdownTimer = window.setInterval(() => {
-      if (!active) return;
-
-      timeLeft--;
-      timeElement.textContent = `${timeLeft}s`;
-
-      if (timeLeft <= 5 && timeLeft > 0) {
-        timeElement.style.color = "#d94747";
-      }
-
-      if (timeLeft <= 0) {
-        finishGame(false);
-      }
-    }, 1000);
-  }
-
-  function finishGame(won) {
-    if (!active) return;
-
-    active = false;
-    stopTimers();
-
-    if (duck) {
-      duck.remove();
-      duck = null;
-    }
-
-    resultOverlay.classList.remove("hidden");
-
-    if (won) {
-      resultIcon.textContent = "🎉💌";
-      resultTitle.textContent = "Bắt hết được rồi!";
-      resultText.textContent =
-        "Phần thưởng bí mật đã được mở khóa. " ;
-        
-
-      resultButtons.innerHTML = `
-        <button class="pixel-button" id="letter-button" type="button">
-          MỞ LÁ THƯ 💌
-        </button>
-        <button class="pixel-button secondary" id="retry-button" type="button">
-          CHƠI LẠI ↻
-        </button>
-      `;
-
-      document.getElementById("letter-button").onclick = openLetter;
-      document.getElementById("retry-button").onclick = startGame;
-    } else {
-      resultIcon.textContent = "⏰🦆";
-      resultTitle.textContent = "Vịt chạy thoát mất rồi!";
-      resultText.textContent =
-        `Mới bắt được ${score}/${TARGET} chú thôi. ` +
-        "Chú vịt cuối cùng nhanh hơn dự tính một chút nhỉ? Thử lại nhé!";
-
-      resultButtons.innerHTML = `
-        <button class="pixel-button" id="retry-button" type="button">
-          THỬ LẠI NÀO! ↻
-        </button>
-      `;
-
-      document.getElementById("retry-button").onclick = startGame;
-    }
-  }
-
-  // Mở lá thư sau khi thắng.
-  function openLetter() {
-    const dialog = document.getElementById("result-dialog");
-
-    dialog.innerHTML = `
-      <div class="dialog-icon" aria-hidden="true">💌</div>
-
-  
-
-
-      <div class="letter"
-           tabindex="0"
-           aria-label="Lá thư chúc mừng, cuộn để đọc hết">
-
-        <p class="letter-opening">
-          thấm thoát ms chỉ 2 năm trôi qa mà chừ Trịnh Thúy Hiền đã thống nhất TCV r. Vậy là cbi ph xa nhau r bn tôi ơi, cx k lâu nx thì chúng mik ph bc đi trên đoạn đg tương lai của riêng mik r nên cơ hội để gặp lại nhau cs vẻ là rất khó nên qa ngày 20/10 này chúng mik cs lm vài món quà để gửi đến bn Hiền cùng lời chúc cùng lời chào trân trọng nhất. Chúc bn Hiền cs một ngày 20/10 tht là đáng nhớ, hạnh phúc và đầy niềm vui, mong cho phút giây này sẽ là 1 kỉ niệm đáng nhớ sẽ theo bn trên con đg tương lai. Chúc Hiền lun lun xinh đẹp, bùng nổ, đẳng cấp, sức khỏe mạnh mẽ bomchakalaka, đạt đc nguyện vọng là đi du hc Pháp để mở 1 quầy chuối chiên dưới tháp effiel nè và nhớ là luôn luôn ph giữ 1 tinh thần tích cực và nỡ nụ cười trên môi nha. 
+      <section class="letter" aria-label="Lời chúc">
+        <p id="sentence-text" aria-live="polite">
+          thấm thoát ms chỉ 2 năm trôi qa mà chừ Trịnh Thúy Hiền đã thống nhất TCV r.
         </p>
+      </section>
 
-        <div class="letter-sign">
-          Au revoir et à bientôt. 🇫🇷
-        </div>
+      <div class="letter-nav">
+        <button id="prev-btn" type="button" disabled>
+          ← Câu trước
+        </button>
+
+        <span id="sentence-count">1 / 6</span>
+
+        <button id="next-btn" type="button">
+          Câu tiếp theo →
+        </button>
       </div>
 
-    
+      <a
+        class="back"
+        href="https://women12102010.github.io/women1210.github.io/"
+      >
+        ← Quay lại phong bì
+      </a>
 
-      <button class="pixel-button"
-              id="letter-close-button"
-              type="button">
-        ĐỌC XONG RỒI ♡
-      </button>
-    `;
+    </article>
 
-    document
-      .getElementById("letter-close-button")
-      .addEventListener("click", () => {
-        resultOverlay.classList.add("hidden");
-        startOverlay.classList.remove("hidden");
+    <footer>
+      gâu gâu <span class="heart">♡</span> gâu
+    </footer>
 
-        dialog.innerHTML = `
-          <div class="dialog-icon" id="result-icon">🎉</div>
-          <h2 id="result-title">Tuyệt vời!</h2>
-          <p id="result-text"></p>
-          <div class="dialog-buttons" id="result-buttons"></div>
-        `;
-      });
-  }
+  </main>
 
-  document.getElementById("start-button").onclick = startGame;
-document.getElementById("start-again-button").onclick = startGame;
+  <script>
+    const sentences = [
+      "thấm thoát ms chỉ 2 năm trôi qa mà chừ Trịnh Thúy Hiền đã thống nhất TCV r.",
 
-  // Khi thay đổi kích thước cửa sổ, giữ vịt ở trong khu vườn.
-  window.addEventListener("resize", () => {
-    if (active && duck) {
-      const pos = randomPosition();
-      duck.style.left = `${pos.x}px`;
-      duck.style.top = `${pos.y}px`;
+      "Vậy là cbi ph xa nhau r bn tôi ơi, cx k lâu nx thì chúng mik ph bc đi trên đoạn đg tương lai của riêng mik r nên cơ hội để gặp lại nhau cs vẻ là rất khó nên qa ngày 20/10 này chúng mik cs lm vài món quà để gửi đến bn Hiền cùng lời chúc cùng lời chào trân trọng nhất.",
+
+      "Chúc bn Hiền cs một ngày 20/10 tht là đáng nhớ, hạnh phúc và đầy niềm vui, mong cho phút giây này sẽ là 1 kỉ niệm đáng nhớ sẽ theo bn trên con đg tương lai.",
+
+      "Chúc cho bạn luôn mạnh mẽ để đối đầu với mọi khó khăn.",
+
+      "Chúc Hiền lun lun xinh đẹp, bùng nổ, đẳng cấp, sức khỏe mạnh mẽ bomchakalaka, đạt đc nguyện vọng là đi du hc Pháp để mở 1 quầy chuối chiên dưới tháp effiel nè và nhớ là luôn luôn ph giữ 1 tinh thần tích cực và nỡ nụ cười trên môi nha.",
+
+      "Au revoir et à bientôt."
+    ];
+
+    let currentSentence = 0;
+
+    const sentenceText = document.getElementById('sentence-text');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const sentenceCount = document.getElementById('sentence-count');
+
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    function showSentence(index) {
+      currentSentence = index;
+
+      const text = sentences[currentSentence];
+
+      sentenceText.replaceChildren();
+
+      if (reduceMotion) {
+        sentenceText.textContent = text;
+      } else {
+        [...text].forEach((char, i) => {
+          const span = document.createElement('span');
+
+          span.textContent = char === ' ' ? '\u00A0' : char;
+
+          span.style.setProperty(
+            '--delay',
+            `${i * 0.025}s`
+          );
+
+          sentenceText.appendChild(span);
+        });
+      }
+
+      sentenceCount.textContent =
+        `${currentSentence + 1} / ${sentences.length}`;
+
+      prevBtn.disabled = currentSentence === 0;
+
+      nextBtn.disabled =
+        currentSentence === sentences.length - 1;
     }
-  });
-})();
-</script>
+
+    prevBtn.addEventListener('click', () => {
+      if (currentSentence > 0) {
+        showSentence(currentSentence - 1);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentSentence < sentences.length - 1) {
+        showSentence(currentSentence + 1);
+      }
+    });
+
+    showSentence(0);
+  </script>
 </body>
 </html>
