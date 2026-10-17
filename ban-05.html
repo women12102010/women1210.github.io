@@ -587,7 +587,7 @@ button {
     </div>
     <div class="hud-item">
       <span class="hud-label">THỜI GIAN</span>
-      <span class="hud-value" id="time">30s</span>
+      <span class="hud-value" id="time">15s</span>
     </div>
     <div class="hud-item">
       <span class="hud-label">MỤC TIÊU</span>
@@ -664,8 +664,8 @@ button {
   "use strict";
 
   const TARGET = 5;
-  const ROUND_SECONDS = 30;
-  const MOVE_INTERVAL = 425;
+  const ROUND_SECONDS = 15;
+  const MOVE_INTERVAL = 100;
 
   const arena = document.getElementById("arena");
   const scoreElement = document.getElementById("score");
@@ -827,7 +827,7 @@ button {
     makeDuck();
 
     // Vịt đổi chỗ nhanh gấp đôi: 850ms -> 425ms.
-    moveTimer = window.setInterval(moveDuck, 200);
+    moveTimer = window.setInterval(moveDuck, MOVE_INTERVAL);
 
     countdownTimer = window.setInterval(() => {
       if (!active) return;
