@@ -1,900 +1,640 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#fff6d9">
-  <title>Bắt vịt chạy loạn 🦆</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bắt vịt chạy loạn 🦆</title>
 
-  <style>
-    /* BAN-05: CSS độc lập */
-    :root {
-      --sky: #ccefff;
-      --cream: #fff8df;
-      --ink: #34434a;
-      --yellow: #ffd85e;
-      --grass: #a7df91;
-      --panel: #fffced;
-    }
+<style>
+:root {
+  --ink: #344b3a;
+  --cream: #fff7df;
+  --green: #83c96d;
+  --dark-green: #477c4d;
+  --pink: #f5b9c5;
+  --brown: #926344;
+  --gold: #f4cf75;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 20px;
-      display: grid;
-      place-items: center;
-      color: var(--ink);
-      font-family: "Courier New", monospace;
-      background: linear-gradient(
-        180deg,
-        var(--sky) 0 35%,
-        #e4f8cf 35% 100%
-      );
-    }
-
-    button {
-      font: inherit;
-    }
-
-    .ban05 {
-      width: min(900px, 100%);
-      margin: auto;
-    }
-
-    .topline {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .pixel-label {
-      padding: 8px 10px;
-      background: var(--panel);
-      border: 3px solid var(--ink);
-      box-shadow: 3px 3px 0 var(--ink);
-    }
-
-    .hero {
-      text-align: center;
-      padding: 30px 10px 22px;
-    }
-
-    .eyebrow {
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 12px 0;
-      font-size: clamp(38px, 8vw, 68px);
-      line-height: 1;
-      letter-spacing: -4px;
-      text-shadow: 4px 4px 0 #f2b9a0;
-    }
-
-    .subtitle {
-      max-width: 550px;
-      margin: auto;
-      font-family: Arial, sans-serif;
-      line-height: 1.7;
-    }
-
-    .hud {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .stat {
-      padding: 12px 5px;
-      text-align: center;
-      background: var(--panel);
-      border: 3px solid var(--ink);
-      box-shadow: 4px 4px 0 var(--ink);
-    }
-
-    .stat-label {
-      display: block;
-      font-size: 11px;
-      font-weight: bold;
-      opacity: .7;
-    }
-
-    .stat-value {
-      display: block;
-      margin-top: 6px;
-      font-size: clamp(20px, 4vw, 30px);
-      font-weight: bold;
-    }
-
-    .progress-track {
-      height: 14px;
-      margin-bottom: 16px;
-      overflow: hidden;
-      border: 3px solid var(--ink);
-      background: white;
-    }
-
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      background: var(--yellow);
-      transition: width .2s;
-    }
-
-    .arena-wrap {
-      padding: 7px;
-      background: var(--ink);
-      box-shadow: 7px 7px 0 #34434a33;
-    }
-
-    .arena {
-      position: relative;
-      height: clamp(320px, 55vw, 440px);
-      overflow: hidden;
-      isolation: isolate;
-      cursor: crosshair;
-      user-select: none;
-      touch-action: manipulation;
-      background: linear-gradient(
-        180deg,
-        #9fe2f3 0 47%,
-        #aee39a 47% 100%
-      );
-    }
-
-    .arena::before {
-      content: "";
-      position: absolute;
-      inset: 47% 0 0;
-      z-index: -1;
-      opacity: .35;
-      background-image:
-        repeating-linear-gradient(
-          90deg,
-          transparent 0 27px,
-          #68b978 27px 30px
-        ),
-        repeating-linear-gradient(
-          0deg,
-          transparent 0 25px,
-          #68b978 25px 28px
-        );
-      pointer-events: none;
-    }
-
-    .pond {
-      position: absolute;
-      left: 30%;
-      top: 59%;
-      width: 40%;
-      height: 23%;
-      border: 5px solid #4c9eaa;
-      border-radius: 50%;
-      background: #79d6e5;
-      transform: rotate(-8deg);
-      pointer-events: none;
-    }
-
-    .pond::after {
-      content: "〰 〰";
-      position: absolute;
-      top: 25%;
-      left: 25%;
-      color: white;
-      font-size: 22px;
-    }
-
-    .fence {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 8%;
-      height: 13px;
-      border-top: 4px solid #8b5e42;
-      border-bottom: 4px solid #8b5e42;
-      background: #c99565;
-      pointer-events: none;
-    }
-
-    .fence::before {
-      content: "";
-      position: absolute;
-      inset: -17px 0 -4px;
-      background: repeating-linear-gradient(
-        90deg,
-        #c99565 0 12px,
-        #8b5e42 12px 16px,
-        transparent 16px 39px
-      );
-    }
-
-    .decoration {
-      position: absolute;
-      font-size: 24px;
-      pointer-events: none;
-    }
-
-    .duck {
-      position: absolute;
-      z-index: 3;
-      display: grid;
-      place-items: center;
-      width: 70px;
-      height: 70px;
-      padding: 0;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      transform: translate(-50%, -50%);
-      filter: drop-shadow(2px 4px 0 #34434a30);
-      transition: left .25s, top .25s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .duck span {
-      font-size: 56px;
-      line-height: 1;
-      transition: transform .12s;
-    }
-
-    .duck:hover span {
-      transform: scale(1.15) rotate(-8deg);
-    }
-
-    .duck:active span {
-      transform: scale(.8);
-    }
-
-    .duck.caught {
-      pointer-events: none;
-      animation: duck-pop .22s ease forwards;
-    }
-
-    @keyframes duck-pop {
-      to {
-        opacity: 0;
-        transform: translate(-50%, -90%) scale(1.5) rotate(20deg);
-      }
-    }
-
-    .splash {
-      position: absolute;
-      z-index: 5;
-      color: white;
-      font-weight: bold;
-      text-shadow: 2px 2px 0 var(--ink);
-      pointer-events: none;
-      animation: float-up .7s ease forwards;
-    }
-
-    @keyframes float-up {
-      to {
-        opacity: 0;
-        transform: translateY(-40px) scale(1.2);
-      }
-    }
-
-    .overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 10;
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      background: #2b444878;
-      backdrop-filter: blur(3px);
-    }
-
-    .overlay[hidden] {
-      display: none;
-    }
-
-    .dialog {
-      width: min(430px, 100%);
-      padding: 26px 22px;
-      text-align: center;
-      background: #fff9e5;
-      border: 4px solid var(--ink);
-      box-shadow: 7px 7px 0 var(--ink);
-    }
-
-    .dialog-icon {
-      margin-bottom: 12px;
-      font-size: 64px;
-      line-height: 1.1;
-    }
-
-    .dialog h2 {
-      margin: 0 0 12px;
-      font-size: clamp(24px, 5vw, 32px);
-      line-height: 1.2;
-    }
-
-    .dialog p {
-      font-family: Arial, sans-serif;
-      line-height: 1.65;
-    }
-
-    .pixel-button {
-      min-height: 48px;
-      padding: 12px 18px;
-      border: 3px solid var(--ink);
-      background: var(--yellow);
-      color: var(--ink);
-      box-shadow: 4px 4px 0 var(--ink);
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform .1s, box-shadow .1s;
-    }
-
-    .pixel-button:hover {
-      transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 var(--ink);
-    }
-
-    .pixel-button:active {
-      transform: translate(4px, 4px);
-      box-shadow: none;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .hint {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-   
-.letter {
-  margin: 16px 0;
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 18px;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 15% 20%, #fff8df 0 3px, transparent 4px),
+    radial-gradient(circle at 85% 70%, #ffffff80 0 4px, transparent 5px),
+    #dff2d4;
+  font-family: "Courier New", monospace;
+}
+
+button {
+  font-family: inherit;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+.game-shell {
+  width: min(100%, 650px);
+  padding: 15px;
+  border: 4px solid #557b4c;
+  border-radius: 8px;
+  background: var(--cream);
+  box-shadow: 0 8px 0 #b5d5a2, 0 14px 30px #496b4430;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(18px, 4vw, 26px);
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  font-size: 11px;
+  color: #71876a;
+}
+
+.pixel-flower {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.hud {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.hud-item {
+  padding: 9px 5px;
+  border: 2px solid #a5c891;
+  background: #f4f8df;
+  text-align: center;
+}
+
+.hud-label {
+  display: block;
+  font-size: 10px;
+  color: #75886c;
+  margin-bottom: 5px;
+}
+
+.hud-value {
+  font-size: 19px;
+  font-weight: bold;
+}
+
+#time {
+  color: #bc6c55;
+}
+
+.arena {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.2 / 1;
+  min-height: 300px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 4px solid #557b4c;
+  background: #b9e6a0;
+  image-rendering: pixelated;
+}
+
+/* Bầu trời và những đám mây */
+.sky {
+  position: absolute;
+  inset: 0 0 47%;
+  z-index: -3;
+  background: linear-gradient(#b8e8f2, #e0f7e8);
+}
+
+.cloud {
+  position: absolute;
+  width: 76px;
+  height: 19px;
+  border-radius: 3px;
+  background: #ffffffc9;
+  box-shadow:
+    12px -12px 0 -2px #ffffffc9,
+    29px -8px 0 2px #ffffffc9,
+    40px 0 0 -2px #ffffffc9;
+  opacity: .8;
+}
+
+.cloud-one {
+  top: 13%;
+  left: 10%;
+}
+
+.cloud-two {
+  top: 24%;
+  right: 10%;
+  transform: scale(.7);
+}
+
+/* Đồi phía xa */
+.hill {
+  position: absolute;
+  z-index: -2;
+  bottom: 32%;
+  width: 75%;
+  height: 29%;
+  border-radius: 50% 50% 0 0;
+  background: #9bd48b;
+}
+
+.hill-left {
+  left: -22%;
+}
+
+.hill-right {
+  right: -25%;
+  height: 24%;
+  background: #8bc97e;
+}
+
+/* Mặt đất */
+.ground {
+  position: absolute;
+  z-index: -1;
+  inset: 54% 0 0;
+  background:
+    radial-gradient(circle, #ffffff70 0 2px, transparent 3px) 0 0 / 29px 27px,
+    linear-gradient(#9bd77c, #75bd68);
+  border-top: 5px solid #6fae5c;
+}
+
+.grass {
+  position: absolute;
+  bottom: 11%;
+  font-size: 21px;
+  color: #427c43;
+}
+
+.grass-one {
+  left: 5%;
+}
+
+.grass-two {
+  right: 7%;
+}
+
+.flower {
+  position: absolute;
+  bottom: 19%;
+  font-size: 20px;
+}
+
+.flower-one {
+  left: 17%;
+}
+
+.flower-two {
+  right: 19%;
+}
+
+/* Hồ nước pixel art */
+.pond {
+  position: absolute;
+  left: 30%;
+  top: 59%;
+  width: 40%;
+  height: 23%;
+  border: 5px solid #398b9c;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 27% 25%, #d9ffff 0 3%, transparent 4%),
+    radial-gradient(ellipse at 68% 62%, #c6faff 0 2%, transparent 3%),
+    repeating-linear-gradient(
+      165deg,
+      transparent 0 17px,
+      #ffffff30 18px 20px,
+      transparent 21px 31px
+    ),
+    linear-gradient(
+      145deg,
+      #b1f4ee 0%,
+      #64d2df 38%,
+      #48afcb 72%,
+      #328da9 100%
+    );
+  box-shadow:
+    inset 0 0 0 4px #d5ffff80,
+    inset 0 -12px 18px #247a9a45,
+    0 5px 0 #34434a22;
+  transform: rotate(-8deg);
+  pointer-events: none;
+}
+
+.pond::before {
+  content: "🪷";
+  position: absolute;
+  top: -13%;
+  left: 17%;
+  font-size: clamp(18px, 3vw, 28px);
+  filter: drop-shadow(1px 3px 0 #247a9a35);
+  transform: rotate(8deg);
+}
+
+.pond::after {
+  content: "〰 〰 〰";
+  position: absolute;
+  top: 28%;
+  left: 22%;
+  color: #f2ffff;
+  font-size: clamp(16px, 2.5vw, 23px);
+  letter-spacing: 3px;
+  text-shadow: 0 2px 0 #398b9c50;
+  animation: water-shimmer 2s ease-in-out infinite alternate;
+}
+
+@keyframes water-shimmer {
+  from {
+    transform: translateX(-3px);
+    opacity: .6;
+  }
+  to {
+    transform: translateX(5px);
+    opacity: 1;
+  }
+}
+
+/* Vịt */
+.duck {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 47px;
+  line-height: 1;
+  filter: drop-shadow(2px 4px 0 #344b3a35);
+  transform: translate(-50%, -50%);
+  transition:
+    left .16s ease-out,
+    top .16s ease-out,
+    transform .12s ease-out;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.duck:hover {
+  transform: translate(-50%, -50%) scale(1.12) rotate(-7deg);
+}
+
+.duck:active {
+  transform: translate(-50%, -50%) scale(.85);
+}
+
+.duck.caught {
+  animation: duck-caught .3s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes duck-caught {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -100%) scale(.3) rotate(30deg);
+  }
+}
+
+.floating-text {
+  position: absolute;
+  z-index: 7;
+  pointer-events: none;
+  color: #fff9d7;
+  font-size: 17px;
+  font-weight: bold;
+  text-shadow:
+    2px 2px #527849,
+    -1px -1px #527849;
+  animation: float-up .65s ease-out forwards;
+}
+
+@keyframes float-up {
+  to {
+    opacity: 0;
+    transform: translateY(-35px) scale(1.2);
+  }
+}
+
+.arena-message {
+  position: absolute;
+  z-index: 8;
+  top: 12px;
+  left: 50%;
+  width: max-content;
+  max-width: 90%;
+  padding: 7px 11px;
+  border: 2px solid #557b4c;
+  background: #fff9dfeb;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 13px;
+}
+
+.pixel-button {
+  padding: 12px 16px;
+  border: 3px solid #54784a;
+  border-radius: 3px;
+  background: #8dce75;
+  color: #29472e;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 0 #54784a;
+  transition: transform .1s, box-shadow .1s;
+}
+
+.pixel-button:hover {
+  background: #a8e18b;
+}
+
+.pixel-button:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #54784a;
+}
+
+.pixel-button.secondary {
+  background: #f6dca0;
+}
+
+.instructions {
+  margin: 14px 0 2px;
+  color: #6f8265;
+  font-size: 11px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* Màn hình bắt đầu / kết quả */
+.overlay {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 15px;
+  background: #344b3acb;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.dialog {
+  width: min(100%, 390px);
+  max-height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 23px 19px;
+  border: 4px solid #9a7653;
+  background:
+    radial-gradient(circle, #d6b98b40 0 1px, transparent 2px) 0 0 / 13px 13px,
+    #fff6dd;
+  text-align: center;
+  box-shadow: 0 7px 0 #344b3a60;
+}
+
+.dialog-icon {
+  margin-bottom: 8px;
+  font-size: 43px;
+}
+
+.dialog h2 {
+  margin: 7px 0 12px;
+  color: #6a563d;
+  font-size: 20px;
+}
+
+.dialog p {
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 17px;
+}
+
+/* Lá thư */
+.letter-eyebrow {
+  margin: 0 0 10px;
+  color: #a77850;
+  font-size: 10px !important;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.letter-title {
+  color: #72503f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px !important;
+  font-weight: normal;
+  letter-spacing: -.5px;
+}
+
+.letter {
   max-height: 220px;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: #c99565 #fff0cf;
-
-  border: 2px dashed #d5a36d;
-  background: #fffdf6;
-  color: #34434a;
-
+  padding: 14px;
+  border: 2px dashed #d7b58a;
+  background: #fffaf0;
   text-align: left;
-  font-family: Arial, "Segoe UI", sans-serif;
-  font-size: 16px;
-  line-height: 1.9;
-
-  white-space: pre-line;
-  overflow-wrap: anywhere;
+  scrollbar-color: #d5a36d #fff3d9;
+  scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
 }
 
-.letter::-webkit-scrollbar {
-  width: 8px;
+.letter p {
+  margin: 0 0 16px;
+  font-family: Arial, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.9;
+  white-space: normal;
 }
 
-.letter::-webkit-scrollbar-track {
-  background: #fff0cf;
+.letter .letter-opening {
+  color: #875d42;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-style: italic;
 }
 
-.letter::-webkit-scrollbar-thumb {
-  background: #c99565;
-  border: 2px solid #fff0cf;
-  border-radius: 8px;
+.letter .letter-highlight {
+  padding: 12px;
+  border-left: 3px solid #d5a36d;
+  background: #fff3d9;
+  color: #875d42;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+}
+
+.letter .letter-ending {
+  margin-top: 22px;
+  color: #875d42;
+  font-weight: bold;
 }
 
 .letter-sign {
-  display: block;
-  margin-top: 14px;
-  font-family: Arial, "Segoe UI", sans-serif;
-  font-size: 12px;
-  line-height: 1.7;
-  opacity: .75;
+  padding-top: 14px;
+  border-top: 1px dashed #d5a36d;
+  color: #a77850;
+  text-align: right;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.9;
 }
 
+.letter-scroll-hint {
+  margin: 9px 0 !important;
+  color: #8b6a51;
+  font-size: 10px !important;
+}
 
-    .footer-note {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 11px;
-      opacity: .7;
-    }
+@media (max-width: 430px) {
+  body {
+    padding: 9px;
+  }
 
-    @media (max-width: 520px) {
-      body {
-        padding: 12px;
-      }
+  .game-shell {
+    padding: 10px;
+  }
 
-      .topline {
-        font-size: 10px;
-      }
+  .arena {
+    min-height: 280px;
+  }
 
-      .hero {
-        padding: 25px 5px 20px;
-      }
+  .duck {
+    width: 57px;
+    height: 57px;
+    font-size: 42px;
+  }
 
-      .hud {
-        gap: 7px;
-      }
+  .dialog {
+    padding: 17px 12px;
+  }
 
-      .stat {
-        box-shadow: 3px 3px 0 var(--ink);
-      }
+  .letter {
+    max-height: 200px;
+    padding: 11px;
+  }
 
-      .stat-label {
-        font-size: 9px;
-      }
+  .pixel-button {
+    padding: 11px 12px;
+  }
+}
 
-      .arena {
-        height: min(112vw, 390px);
-        min-height: 300px;
-      }
-
-      .pond {
-        left: 25%;
-        width: 50%;
-      }
-
-      .controls {
-        align-items: stretch;
-      }
-
-      .controls .pixel-button {
-        width: 100%;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
 </head>
 
 <body>
-  <main class="ban05" id="ban05-game">
+<main class="game-shell">
+  <header class="header">
+    <div>
+      <h1>🦆 Bắt vịt chạy loạn!</h1>
+      <p class="subtitle">DUCK HUNT · SPECIAL 20/10 EDITION</p>
+    </div>
+    <div class="pixel-flower" aria-hidden="true">🌼</div>
+  </header>
 
-    <div class="topline">
-      <span class="pixel-label">20/10 MINI GAME</span>
+  <section class="hud" aria-label="Thông tin trò chơi">
+    <div class="hud-item">
+      <span class="hud-label">ĐÃ BẮT</span>
+      <span class="hud-value"><span id="score">0</span>/5</span>
+    </div>
+    <div class="hud-item">
+      <span class="hud-label">THỜI GIAN</span>
+      <span class="hud-value" id="time">30s</span>
+    </div>
+    <div class="hud-item">
+      <span class="hud-label">MỤC TIÊU</span>
+      <span class="hud-value">🦆 × 5</span>
+    </div>
+  </section>
+
+  <section class="arena" id="arena" aria-label="Khu vườn bắt vịt">
+    <div class="sky"></div>
+    <div class="cloud cloud-one"></div>
+    <div class="cloud cloud-two"></div>
+    <div class="hill hill-left"></div>
+    <div class="hill hill-right"></div>
+    <div class="ground"></div>
+    <div class="pond"></div>
+
+    <span class="grass grass-one" aria-hidden="true">♣ ♣</span>
+    <span class="grass grass-two" aria-hidden="true">♣ ♣</span>
+    <span class="flower flower-one" aria-hidden="true">🌼</span>
+    <span class="flower flower-two" aria-hidden="true">🌷</span>
+
+    <div class="arena-message" id="arena-message">
+      Bắt được 5 chú vịt trước khi hết giờ nhé!
     </div>
 
-    <header class="hero">
-      <p class="eyebrow">Nhiệm vụ hôm nay</p>
-      <h1>BẮT VỊT! 🦆</h1>
-      <p class="subtitle">
-        Đám vịt đang chạy loạn khắp cái ao rồi!
-        Bắt đủ <strong>5 chú vịt</strong> trong 30 giây
-        để nhận một lá thư nhá.
-      </p>
-    </header>
-
-    <section class="hud" aria-label="Thông tin trò chơi">
-      <div class="stat">
-        <span class="stat-label">Đã bắt</span>
-        <span class="stat-value"><span id="caught-count">0</span> / 5</span>
-      </div>
-
-      <div class="stat">
-        <span class="stat-label">Thời gian</span>
-        <span class="stat-value"><span id="time-left">30</span>s</span>
-      </div>
-
-      <div class="stat">
-        <span class="stat-label">Còn lại</span>
-        <span class="stat-value" id="remaining-count">5 🐣</span>
-      </div>
-    </section>
-
-    <div
-      class="progress-track"
-      id="progress-track"
-      role="progressbar"
-      aria-label="Tiến độ bắt vịt"
-      aria-valuemin="0"
-      aria-valuemax="5"
-      aria-valuenow="0"
-    >
-      <div class="progress-fill" id="progress-fill"></div>
-    </div>
-
-    <section class="arena-wrap">
-      <div class="arena" id="arena" aria-label="Khu vực bắt vịt">
-
-        <div class="pond" aria-hidden="true"></div>
-        <div class="fence" aria-hidden="true"></div>
-
-        <span class="decoration" style="left:7%;top:58%" aria-hidden="true">🌼</span>
-        <span class="decoration" style="left:83%;top:72%" aria-hidden="true">🌷</span>
-        <span class="decoration" style="left:14%;top:80%" aria-hidden="true">🌸</span>
-        <span class="decoration" style="left:74%;top:51%" aria-hidden="true">🌿</span>
-
-        <div class="overlay" id="start-overlay">
-          <div class="dialog">
-            <div class="dialog-icon">🦆💨</div>
-            <h2>Vịt chạy mất dép!</h2>
-            <p>
-              Click hoặc chạm vào vịt để bắt.
-              Bắt đủ 5 con trước khi hết giờ, rồi xem
-              chú vịt mang gì đến cho nhé!
-            </p>
-            <button class="pixel-button" id="start-button" type="button">
-              BẮT ĐẦU! ▶
-            </button>
-          </div>
+    <div class="overlay" id="start-overlay">
+      <div class="dialog">
+        <div class="dialog-icon">🦆🌿</div>
+        <h2>Vịt chạy mất rồi!</h2>
+        <p>
+          Có đúng một chú vịt tinh nghịch đang lẩn trốn
+          trong khu vườn này.
+          <br><br>
+          Bắt đủ <strong>5 chú vịt</strong> trong vòng
+          <strong>30 giây</strong> để mở khóa một món quà bí mật!
+        </p>
+        <p>Nhưng nhớ nhé… chú vịt chạy nhanh lắm đó. 👀</p>
+        <div class="dialog-buttons">
+          <button class="pixel-button" id="start-button" type="button">
+            BẮT ĐẦU! ▶
+          </button>
         </div>
-
-        <div class="overlay" id="result-overlay" hidden>
-          <div class="dialog" id="result-dialog" aria-live="polite">
-            <div class="dialog-icon" id="result-icon">🎉</div>
-            <h2 id="result-title">Giỏi quá!</h2>
-            <p id="result-message">Đã bắt đủ vịt</p>
-            <button
-              class="pixel-button"
-              id="result-button"
-              type="button"
-            >
-              CHƠI LẠI ↻
-            </button>
-          </div>
-        </div>
-
       </div>
-    </section>
-
-    <div class="controls">
-      <button class="pixel-button" id="restart-button" type="button">
-        ↻ Chơi lại
-      </button>
     </div>
 
-    <p class="footer-note">
-      20/10
-    </p>
-
-  </main>
-
-  <script>
-    (() => {
-      "use strict";
-
-      const TARGET = 5;
-      const ROUND_SECONDS = 30;
-
-      const arena = document.getElementById("arena");
-      const caughtCount = document.getElementById("caught-count");
-      const timeLeft = document.getElementById("time-left");
-      const remainingCount = document.getElementById("remaining-count");
-      const progressFill = document.getElementById("progress-fill");
-      const progressTrack = document.getElementById("progress-track");
-
-      const startOverlay = document.getElementById("start-overlay");
-      const resultOverlay = document.getElementById("result-overlay");
-
-      const startButton = document.getElementById("start-button");
-      const resultButton = document.getElementById("result-button");
-      const restartButton = document.getElementById("restart-button");
-
-      const resultIcon = document.getElementById("result-icon");
-      const resultTitle = document.getElementById("result-title");
-      const resultMessage = document.getElementById("result-message");
-
-      let caught = 0;
-      let seconds = ROUND_SECONDS;
-      let timerId = null;
-      let moveId = null;
-      let active = false;
-      let duckId = 0;
-
-      const ducks = new Map();
-
-      // Đặt vịt trong phạm vi khu vực chơi.
-      function randomPosition(duck) {
-        const arenaRect = arena.getBoundingClientRect();
-        const duckRect = duck.getBoundingClientRect();
-
-        const halfW = Math.max(duckRect.width / 2, 30);
-        const halfH = Math.max(duckRect.height / 2, 30);
-
-        const x = halfW + Math.random() *
-          Math.max(1, arenaRect.width - halfW * 2);
-
-        const minY = Math.max(halfH + 12, arenaRect.height * 0.12);
-        const maxY = Math.max(minY + 1, arenaRect.height - halfH - 22);
-        const y = minY + Math.random() * (maxY - minY);
-
-        duck.style.left = `${x}px`;
-        duck.style.top = `${y}px`;
-      }
-
-      // Tạo một chú vịt có thể click hoặc chạm.
-      function makeDuck() {
-        const duck = document.createElement("button");
-
-        duck.type = "button";
-        duck.className = "duck";
-        duck.setAttribute("aria-label", "Bắt chú vịt");
-        duck.innerHTML = "<span aria-hidden=\"true\">🦆</span>";
-
-        duck.dataset.duckId = String(++duckId);
-
-        duck.addEventListener("click", (event) => {
-          event.stopPropagation();
-          catchDuck(duck);
-        });
-
-        arena.appendChild(duck);
-        randomPosition(duck);
-        ducks.set(duck.dataset.duckId, duck);
-
-        return duck;
-      }
-
-      // Tất cả vịt còn sống sẽ chạy sang vị trí mới.
-      function moveDucks() {
-        if (!active) return;
-
-        for (const duck of ducks.values()) {
-          if (!duck.classList.contains("caught")) {
-            randomPosition(duck);
-          }
-        }
-      }
-
-      function showPop(message, x, y) {
-        const pop = document.createElement("span");
-
-        pop.className = "splash";
-        pop.textContent = message;
-        pop.style.left = `${x}px`;
-        pop.style.top = `${y}px`;
-
-        arena.appendChild(pop);
-
-        window.setTimeout(() => pop.remove(), 750);
-      }
-
-      function updateHud() {
-        caughtCount.textContent = String(caught);
-        timeLeft.textContent = String(seconds);
-        remainingCount.textContent = `${TARGET - caught} 🐣`;
-
-        progressFill.style.width = `${caught / TARGET * 100}%`;
-        progressTrack.setAttribute("aria-valuenow", String(caught));
-      }
-
-      // Bắt vịt và cập nhật điểm.
-      function catchDuck(duck) {
-        if (!active || duck.classList.contains("caught")) return;
-
-        const rect = duck.getBoundingClientRect();
-        const arenaRect = arena.getBoundingClientRect();
-
-        const messages = ["QUẠC! +1", "BẮT ĐƯỢC!", "HÊ HÊ!"];
-
-        showPop(
-          messages[Math.floor(Math.random() * messages.length)],
-          rect.left - arenaRect.left + rect.width / 2,
-          rect.top - arenaRect.top + rect.height / 2
-        );
-
-        duck.classList.add("caught");
-        ducks.delete(duck.dataset.duckId);
-
-        caught++;
-        updateHud();
-
-        window.setTimeout(() => duck.remove(), 240);
-
-        if (caught >= TARGET) {
-          finishGame(true);
-          return;
-        }
-
-        // Bắt được vịt thì một chú khác xuất hiện.
-        window.setTimeout(() => {
-          if (active) makeDuck();
-        }, 180);
-      }
-
-      function clearGameTimers() {
-        if (timerId !== null) {
-          window.clearInterval(timerId);
-          timerId = null;
-        }
-
-        if (moveId !== null) {
-          window.clearInterval(moveId);
-          moveId = null;
-        }
-      }
-
-      // Kết thúc ván.
-      function finishGame(won) {
-        if (!active) return;
-
-        active = false;
-        clearGameTimers();
-
-        resultOverlay.hidden = false;
-
-        if (won) {
-          resultIcon.textContent = "🦆💌";
-          resultTitle.textContent = "Vịt đưa thư tới rồi!";
-          resultMessage.textContent =
-            "Bắt đủ 5 chú vịt trong thời gian quy định! " +
-            "Một lá thư nhỏ đang chờ được mở.";
-
-          resultButton.textContent = "MỞ THƯ CHÚC MỪNG 💌";
-          resultButton.dataset.action = "letter";
-        } else {
-          resultIcon.textContent = "⏰🦆";
-          resultTitle.textContent = "Vịt chạy nhanh quá!";
-          resultMessage.textContent =
-            `Mới bắt được ${caught}/${TARGET} chú thôi. ` +
-            "Thử lại một lần nữa nhé!";
-
-          resultButton.textContent = "THỬ LẠI NÀO ↻";
-          resultButton.dataset.action = "retry";
-        }
-
-        for (const duck of ducks.values()) {
-          duck.disabled = true;
-        }
-      }
-
-      // Mở lá thư sau khi thắng.
-      
-
-function openLetter() {
-  const dialog = document.getElementById("result-dialog");
-
-  dialog.innerHTML = `
-    <div class="dialog-icon" aria-hidden="true">💌🦆</div>
-
-    <h2>Một lá thư dành cho bạn</h2>
-
-    <div class="letter"
-         tabindex="0"
-         aria-label="Lá thư chúc mừng, cuộn để đọc hết">
-
-      Thấm thoắt mới chỉ 2 năm trôi qua mà chừ Trịnh Thúy Hiền đã thống nhất TCV rồi.
-
-      Vậy là chuẩn bị phải xa nhau rồi, bạn tôi ơi. Cũng không lâu nữa thì chúng mình phải bước đi trên đoạn đường tương lai của riêng mình rồi, nên cơ hội để gặp lại nhau có vẻ là rất khó.
-
-      Nhân ngày 20/10 này, chúng mình có làm vài món quà để gửi đến bạn Hiền cùng lời chúc và lời chào trân trọng nhất.
-
-      Chúc bạn Hiền có một ngày 20/10 thật đáng nhớ, hạnh phúc và đầy niềm vui. Mong rằng phút giây này sẽ là một kỉ niệm đáng nhớ, theo bạn trên con đường tương lai.
-
-      Chúc Hiền luôn luôn xinh đẹp, bùng nổ, đẳng cấp, sức khỏe mạnh mẽ bomchakalaka, đạt được nguyện vọng là đi du học Pháp để mở một quầy chuối chiên dưới tháp Eiffel nè.
-
-      Và nhớ là luôn luôn phải giữ một tinh thần tích cực và nở nụ cười trên môi nha.
-
-      Au revoir et à bientôt. 🇫🇷
-
-      
-
-    <button class="pixel-button"
-            id="letter-close-button"
-            type="button">
-      CHƠI LẠI ↻
-    </button>
-  `;
-
-  document
-    .getElementById("letter-close-button")
-    .addEventListener("click", resetGame);
-}
-
-
-      // Trở về màn hình bắt đầu.
-      function resetGame() {
-        clearGameTimers();
-
-        active = false;
-        caught = 0;
-        seconds = ROUND_SECONDS;
-
-        for (const duck of ducks.values()) {
-          duck.remove();
-        }
-
-        ducks.clear();
-
-        arena.querySelectorAll(".splash").forEach((item) => {
-          item.remove();
-        });
-
-        resultOverlay.hidden = true;
-        startOverlay.hidden = false;
-
-        resultIcon.textContent = "🎉";
-        resultTitle.textContent = "Giỏi quá!";
-        resultMessage.textContent = "Đã bắt đủ vịt rồi!";
-        resultButton.textContent = "CHƠI LẠI ↻";
-        resultButton.dataset.action = "";
-
-        updateHud();
-      }
-
-      // Bắt đầu một ván mới.
-      function startGame() {
-        clearGameTimers();
-
-        for (const duck of ducks.values()) {
-          duck.remove();
-        }
-
-        ducks.clear();
-
-        caught = 0;
-        seconds = ROUND_SECONDS;
-        active = true;
-
-        updateHud();
-
-        startOverlay.hidden = true;
-        resultOverlay.hidden = true;
-
-        // Khởi tạo 3 chú vịt cùng lúc.
-        for (let i = 0; i < 3; i++) {
-          makeDuck();
-        }
-
-        // Vịt liên tục đổi chỗ.
-        moveId = window.setInterval(moveDucks, 850);
-
-        // Đồng hồ đếm ngược 45 giây.
-        timerId = window.setInterval(() => {
-          if (!active) return;
-
-          seconds--;
-          updateHud();
-
-          if (seconds <= 0) {
-            seconds = 0;
-            updateHud();
-            finishGame(false);
-          }
-        }, 1000);
-      }
-
-      startButton.addEventListener("click", startGame);
-      restartButton.addEventListener("click", resetGame);
-
-      resultButton.addEventListener("click", () => {
-        if (resultButton.dataset.action === "letter") {
-          openLetter();
-        } else {
-          startGame();
-        }
-      });
-
-      updateHud();
-    })();
-  </script>
-</body>
-</html>
+    <div class="overlay hidden" id="result-overlay">
+      <div class="dialog" id="result-dialog">
+        <div class="dialog-icon" id="result-icon">🎉</div>
+        <h2 id="result-title">Tuyệt vời!</h2>
+        <p id
