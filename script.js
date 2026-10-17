@@ -12,7 +12,7 @@ const CODE_ROUTES = {
   "11QUY": "ban-11.html",
   "12THY": "ban-12.html",
   "13TRINH": "ban-13.html",
-  "14TRINH": "ban-14.html"
+  "14UYEN": "ban-14.html"
 };
 const form = document.querySelector("#codeForm");
 const codeInput = document.querySelector("#secretCode");
