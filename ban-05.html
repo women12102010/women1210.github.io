@@ -575,7 +575,7 @@ button {
   <header class="header">
     <div>
       <h1>🦆 Bắt vịt chạy loạn!</h1>
-      <p class="subtitle">20/10 </p>
+      <p class="subtitle">20/10</p>
     </div>
     <div class="pixel-flower" aria-hidden="true">🌼</div>
   </header>
@@ -616,14 +616,15 @@ button {
     <div class="overlay" id="start-overlay">
       <div class="dialog">
         <div class="dialog-icon">🦆🌿</div>
-        <h2>Bắt Vịt</h2>
+        <h2>Bắt Vịt gogogo!</h2>
         <p>
           Có đúng một chú vịt tinh nghịch đang lẩn trốn
           trong khu vườn này.
           <br><br>
           Bắt đủ <strong>5 chú vịt</strong> trong vòng
-          <strong>30 giây</strong> để mở khóa món quà
+          <strong>30 giây</strong> để mở khóa một món quà bí mật!
         </p>
+
         <div class="dialog-buttons">
           <button class="pixel-button" id="start-button" type="button">
             BẮT ĐẦU! ▶
@@ -636,4 +637,321 @@ button {
       <div class="dialog" id="result-dialog">
         <div class="dialog-icon" id="result-icon">🎉</div>
         <h2 id="result-title">Tuyệt vời!</h2>
-        <p id
+        <p id="result-text"></p>
+        <div class="dialog-buttons" id="result-buttons">
+          <button class="pixel-button" id="letter-button" type="button">
+            MỞ QUÀ 💌
+          </button>
+          <button class="pixel-button secondary" id="retry-button" type="button">
+            CHƠI LẠI ↻
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button class="pixel-button" id="start-again-button" type="button">
+      CHƠI LẠI ↻
+    </button>
+  </div>
+
+  
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  const TARGET = 5;
+  const ROUND_SECONDS = 30;
+  const MOVE_INTERVAL = 425;
+
+  const arena = document.getElementById("arena");
+  const scoreElement = document.getElementById("score");
+  const timeElement = document.getElementById("time");
+  const messageElement = document.getElementById("arena-message");
+
+  const startOverlay = document.getElementById("start-overlay");
+  const resultOverlay = document.getElementById("result-overlay");
+
+  const resultIcon = document.getElementById("result-icon");
+  const resultTitle = document.getElementById("result-title");
+  const resultText = document.getElementById("result-text");
+  const resultButtons = document.getElementById("result-buttons");
+
+  let score = 0;
+  let timeLeft = ROUND_SECONDS;
+  let active = false;
+  let duck = null;
+  let moveTimer = null;
+  let countdownTimer = null;
+  let spawnTimer = null;
+  let roundId = 0;
+
+  function randomPosition() {
+    const rect = arena.getBoundingClientRect();
+    const duckSize = 65;
+
+    const marginX = duckSize / 2 + 5;
+    const marginY = duckSize / 2 + 5;
+
+    const minX = marginX;
+    const maxX = Math.max(minX, rect.width - marginX);
+
+    const minY = 65;
+    const maxY = Math.max(minY, rect.height - marginY);
+
+    return {
+      x: minX + Math.random() * (maxX - minX),
+      y: minY + Math.random() * (maxY - minY)
+    };
+  }
+
+  function moveDuck() {
+    if (!active || !duck || !duck.isConnected) return;
+
+    const pos = randomPosition();
+    duck.style.left = `${pos.x}px`;
+    duck.style.top = `${pos.y}px`;
+
+    // Thỉnh thoảng vịt quay mặt theo hướng khác.
+    duck.style.filter = Math.random() > 0.5
+      ? "drop-shadow(2px 4px 0 #344b3a35)"
+      : "drop-shadow(2px 4px 0 #344b3a35)";
+
+    if (Math.random() > 0.72) {
+      duck.textContent = "🐤";
+    } else {
+      duck.textContent = "🦆";
+    }
+  }
+
+  function makeDuck() {
+    if (!active || duck) return;
+
+    const newDuck = document.createElement("button");
+    newDuck.type = "button";
+    newDuck.className = "duck";
+    newDuck.textContent = "🦆";
+    newDuck.setAttribute("aria-label", "Bắt chú vịt");
+
+    const pos = randomPosition();
+    newDuck.style.left = `${pos.x}px`;
+    newDuck.style.top = `${pos.y}px`;
+
+    newDuck.addEventListener("pointerdown", catchDuck);
+
+    arena.appendChild(newDuck);
+    duck = newDuck;
+  }
+
+  function showFloatingText(text, x, y) {
+    const pop = document.createElement("div");
+    pop.className = "floating-text";
+    pop.textContent = text;
+    pop.style.left = `${x}px`;
+    pop.style.top = `${y}px`;
+
+    arena.appendChild(pop);
+
+    window.setTimeout(() => pop.remove(), 700);
+  }
+
+  function catchDuck(event) {
+    if (!active || !duck) return;
+
+    event.preventDefault();
+
+    const caughtDuck = duck;
+    const rect = caughtDuck.getBoundingClientRect();
+    const arenaRect = arena.getBoundingClientRect();
+
+    const x = rect.left - arenaRect.left + rect.width / 2;
+    const y = rect.top - arenaRect.top;
+
+    caughtDuck.classList.add("caught");
+    caughtDuck.removeEventListener("pointerdown", catchDuck);
+    duck = null;
+
+    score++;
+    scoreElement.textContent = score;
+    showFloatingText(["BẮT ĐƯỢC!", "Ú ÒA!", "DÍNH RỒI!", "QUÁ ĐỈNH!"][Math.floor(Math.random() * 4)], x, y);
+
+    messageElement.textContent = score >= TARGET
+      ? "Đã hoàn thành thử thách!"
+      : `Bắt được ${score}/${TARGET} chú rồi! Còn nữa đó!`;
+
+    if (score >= TARGET) {
+      finishGame(true);
+      return;
+    }
+
+    // Xóa vịt cũ rồi mới xuất hiện vịt tiếp theo.
+    window.setTimeout(() => {
+      caughtDuck.remove();
+      if (active && !duck) makeDuck();
+    }, 180);
+  }
+
+  function stopTimers() {
+    window.clearInterval(moveTimer);
+    window.clearInterval(countdownTimer);
+    window.clearTimeout(spawnTimer);
+
+    moveTimer = null;
+    countdownTimer = null;
+    spawnTimer = null;
+  }
+
+  function startGame() {
+    roundId++;
+    stopTimers();
+
+    if (duck) {
+      duck.remove();
+      duck = null;
+    }
+
+    score = 0;
+    timeLeft = ROUND_SECONDS;
+    active = true;
+
+    scoreElement.textContent = "0";
+    timeElement.textContent = `${timeLeft}s`;
+    messageElement.textContent = "Bắt được 5 chú vịt trước khi hết giờ nhé!";
+
+    startOverlay.classList.add("hidden");
+    resultOverlay.classList.add("hidden");
+
+    makeDuck();
+
+    // Vịt đổi chỗ nhanh gấp đôi: 850ms -> 425ms.
+    moveTimer = window.setInterval(moveDuck, 200);
+
+    countdownTimer = window.setInterval(() => {
+      if (!active) return;
+
+      timeLeft--;
+      timeElement.textContent = `${timeLeft}s`;
+
+      if (timeLeft <= 5 && timeLeft > 0) {
+        timeElement.style.color = "#d94747";
+      }
+
+      if (timeLeft <= 0) {
+        finishGame(false);
+      }
+    }, 1000);
+  }
+
+  function finishGame(won) {
+    if (!active) return;
+
+    active = false;
+    stopTimers();
+
+    if (duck) {
+      duck.remove();
+      duck = null;
+    }
+
+    resultOverlay.classList.remove("hidden");
+
+    if (won) {
+      resultIcon.textContent = "🎉💌";
+      resultTitle.textContent = "Bắt hết được rồi!";
+      resultText.textContent =
+        "Phần thưởng bí mật đã được mở khóa. " +
+        
+
+      resultButtons.innerHTML = `
+        <button class="pixel-button" id="letter-button" type="button">
+          MỞ LÁ THƯ 💌
+        </button>
+        <button class="pixel-button secondary" id="retry-button" type="button">
+          CHƠI LẠI ↻
+        </button>
+      `;
+
+      document.getElementById("letter-button").addEventListener("click", openLetter);
+      document.getElementById("retry-button").addEventListener("click", startGame);
+    } else {
+      resultIcon.textContent = "⏰🦆";
+      resultTitle.textContent = "Vịt chạy thoát mất rồi!";
+      resultText.textContent =
+        `Mới bắt được ${score}/${TARGET} chú thôi. ` +
+        "Chú vịt cuối cùng nhanh hơn dự tính một chút nhỉ? Thử lại nhé!";
+
+      resultButtons.innerHTML = `
+        <button class="pixel-button" id="retry-button" type="button">
+          THỬ LẠI NÀO! ↻
+        </button>
+      `;
+
+      document.getElementById("retry-button").addEventListener("click", startGame);
+    }
+  }
+
+  // Mở lá thư sau khi thắng.
+  function openLetter() {
+    const dialog = document.getElementById("result-dialog");
+
+    dialog.innerHTML = `
+      <div class="dialog-icon" aria-hidden="true">💌</div>
+
+  
+
+
+      <div class="letter"
+           tabindex="0"
+           aria-label="Lá thư chúc mừng, cuộn để đọc hết">
+
+        <p class="letter-opening">
+          thấm thoát ms chỉ 2 năm trôi qa mà chừ Trịnh Thúy Hiền đã thống nhất TCV r. Vậy là cbi ph xa nhau r bn tôi ơi, cx k lâu nx thì chúng mik ph bc đi trên đoạn đg tương lai của riêng mik r nên cơ hội để gặp lại nhau cs vẻ là rất khó nên qa ngày 20/10 này chúng mik cs lm vài món quà để gửi đến bn Hiền cùng lời chúc cùng lời chào trân trọng nhất. Chúc bn Hiền cs một ngày 20/10 tht là đáng nhớ, hạnh phúc và đầy niềm vui, mong cho phút giây này sẽ là 1 kỉ niệm đáng nhớ sẽ theo bn trên con đg tương lai. Chúc Hiền lun lun xinh đẹp, bùng nổ, đẳng cấp, sức khỏe mạnh mẽ bomchakalaka, đạt đc nguyện vọng là đi du hc Pháp để mở 1 quầy chuối chiên dưới tháp effiel nè và nhớ là luôn luôn ph giữ 1 tinh thần tích cực và nỡ nụ cười trên môi nha. 
+        </p>
+
+        <div class="letter-sign">
+          Au revoir et à bientôt. 🇫🇷
+        </div>
+      </div>
+
+    
+
+      <button class="pixel-button"
+              id="letter-close-button"
+              type="button">
+        ĐỌC XONG RỒI ♡
+      </button>
+    `;
+
+    document
+      .getElementById("letter-close-button")
+      .addEventListener("click", () => {
+        resultOverlay.classList.add("hidden");
+        startOverlay.classList.remove("hidden");
+
+        dialog.innerHTML = `
+          <div class="dialog-icon" id="result-icon">🎉</div>
+          <h2 id="result-title">Tuyệt vời!</h2>
+          <p id="result-text"></p>
+          <div class="dialog-buttons" id="result-buttons"></div>
+        `;
+      });
+  }
+
+  document.getElementById("start-button").onclick = startGame;
+document.getElementById("start-again-button").onclick = startGame;
+
+  // Khi thay đổi kích thước cửa sổ, giữ vịt ở trong khu vườn.
+  window.addEventListener("resize", () => {
+    if (active && duck) {
+      const pos = randomPosition();
+      duck.style.left = `${pos.x}px`;
+      duck.style.top = `${pos.y}px`;
+    }
+  });
+})();
+</script>
+</body>
+</html>
