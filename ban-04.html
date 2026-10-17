@@ -1,74 +1,736 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="theme-color" content="#281d3b">
-<meta name="description" content="Chocolate for You — một món quà socola cho ngày 20/10.">
-<title>Chocolate for You</title>
-<style>
-:root{--night:#281d3b;--night2:#3a2b52;--cream:#fff4d9;--pink:#f6a9c5;--rose:#d96f9c;--gold:#ffd778;--ink:#45304e;--mint:#a7d9b2;--panel:#fff7e5}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--night);color:var(--cream)}body{min-height:100vh;padding:20px;background:radial-gradient(ellipse at 50% 0%,#58416c 0%,#342642 46%,#21182f 100%);display:flex;justify-content:center;align-items:center}button{font:inherit;touch-action:manipulation}.app{width:min(100%,960px);margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 2px 13px}.brand{font-size:12px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:#ffe6a0}.subtitle{font-size:12px;color:#dfcce9;text-align:right}.shell{overflow:hidden;border:2px solid #846b9b;border-radius:17px;background:#3b2b50;box-shadow:0 22px 65px #130d21a8}.hud{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 15px;background:#332542;border-bottom:2px solid #5a426a;font-size:12px}.hud strong{color:#ffe5a0}.step-pill{border:1px solid #80658f;border-radius:99px;padding:5px 10px;color:#eadcf3;white-space:nowrap;font-size:11px}.scene{position:relative;min-height:350px;background:#f5cbd4;overflow:hidden}.pixel-scene{display:block;width:100%;height:auto;aspect-ratio:900/390;image-rendering:pixelated}.scene-caption{position:absolute;left:14px;bottom:12px;padding:7px 10px;background:#342642d9;border:1px solid #846b9b;border-radius:8px;color:#fff3db;font-size:11px;line-height:1.4}.stage-content{padding:18px;background:#fff3d9;color:var(--ink);border-top:3px solid #d59aa9}.stage-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:7px}.stage-heading h1,.stage-heading h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(22px,4vw,30px);line-height:1.1;margin:0;color:#573653}.stage-heading h1{font-size:clamp(24px,4.5vw,34px)}.stage-heading p{font-size:12px;margin:5px 0 0;color:#866477}.mini-tag{font-size:10px;font-weight:900;letter-spacing:.1em;color:#9b5a79;background:#f8dce2;border-radius:99px;padding:7px 9px;white-space:nowrap}.description{font-size:13px;line-height:1.65;color:#76566b;margin:8px 0 14px}.choices{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.choice{min-width:0;cursor:pointer;border:2px solid #e3c4c5;border-radius:12px;background:#fffaf0;color:#563c55;padding:10px 8px;text-align:center;transition:transform .12s,border-color .12s,background .12s;box-shadow:0 3px 0 #e5c5c0}.choice:hover{transform:translateY(-2px)}.choice.selected{border-color:#bd638d;background:#ffe3e9;box-shadow:0 3px 0 #c986a0}.choice .emoji{display:block;font-size:27px;line-height:1.3;margin-bottom:4px}.choice strong{display:block;font-size:12px}.choice small{display:block;font-size:10px;line-height:1.4;margin-top:3px;color:#98778b}.actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:17px}.hint{font-size:11px;color:#98778b;line-height:1.5}.btn{border:0;border-radius:10px;padding:11px 16px;font-weight:850;font-size:12px;cursor:pointer;transition:transform .12s,filter .12s}.btn:hover{transform:translateY(-1px);filter:brightness(1.04)}.btn-primary{background:#70466e;color:#fff5dc;box-shadow:0 4px 0 #4e3153}.btn-soft{background:#f3d8d8;color:#65435e}.progress{height:6px;background:#644d70}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#f3a9c5,#ffdf80);transition:width .25s}.stir-area{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin:14px 0}.pot{position:relative;width:180px;height:125px;border:0;background:transparent;cursor:pointer;touch-action:manipulation}.pot .bowl{position:absolute;left:20px;right:20px;bottom:10px;height:72px;background:#8c5b76;border:6px solid #5e3c61;border-top:10px solid #c27e99;border-radius:8px 8px 28px 28px;box-shadow:inset 0 -12px #70445f}.pot .chocolate{position:absolute;left:29px;right:29px;bottom:53px;height:31px;background:#6d382d;border:4px solid #482936;border-radius:50% 50% 8px 8px;transition:background .2s}.pot .spoon{position:absolute;left:83px;top:5px;width:10px;height:83px;background:#f6d18b;border:3px solid #946b73;transform:rotate(26deg);transform-origin:bottom;transition:transform .1s}.pot.stirred .spoon{transform:rotate(-28deg)}.stir-meter{width:min(100%,260px)}.meter-label{display:flex;justify-content:space-between;font-size:11px;font-weight:800;margin-bottom:7px}.meter{height:14px;background:#e4c6c9;border:2px solid #d2a3b3;border-radius:99px;overflow:hidden}.meter span{display:block;height:100%;width:0;background:repeating-linear-gradient(90deg,#8b4d47 0 10px,#b87968 10px 20px);transition:width .1s}.stir-button{display:block;margin:12px auto 0}.gift-wrap{width:min(100%,500px);margin:8px auto 0;padding:20px;background:#f9e0e4;border:3px solid #e8b6c7;border-radius:14px;text-align:center}.gift-box{position:relative;width:190px;height:130px;margin:8px auto 18px;cursor:pointer;border:0;background:transparent;display:block}.gift-box .lid{position:absolute;top:15px;left:0;width:190px;height:35px;background:#bd719b;border:5px solid #814c7c;z-index:2;transition:transform .35s;transform-origin:left bottom}.gift-box .box-body{position:absolute;bottom:0;left:15px;width:160px;height:88px;background:#f1a9c5;border:5px solid #a45e91}.gift-box .ribbon-v{position:absolute;left:82px;top:15px;bottom:0;width:26px;background:#ffe18c;border-left:4px solid #c28b64;border-right:4px solid #c28b64;z-index:3}.gift-box .bow{position:absolute;top:0;left:67px;width:28px;height:25px;border:6px solid #ffe18c;border-radius:80% 20% 70% 20%;transform:rotate(22deg);z-index:4}.gift-box .bow:after{content:"";position:absolute;left:19px;top:-4px;width:28px;height:25px;border:6px solid #ffe18c;border-radius:20% 80% 20% 70%;transform:rotate(38deg)}.gift-box.open .lid{transform:translate(-15px,-35px) rotate(-13deg)}.gift-box .sparkle{position:absolute;font-size:22px;color:#b27843;opacity:0;transition:opacity .2s}.gift-box.open .sparkle{opacity:1}.final-message{white-space:pre-line;line-height:1.8;font-size:13px;color:#65455e;text-align:left;background:#fff9eb;border:1px dashed #cf9cb4;border-radius:10px;padding:16px;margin:12px 0;max-height:40vh;overflow:auto}.footer{text-align:center;color:#b8a3c9;font-size:11px;margin-top:13px}.footer a{color:#ffe4a0;text-decoration:none}.hidden{display:none!important}@media(max-width:620px){body{padding:10px 8px;align-items:flex-start}.top{margin-bottom:9px}.subtitle{max-width:45%;font-size:10px}.hud{padding:10px;font-size:11px}.scene{min-height:0}.scene-caption{font-size:9px;left:7px;bottom:7px;padding:5px 7px}.stage-content{padding:13px}.choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.choice{padding:9px 6px}.choice .emoji{font-size:25px}.actions{align-items:flex-start}.hint{max-width:55%}.btn{padding:10px 12px}.pot{transform:scale(.9);margin:-4px}.final-message{font-size:12px;max-height:45vh}.gift-wrap{padding:12px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#24150F">
+  <meta name="description" content="Một lời chúc nhỏ dành riêng cho bạn nhân ngày 20/10.">
+
+  <title>gâu gâu · 20.10</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --coffee: #24150F;
+      --espresso: #160D09;
+      --mocha: #493024;
+      --caramel: #C99B70;
+      --milk: #F5E9D5;
+      --cream: #E8D3B5;
+      --muted: #BCA996;
+      --paper: #2C1C14;
+      --line: #E8D3B540;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 26px 18px 34px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      isolation: isolate;
+      overflow-x: hidden;
+      color: var(--milk);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background:
+        radial-gradient(
+          ellipse at 50% 12%,
+          #67452D 0%,
+          transparent 38%
+        ),
+        radial-gradient(
+          ellipse at 5% 80%,
+          #39251A 0%,
+          transparent 38%
+        ),
+        linear-gradient(
+          155deg,
+          #160D09 0%,
+          #24150F 48%,
+          #352117 100%
+        );
+    }
+
+    /* Ánh sáng ấm như quán cà phê */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          circle at 50% 45%,
+          #C99B700A,
+          transparent 55%
+        );
+    }
+
+    /* Vòng cà phê */
+    .coffee-surface {
+      position: fixed;
+      z-index: -2;
+      left: 50%;
+      top: 50%;
+      width: min(86vw, 650px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: .72;
+      background:
+        radial-gradient(
+          circle at 48% 45%,
+          #805538 0%,
+          #593721 35%,
+          #382116 65%,
+          #1B100B 100%
+        );
+      box-shadow:
+        0 0 70px #C99B7010,
+        inset 0 0 45px #120904AA,
+        inset 0 0 0 3px #E8D3B510;
+    }
+
+    /* Các gợn cà phê bên trong */
+    .coffee-surface::before {
+      content: "";
+      position: absolute;
+      inset: 4%;
+      border-radius: 50%;
+      background:
+        repeating-radial-gradient(
+          ellipse at 45% 48%,
+          transparent 0 23px,
+          #E6C8A50C 24px 26px,
+          transparent 27px 39px
+        );
+      opacity: .8;
+    }
+
+    /* Dải sữa trắng xoắn ốc */
+    .milk-swirl {
+      position: absolute;
+      inset: 12%;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          from 15deg,
+          transparent 0deg 32deg,
+          #F5E9D5 42deg 53deg,
+          #DCC7A8 57deg 61deg,
+          transparent 67deg 100deg,
+          #F5E9D5 112deg 122deg,
+          #E8D3B5 126deg 131deg,
+          transparent 137deg 174deg,
+          #F5E9D5 186deg 197deg,
+          #DCC7A8 201deg 206deg,
+          transparent 212deg 246deg,
+          #F5E9D5 258deg 268deg,
+          #E8D3B5 272deg 277deg,
+          transparent 283deg 360deg
+        );
+      -webkit-mask: radial-gradient(
+        circle,
+        transparent 0 9%,
+        #000 11% 77%,
+        transparent 80%
+      );
+      mask: radial-gradient(
+        circle,
+        transparent 0 9%,
+        #000 11% 77%,
+        transparent 80%
+      );
+      filter: blur(1px);
+      opacity: .85;
+      transform: rotate(-18deg);
+    }
+
+    /* Tâm xoáy sữa */
+    .milk-swirl::before {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          from 35deg,
+          transparent 0deg 70deg,
+          #F5E9D5 90deg 115deg,
+          transparent 130deg 210deg,
+          #F5E9D5 230deg 255deg,
+          transparent 270deg 360deg
+        );
+      -webkit-mask: radial-gradient(
+        circle,
+        transparent 0 15%,
+        #000 18% 72%,
+        transparent 76%
+      );
+      mask: radial-gradient(
+        circle,
+        transparent 0 15%,
+        #000 18% 72%,
+        transparent 76%
+      );
+    }
+
+    /* Nút khuấy làm vòng sữa quay */
+    .coffee-surface.stirring .milk-swirl {
+      animation: milk-spin 2.6s cubic-bezier(.16, .72, .22, 1) forwards;
+    }
+
+    .coffee-surface.stirring {
+      animation: surface-glow 2.6s ease-out;
+    }
+
+    @keyframes milk-spin {
+      0% {
+        transform: rotate(-18deg) scale(1);
+        filter: blur(1px);
+      }
+      25% {
+        filter: blur(1.8px);
+      }
+      70% {
+        transform: rotate(680deg) scale(1.04);
+        filter: blur(1.3px);
+      }
+      100% {
+        transform: rotate(702deg) scale(1);
+        filter: blur(1px);
+      }
+    }
+
+    @keyframes surface-glow {
+      0%, 100% {
+        box-shadow:
+          0 0 70px #C99B7010,
+          inset 0 0 45px #120904AA,
+          inset 0 0 0 3px #E8D3B510;
+      }
+      40% {
+        box-shadow:
+          0 0 95px #C99B7030,
+          inset 0 0 35px #12090488,
+          inset 0 0 0 3px #E8D3B530;
+      }
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 560px);
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 10px;
+      letter-spacing: .2em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      margin: 22px auto 14px;
+      padding: 30px 32px;
+      background: linear-gradient(
+        145deg,
+        #342117F2,
+        #1C100BF2
+      );
+      border: 1px solid #C99B7045;
+      border-radius: 4px;
+      box-shadow:
+        0 18px 55px #0D0704A0,
+        0 0 35px #C99B7010;
+      backdrop-filter: blur(12px);
+      animation: card-glow 5s ease-in-out infinite alternate;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 1px solid #E8D3B520;
+      pointer-events: none;
+    }
+
+    @keyframes card-glow {
+      from {
+        box-shadow:
+          0 18px 55px #0D0704A0,
+          0 0 20px #C99B7008;
+        border-color: #C99B7030;
+      }
+      to {
+        box-shadow:
+          0 18px 55px #0D0704A0,
+          0 0 40px #C99B7020;
+        border-color: #C99B7070;
+      }
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--caramel);
+    }
+
+    .flower {
+      margin-bottom: 6px;
+      text-align: center;
+      font-size: 23px;
+      color: var(--cream);
+      text-shadow: 0 0 20px #E8D3B530;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 7vw, 56px);
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+    }
+
+    h1 em {
+      color: var(--cream);
+      font-weight: 600;
+      text-shadow: 0 0 32px #C99B7028;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 14px 0;
+      color: var(--caramel);
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .letter {
+      min-height: 145px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 2px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      line-height: 1.65;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .letter p {
+      width: 100%;
+      margin: 0;
+      white-space: normal;
+    }
+
+    #sentence-text span {
+      display: inline;
+      opacity: 0;
+      filter: blur(3px);
+      animation: letter-appear .28s ease-out forwards;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes letter-appear {
+      from {
+        opacity: 0;
+        filter: blur(3px);
+      }
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    .letter-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    button {
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+
+    .letter-nav button {
+      padding: 9px 12px;
+      border: 1px solid #C99B7055;
+      border-radius: 3px;
+      background: #C99B7010;
+      color: var(--milk);
+      font-size: 11px;
+      cursor: pointer;
+      transition:
+        background .25s ease,
+        border-color .25s ease,
+        opacity .25s ease;
+    }
+
+    .letter-nav button:hover:not(:disabled) {
+      background: #C99B7025;
+      border-color: var(--caramel);
+    }
+
+    .letter-nav button:disabled {
+      opacity: .3;
+      cursor: default;
+    }
+
+    #sentence-count {
+      color: var(--muted);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .sign {
+      margin-top: 26px;
+      text-align: right;
+      color: var(--caramel);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-style: italic;
+    }
+
+    .back {
+      display: block;
+      margin: 17px auto 0;
+      text-align: center;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .04em;
+      transition: color .25s ease;
+    }
+
+    .back:hover {
+      color: var(--cream);
+    }
+
+    footer {
+      text-align: center;
+      color: #B39B85;
+      font-size: 10px;
+      letter-spacing: .08em;
+    }
+
+    footer .heart {
+      color: var(--cream);
+    }
+
+    /* Nút khuấy nằm ngoài khung thư */
+    .stir-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      margin: 22px auto 0;
+      padding: 12px 22px;
+      border: 1px solid #E8D3B560;
+      border-radius: 40px;
+      color: var(--milk);
+      background: linear-gradient(
+        135deg,
+        #69452E,
+        #382116
+      );
+      box-shadow:
+        0 5px 20px #10090455,
+        inset 0 1px #F5E9D51A;
+      font-size: 11px;
+      letter-spacing: .08em;
+      cursor: pointer;
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+    }
+
+    .stir-button:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 8px 25px #10090480,
+        0 0 20px #C99B7018;
+      background: linear-gradient(
+        135deg,
+        #80583A,
+        #493024
+      );
+    }
+
+    .stir-button:active {
+      transform: scale(.97);
+    }
+
+    .stir-button:disabled {
+      cursor: default;
+      opacity: .7;
+    }
+
+    .spoon {
+      display: inline-block;
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .stir-button.is-stirring .spoon {
+      animation: spoon-spin .65s linear infinite;
+    }
+
+    @keyframes spoon-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 14px 12px 28px;
+      }
+
+      .coffee-surface {
+        width: 115vw;
+        opacity: .55;
+      }
+
+      .card {
+        margin: 12px auto;
+        padding: 24px 20px;
+      }
+
+      .letter {
+        min-height: 155px;
+        font-size: 20px;
+      }
+
+      .letter-nav {
+        gap: 6px;
+      }
+
+      .letter-nav button {
+        padding: 9px 8px;
+        font-size: 10px;
+      }
+
+      .stir-button {
+        margin-top: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card {
+        animation: none;
+      }
+
+      #sentence-text span {
+        animation: none;
+        opacity: 1;
+        filter: none;
+      }
+
+      .stir-button.is-stirring .spoon {
+        animation: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<main class="app">
-<header class="top"><div class="brand">✦ Chocolate for You</div><div class="subtitle">20.10</div></header>
-<section class="shell" aria-label="Trò chơi làm socola">
-<div class="hud"><strong>🍫CHOCOLATE SHOP</strong><span class="step-pill" id="stepLabel">BƯỚC 1 / 4</span><span class="step-pill" id="statusLabel">BẾP ĐANG MỞ</span></div>
-<div class="scene"><canvas id="art" class="pixel-scene" width="900" height="390" aria-label="Minh họa căn bếp socola pixel art"></canvas><div class="scene-caption" id="sceneCaption">Một món quà ngọt ngào đang chờ được tạo ra…</div></div>
-<div class="progress"><span id="progressBar"></span></div>
-<section class="stage-content" id="stageContent" aria-live="polite"></section>
-</section>
-<footer class="footer">20.10 · <a href="https://women12102010.github.io/women1210.github.io/">Quay lại trang chính</a></footer>
-</main>
-<script>
-(()=>{'use strict';
-const $=id=>document.getElementById(id);const canvas=$('art'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;
-const state={step:0,chocolate:'dark',topping:'strawberry',shape:'heart',stir:0,opened:false};
-const stages=['Chọn nguyên liệu','Khuấy socola','Tạo hình & trang trí','Mở quà'];
-const reward='hí lu cô bé sicula chúc mhien có 1 ngày 20/10 vui vẻ và hạnh phúc luôn gặp may mắn trên con đường học vấn của mình chúc mhien đỗ nv1 mọi điều tốt đẹp đều đến với mhien.Qua 3 năm cấp 3 rồi cũng sắp đến chặn cuối rồi tui hi vọng hiền chăm ngoan học giỏi cố gắng đậu cái trường mà mình mong ước không phải hối tiếc hay luyến tiếc gì nữa luôn tự tin không sợ gì hết có tụi tui chống lưng mà. Tụi tui có gì làm bà thấy thất vọng thì bỏ qua xí xoá hết đi nghe . Đẹp gái thì không có gì phải buồn chúc hiền ĐỖ NV1 ĐỖ NV1 ĐỖ NV1 nhá pái pai cô gái sicula có là da trắng bốc';
-const pixel=(x,y,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),Math.round(w),Math.round(h));};
-function draw(){const w=900,h=390;ctx.clearRect(0,0,w,h);let sky=ctx.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#f5c8d5');sky.addColorStop(1,'#ffe8c6');ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
-// window
-pixel(54,38,210,165,'#805477');pixel(64,48,190,145,'#b9dfe4');pixel(154,48,8,145,'#805477');pixel(64,116,190,8,'#805477');pixel(78,64,24,20,'#fff0c2');pixel(194,72,28,18,'#fff0c2');pixel(100,150,30,8,'#fff7df');pixel(180,150,30,8,'#fff7df');
-// shelves
-pixel(0,225,900,17,'#94627b');pixel(0,242,900,7,'#69465f');for(let i=0;i<6;i++){pixel(40+i*145,166,58,55,'#a36d82');pixel(45+i*145,171,48,45,i%2?'#f5d79e':'#d8b4d2');pixel(54+i*145,179,30,28,i%2?'#fff0c2':'#f3a9c5');pixel(67+i*145,163,7,8,'#ffe7a2');}
-// counter
-pixel(0,288,900,102,'#c58b92');pixel(0,288,900,13,'#f4c3b5');pixel(0,301,900,8,'#ad707f');for(let x=18;x<900;x+=40)pixel(x,328,17,5,'#b77b85');
-// left jars
-pixel(72,250,65,37,'#fff0cf');pixel(78,242,53,10,'#85556c');pixel(84,260,42,18,'#c57d8c');pixel(170,257,54,30,'#b8d9c0');pixel(176,248,42,10,'#77536d');pixel(184,263,26,15,'#fff0cf');
-// recipe board
-pixel(710,45,130,105,'#81566f');pixel(718,53,114,89,'#fff0d9');pixel(742,69,65,7,'#dca2b0');pixel(733,85,82,5,'#dca2b0');pixel(750,100,47,5,'#dca2b0');drawHeart(775,123,12,'#e68cab');
-// central appliance changes by step
-if(state.step===0){drawBowl(450,270);drawChocolateBar(400,210,state.chocolate);drawSpoon(515,218);pixel(420,166,55,8,'#fff3d5');pixel(432,153,30,8,'#fff3d5');}
-else if(state.step===1){drawBowl(450,270);drawMelt(450,248);drawSpoon(480,202);for(let i=0;i<8;i++){pixel(380+i*20,207-(i%3)*12,5,5,'#fff1a5');}}
-else if(state.step===2){drawTray(450,267,state.shape);drawToppings();}
-else{drawChocolateBar(450,254,state.chocolate);drawGift(450,205);for(let i=0;i<8;i++){drawStar(335+i*34,125+(i%2)*24,5,i);}}
-// hanging hearts / pixel sparkles
-for(let i=0;i<12;i++){const x=310+i*28,y=45+(i%3)*12;pixel(x,y,4,4,i%2?'#fff1ba':'#d68ba7');}
-}
-function drawBowl(x,y){pixel(x-90,y-42,180,14,'#e9c4c9');pixel(x-80,y-28,160,58,'#b16d89');pixel(x-70,y-20,140,45,'#78465f');pixel(x-65,y-15,130,32,state.chocolate==='dark'?'#5c302f':'#f0d4a1');pixel(x-55,y-10,110,8,state.chocolate==='dark'?'#9a5a4e':'#fff0c9');pixel(x-80,y+30,160,10,'#8a526e');}
-function drawChocolateBar(x,y,type){const c=type==='dark'?'#6b382f':'#d7ae75',light=type==='dark'?'#a96753':'#f6d9a2',edge=type==='dark'?'#432736':'#a77a58';pixel(x-68,y-36,136,80,edge);pixel(x-62,y-30,124,68,c);for(let r=0;r<2;r++)for(let col=0;col<4;col++){pixel(x-54+col*29,y-22+r*29,23,22,light);pixel(x-50+col*29,y-18+r*29,17,14,c);}pixel(x-57,y-26,114,4,'#f3c28d');}
-function drawSpoon(x,y){pixel(x,y,9,75,'#f7d18b');pixel(x-5,y-11,19,22,'#c1a0aa');pixel(x-2,y-8,13,15,'#f5e1d0');}
-function drawMelt(x,y){pixel(x-75,y-15,150,24,state.chocolate==='dark'?'#6b382f':'#d7ae75');pixel(x-62,y-22,124,12,state.chocolate==='dark'?'#8c5145':'#f4d49a');for(let i=0;i<6;i++)pixel(x-52+i*20,y-28-(i%2)*5,9,5,'#f6b5be');}
-function drawTray(x,y,shape){pixel(x-108,y-38,216,84,'#8b5975');pixel(x-100,y-30,200,68,'#d7a0b5');if(shape==='heart'){drawHeart(x,y,40,state.chocolate==='dark'?'#6b382f':'#d7ae75');}else if(shape==='star'){drawStar(x,y,43,0,state.chocolate==='dark'?'#6b382f':'#d7ae75');}else{pixel(x-48,y-33,96,66,state.chocolate==='dark'?'#6b382f':'#d7ae75');for(let r=0;r<2;r++)for(let c=0;c<3;c++)pixel(x-39+c*29,y-24+r*27,20,18,state.chocolate==='dark'?'#a96753':'#f6d9a2');}}
-function drawToppings(){for(let i=0;i<10;i++){let x=390+(i*37)%120,y=245+(i*23)%38;pixel(x,y,7,7,state.topping==='strawberry'?'#e56e85':state.topping==='sprinkles'?'#f6d56e':'#f6f0dc');pixel(x+4,y+2,4,4,'#fff0c8');}}
-function drawGift(x,y){pixel(x-72,y-20,144,14,'#f5c3d4');pixel(x-60,y-6,120,75,'#c8759f');pixel(x-60,y-6,120,8,'#eaa1bd');pixel(x-10,y-6,20,75,'#ffe18c');pixel(x-60,y+20,120,12,'#ffe18c');pixel(x-24,y-32,20,17,'#ffe18c');pixel(x-44,y-38,25,20,'#f8d68a');pixel(x-24,y-27,25,19,'#f8d68a');pixel(x+3,y-38,25,20,'#f8d68a');pixel(x+4,y-27,25,19,'#f8d68a');}
-function drawHeart(x,y,r,c){pixel(x-r*.75,y-r*.5,r*.65,r*.65,c);pixel(x+r*.1,y-r*.5,r*.65,r*.65,c);pixel(x-r,y-r*.15,r*2,r*.7,c);pixel(x-r*.7,y+r*.45,r*1.4,r*.45,c);pixel(x-r*.35,y+r*.85,r*.7,r*.4,c);}
-function drawStar(x,y,r,rot,c){ctx.save();ctx.translate(x,y);ctx.rotate(rot*.4);ctx.fillStyle=c||'#ffe18c';ctx.beginPath();for(let i=0;i<10;i++){let a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*.45:r;ctx.lineTo(Math.cos(a)*rr,Math.sin(a)*rr)}ctx.closePath();ctx.fill();ctx.restore();}
-function updateHeader(){ $('stepLabel').textContent=state.step<3?`BƯỚC ${state.step+1} / 4`:'MÓN QUÀ HOÀN THÀNH';$('statusLabel').textContent=state.step===0?'CHỌN NGUYÊN LIỆU':state.step===1?'KHUẤY ĐỀU TAY':state.step===2?'TRANG TRÍ':state.opened?'ĐÃ MỞ QUÀ':'ĐỢI MỞ QUÀ';$('progressBar').style.width=(`${[0,25,55,80,100][state.step]||100}%`);$('sceneCaption').textContent=state.step===0?'Chọn vị socola và những món trang trí yêu thích.':state.step===1?'Chạm liên tục vào chiếc muỗng để khuấy thật đều!':state.step===2?'Một chút sáng tạo sẽ làm thanh socola trở nên đặc biệt.':'Một món quà nhỏ';draw();}
-function render(){updateHeader();const root=$('stageContent');if(state.step===0){root.innerHTML=`<div class="stage-heading"><div><p>Chào mừng đến tiệm socola của riêng bạn!</p></div><span class="mini-tag">BƯỚC 01</span></div><p class="description">Trước khi bắt đầu, hãy chọn nguyên liệu cho món quà ngọt ngào của mình.</p><div class="choices"><button class="choice ${state.chocolate==='dark'?'selected':''}" data-choc="dark"><span class="emoji">🍫</span><strong>Socola đen</strong><small>Đậm đà, cổ điển</small></button><button class="choice ${state.chocolate==='white'?'selected':''}" data-choc="white"><span class="emoji">🍦</span><strong>Socola trắng</strong><small>Ngọt dịu, mềm mại</small></button><button class="choice ${state.topping==='strawberry'?'selected':''}" data-top="strawberry"><span class="emoji">🍓</span><strong>Dâu tây</strong><small>Chút vị ngọt ngào</small></button><button class="choice ${state.topping==='sprinkles'?'selected':''}" data-top="sprinkles"><span class="emoji">🌈</span><strong>Kẹo sắc màu</strong><small>Vui tươi và rực rỡ</small></button></div><div class="actions"><span class="hint">✦ Chọn vị socola và topping nhé.</span><button class="btn btn-primary" id="nextBtn">Bắt đầu nấu →</button></div>`;
-root.querySelectorAll('[data-choc]').forEach(b=>b.onclick=()=>{state.chocolate=b.dataset.choc;render()});root.querySelectorAll('[data-top]').forEach(b=>b.onclick=()=>{state.topping=b.dataset.top;render()});$('nextBtn').onclick=()=>{state.step=1;render()};}
-else if(state.step===1){root.innerHTML=`<div class="stage-heading"><div><p>Đừng để socola bị nguội nhé!</p></div><span class="mini-tag">BƯỚC 02</span></div><p class="description">Chạm vào chiếc muỗng nhiều lần để khuấy. Khi thanh tiến trình đầy, socola đã sẵn sàng để đổ khuôn.</p><div class="stir-area"><button class="pot" id="stirBtn" aria-label="Khuấy socola"><span class="spoon"></span><span class="chocolate"></span><span class="bowl"></span></button><div class="stir-meter"><div class="meter-label"><span>Độ mịn của socola</span><span id="meterText">${state.stir}%</span></div><div class="meter"><span id="meterBar" style="width:${state.stir}%"></span></div><button class="btn btn-primary stir-button" id="stirMore">🥄 Khuấy nào!</button></div></div><div class="actions"><span class="hint">Bạn cần khuấy đến 100%.</span><button class="btn btn-primary" id="pourBtn" ${state.stir<100?'disabled':''} style="opacity:${state.stir<100?'.45':'1'}">Đổ vào khuôn →</button></div>`;
-const stir=()=>{state.stir=Math.min(100,state.stir+8+Math.floor(Math.random()*7));const b=$('stirBtn');b.classList.toggle('stirred');$('meterText').textContent=state.stir+'%';$('meterBar').style.width=state.stir+'%';if(state.stir>=100){$('pourBtn').disabled=false;$('pourBtn').style.opacity='1';$('statusLabel').textContent='SOCOLA ĐÃ MỊN!';}};$('stirBtn').onclick=stir;$('stirMore').onclick=stir;$('pourBtn').onclick=()=>{if(state.stir>=100){state.step=2;render()}};}
-else if(state.step===2){root.innerHTML=`<div class="stage-heading"><div><h2>Tạo hình thật xinh</h2><p>Chiếc socola độc nhất vô nhị của bạn.</p></div><span class="mini-tag">BƯỚC 03</span></div><p class="description">Chọn khuôn yêu thích, rồi chọn món trang trí cuối cùng trước khi gói quà nhé.</p><div class="choices"><button class="choice ${state.shape==='heart'?'selected':''}" data-shape="heart"><span class="emoji">💗</span><strong>Trái tim</strong><small>Ngọt ngào</small></button><button class="choice ${state.shape==='star'?'selected':''}" data-shape="star"><span class="emoji">⭐</span><strong>Ngôi sao</strong><small>Lấp lánh</small></button><button class="choice ${state.shape==='bar'?'selected':''}" data-shape="bar"><span class="emoji">🍫</span><strong>Thanh cổ điển</strong><small>Kinh điển</small></button><button class="choice ${state.topping==='strawberry'?'selected':''}" data-finish="strawberry"><span class="emoji">🍓</span><strong>Dâu tây</strong><small>Topping yêu thích</small></button></div><div class="actions"><span class="hint">✦ Không có đáp án đúng hay sai.</span><button class="btn btn-primary" id="wrapBtn">Gói thành quà 🎁</button></div>`;root.querySelectorAll('[data-shape]').forEach(b=>b.onclick=()=>{state.shape=b.dataset.shape;render()});root.querySelectorAll('[data-finish]').forEach(b=>b.onclick=()=>{state.topping='strawberry';render()});$('wrapBtn').onclick=()=>{state.step=3;state.opened=false;render()};}
-else{root.innerHTML=`<div class="stage-heading"><div><h2>Món quà đã sẵn sàng!</h2><p>Một chiếc hộp nhỏ đang giữ lời nhắn dành riêng cho bạn.</p></div><span class="mini-tag">BƯỚC 04</span></div><div class="gift-wrap"><p class="description">Chạm vào hộp quà để mở món quà 20/10 nhé.</p><button class="gift-box ${state.opened?'open':''}" id="giftBtn" aria-label="Mở hộp quà"><span class="lid"></span><span class="box-body"></span><span class="ribbon-v"></span><span class="bow"></span><span class="sparkle" style="left:8px;top:10px">✦</span><span class="sparkle" style="right:7px;top:30px">✧</span></button>${state.opened?`<div class="final-message">${escapeHTML(reward)}</div><p class="description">🍫 Công thức bí mật: ${state.chocolate==='dark'?'socola đen':'socola trắng'} · ${state.shape==='heart'?'khuôn trái tim':state.shape==='star'?'khuôn ngôi sao':'khuôn thanh cổ điển'} · ${state.topping==='strawberry'?'dâu tây':'kẹo sắc màu'}.</p>`:'<p class="description">♡♡♡</p>'}</div><div class="actions"><span class="hint">${state.opened?'Món quà nhỏ dành riêng cho Minh Hiền':'Sẵn sàng mở quà chưa nào?'}</span><button class="btn btn-primary" id="againBtn">${state.opened?'Làm thanh khác ↻':'Mở quà ✨'}</button></div>`;$('giftBtn').onclick=openGift;$('againBtn').onclick=()=>{if(!state.opened)openGift();else{state.step=0;state.stir=0;state.opened=false;render()}};}}
-function openGift(){state.opened=true;render();$('giftBtn').classList.add('open');}
-function escapeHTML(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-// Pixel-art scene redraw adapts to current selections. All artwork is drawn locally.
-window.addEventListener('resize',()=>{ctx.imageSmoothingEnabled=false;draw()});render();
-})();
-</script>
+  <!-- Mặt cà phê và dòng sữa -->
+  <div class="coffee-surface" id="coffee-surface" aria-hidden="true">
+    <div class="milk-swirl"></div>
+  </div>
+
+  <main class="wrap">
+    <header class="top">
+      <span>20 · 10 · 2026</span>
+      <span>with warmth ♡</span>
+    </header>
+
+    <article class="card">
+      <div class="flower" aria-hidden="true">❀</div>
+
+      <h1><em>gâu gâu</em></h1>
+
+      <div class="divider" aria-hidden="true">♡</div>
+
+      <section class="letter" aria-label="Lời chúc">
+        <p id="sentence-text" aria-live="polite">
+          hí lu cô bé sicula
+        </p>
+      </section>
+
+      <div class="letter-nav">
+        <button id="prev-btn" type="button" disabled>
+          ← Câu trước
+        </button>
+
+        <span id="sentence-count">1 / 6</span>
+
+        <button id="next-btn" type="button">
+          Câu tiếp theo →
+        </button>
+      </div>
+
+      <a
+        class="back"
+        href="https://women12102010.github.io/women1210.github.io/"
+      >
+        ← Quay lại phong bì
+      </a>
+    </article>
+
+    <footer>
+      gâu gâu <span class="heart">♡</span>
+    </footer>
+
+    <!-- Nút nằm bên ngoài card -->
+    <button
+      class="stir-button"
+      id="stir-btn"
+      type="button"
+      aria-label="Khuấy xoáy sữa trong cà phê"
+    >
+      <span class="spoon" aria-hidden="true">↻</span>
+      <span id="stir-label">Khuấy cà phê</span>
+    </button>
+  </main>
+
+  <script>
+    const sentences = [
+      "hí lu cô bé sicula",
+      "chúc mhien có 1 ngày 20/10 vui vẻ và hạnh phúc luôn gặp may mắn trên con đường học vấn của mình chúc mhien đỗ nv1 mọi điều tốt đẹp đều đến với mhien.",
+      "Qua 3 năm cấp 3 rồi cũng sắp đến chặn cuối rồi tui hi vọng hiền chăm ngoan học giỏi cố gắng đậu cái trường mà mình mong ước không phải hối tiếc hay luyến tiếc gì nữa luôn tự tin không sợ gì hết có tụi tui chống lưng mà.",
+      "Tụi tui có gì làm bà thấy thất vọng thì bỏ qua xí xoá hết đi nghe .",
+      " Đẹp gái thì không có gì phải buồn chúc hiền ĐỖ NV1 ĐỖ NV1 ĐỖ NV1 nhá pái pai cô gái sicula có là da trắng bốc"
+    ];
+
+    const sentenceText = document.getElementById("sentence-text");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const sentenceCount = document.getElementById("sentence-count");
+
+    const coffeeSurface = document.getElementById("coffee-surface");
+    const stirBtn = document.getElementById("stir-btn");
+    const stirLabel = document.getElementById("stir-label");
+    const milkSwirl = document.querySelector(".milk-swirl");
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    let currentSentence = 0;
+    let stirTimer;
+
+    // Hiện lời chúc theo từng ký tự
+    function showSentence(index) {
+      currentSentence = index;
+
+      const text = sentences[currentSentence];
+      sentenceText.replaceChildren();
+
+      if (reduceMotion) {
+        sentenceText.textContent = text;
+      } else {
+        [...text].forEach((char, i) => {
+          const span = document.createElement("span");
+
+          span.textContent = char === " " ? "\u00A0" : char;
+          span.style.setProperty("--delay", `${i * 0.025}s`);
+
+          sentenceText.appendChild(span);
+        });
+      }
+
+      sentenceCount.textContent =
+        `${currentSentence + 1} / ${sentences.length}`;
+
+      prevBtn.disabled = currentSentence === 0;
+      nextBtn.disabled =
+        currentSentence === sentences.length - 1;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (currentSentence > 0) {
+        showSentence(currentSentence - 1);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentSentence < sentences.length - 1) {
+        showSentence(currentSentence + 1);
+      }
+    });
+
+    // Khuấy cà phê: xoáy sữa quay rồi chậm dần
+    stirBtn.addEventListener("click", () => {
+      if (reduceMotion) {
+        milkSwirl.animate(
+          [
+            { transform: "rotate(-18deg)" },
+            { transform: "rotate(342deg)" }
+          ],
+          { duration: 700, easing: "ease-out" }
+        );
+        return;
+      }
+
+      clearTimeout(stirTimer);
+
+      coffeeSurface.classList.remove("stirring");
+      stirBtn.classList.remove("is-stirring");
+
+      // Khởi động lại animation kể cả khi bấm liên tiếp
+      void coffeeSurface.offsetWidth;
+
+      coffeeSurface.classList.add("stirring");
+      stirBtn.classList.add("is-stirring");
+
+      stirBtn.disabled = true;
+      stirLabel.textContent = "Đang khuấy...";
+
+      stirTimer = setTimeout(() => {
+        coffeeSurface.classList.remove("stirring");
+        stirBtn.classList.remove("is-stirring");
+
+        stirBtn.disabled = false;
+        stirLabel.textContent = "Khuấy cà phê";
+      }, 2700);
+    });
+
+    showSentence(0);
+  </script>
 </body>
 </html>
