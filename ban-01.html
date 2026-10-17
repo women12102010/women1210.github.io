@@ -631,53 +631,57 @@ button {
     });
   }
 
-  function feed(button) {
-    if (busy || fed >= TOTAL) return;
+  
+function feed(button) {
+  if (busy || fed >= TOTAL) return;
 
-    busy = true;
+  busy = true;
 
-    foods.forEach(food => {
-      food.disabled = true;
-    });
+  foods.forEach(food => {
+    food.disabled = true;
+  });
 
-    speech.textContent = messages[fed % messages.length];
+  speech.textContent = messages[fed % messages.length];
+
+  lizard.classList.remove("eating");
+  void lizard.offsetWidth;
+  lizard.classList.add("eating");
+
+  button.style.transform = "translateY(-100px) scale(.2)";
+  button.style.opacity = "0";
+
+  window.setTimeout(() => {
+    fed++;
+    updateHUD();
 
     lizard.classList.remove("eating");
-    void lizard.offsetWidth;
-    lizard.classList.add("eating");
 
-    button.style.transform = "translateY(-100px) scale(.2)";
-    button.style.opacity = "0";
+    if (fed >= TOTAL) {
+      speech.textContent = "NO CĂNGGG!!";
 
-    window.setTimeout(() => {
-      button.disabled = true;
-
-      fed++;
-      updateHUD();
-
-      lizard.classList.remove("eating");
-
-      if (fed >= TOTAL) {
-        speech.textContent = "NO CĂNGGG!!";
-
-        window.setTimeout(() => {
-          overlay.classList.add("show");
-        }, 450);
-      } else {
-        speech.textContent =
-          nextMessages[(fed - 1) % nextMessages.length];
-
-      
+      window.setTimeout(() => {
+        overlay.classList.add("show");
+      }, 450);
+    } else {
+      speech.textContent =
+        nextMessages[(fed - 1) % nextMessages.length];
+      window.setTimeout(() => {
         foods.forEach(food => {
-          if (food.style.opacity !== "0") {
-            food.disabled = false;
-          }
+          food.style.opacity = "";
+          food.style.transform = "";
+          food.disabled = false;
         });
-      }
 
-      busy = false;
-    }, 430);
-  }
+        busy = false;
+      }, 300);
+
+      return;
+    }
+
+    busy = false;
+  }, 430);
+}
+
 
   function restart() {
     fed = 0;
