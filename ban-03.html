@@ -121,7 +121,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .ground {
-  position: fixed;
+  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
@@ -129,7 +129,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   background: #354451;
   border-top: 8px solid #718b78;
   box-shadow: inset 0 12px #455a54;
-  z-index: 3;
 }
 .ground::before {
   content: "";
@@ -174,32 +173,67 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 /* Nhân vật nữ pixel art */
+
 .hero {
-  position: absolute;
+  position: fixed;
   width: 100px;
   height: 142px;
-  left: max(4%, calc(50% - 350px));
-  bottom: 14%;
+  left: 5%;
+  top: 30%;
+  z-index: 1;
   image-rendering: pixelated;
-  animation: idle 2.8s ease-in-out infinite;
+  transform-origin: center;
+  animation: flying 2.4s ease-in-out infinite;
   filter: drop-shadow(5px 8px 0 #29244233);
 }
-.hero svg { width: 100%; height: 100%; overflow: visible; }
 
-@keyframes idle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+.hero svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+@keyframes flying {
+  0%, 100% {
+    transform: translate(0, 0) rotate(-5deg);
+  }
+  25% {
+    transform: translate(12px, -12px) rotate(-2deg);
+  }
+  50% {
+    transform: translate(20px, 2px) rotate(4deg);
+  }
+  75% {
+    transform: translate(8px, 10px) rotate(1deg);
+  }
 }
 
 .hero-label {
-  position: absolute;
-  bottom: calc(14% + 145px);
-  left: max(3%, calc(50% - 360px));
+  position: fixed;
+  top: calc(30% - 20px);
+  left: 5%;
+  z-index: 1;
   font: 8px 'Press Start 2P', monospace;
   color: #fff0d9;
   text-shadow: 2px 2px #443852;
   white-space: nowrap;
 }
+
+@media (max-width: 600px) {
+  .hero {
+    width: 65px;
+    height: 92px;
+    left: 3%;
+    top: 23%;
+  }
+
+  .hero-label {
+    left: 3%;
+    top: calc(23% - 18px);
+    font-size: 6px;
+  }
+}
+
 
 .wrap {
   width: min(100%, 570px);
@@ -224,7 +258,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .card {
   position: relative;
-  z-index: 4;
+  margin: 20px auto 14px;
+  padding: 30px 28px 24px;
+  color: var(--ink);
+  background: var(--cream);
+  border: 4px solid #e8c2c8;
+  box-shadow:
+    0 0 0 4px #453b60,
+    8px 8px 0 #29244255;
+  animation: card-idle 4s ease-in-out infinite alternate;
 }
 
 @keyframes card-idle {
@@ -432,6 +474,63 @@ footer span { color: #ffc6d7; }
     animation: none;
   }
 }
+  
+.bullet {
+  position: fixed;
+  z-index: 1;
+  width: 12px;
+  height: 5px;
+  background: #ffe875;
+  box-shadow:
+    4px 0 #fff6bc,
+    0 3px #e9a94f,
+    0 -2px #fff3a0,
+    0 0 8px #ffdb60;
+  pointer-events: none;
+  image-rendering: pixelated;
+  animation: bullet-fly .85s linear forwards;
+}
+
+@keyframes bullet-fly {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(65vw);
+  }
+}
+
+.muzzle-flash {
+  position: fixed;
+  z-index: 1;
+  width: 13px;
+  height: 13px;
+  background: #fff3a0;
+  box-shadow:
+    5px 0 #ffc84f,
+    -5px 0 #ffc84f,
+    0 5px #ffc84f,
+    0 -5px #ffc84f;
+  pointer-events: none;
+  animation: flash .16s steps(2, end) forwards;
+}
+
+@keyframes flash {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(.4);
+  }
+}
+
 </style>
 </head>
 
@@ -599,6 +698,46 @@ nextBtn.addEventListener('click', () => {
 });
 
 showSentence(0);
+  
+const hero = document.querySelector('.hero');
+
+function shootBullet() {
+  if (document.hidden) return;
+
+  const rect = hero.getBoundingClientRect();
+
+  // Vị trí nòng súng ở phía trước nhân vật
+  const x = rect.left + rect.width * 0.94;
+  const y = rect.top + rect.height * 0.59;
+
+  // Đạn pixel màu vàng
+  const bullet = document.createElement('span');
+  bullet.className = 'bullet';
+  bullet.style.left = `${x}px`;
+  bullet.style.top = `${y}px`;
+  document.body.appendChild(bullet);
+
+  bullet.addEventListener('animationend', () => {
+    bullet.remove();
+  }, { once: true });
+
+  // Tia lóe nhỏ ở nòng súng
+  const flash = document.createElement('span');
+  flash.className = 'muzzle-flash';
+  flash.style.left = `${x - 2}px`;
+  flash.style.top = `${y - 4}px`;
+  document.body.appendChild(flash);
+
+  flash.addEventListener('animationend', () => {
+    flash.remove();
+  }, { once: true });
+}
+
+// Bắn từng viên, cách nhau một khoảng vừa phải
+if (!reduceMotion) {
+  setInterval(shootBullet, 650);
+}
+
 </script>
 </body>
 </html>
