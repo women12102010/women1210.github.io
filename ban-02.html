@@ -403,6 +403,38 @@
   position: relative;
   z-index: 1;
 }
+    #sentence-text {
+  opacity: 1;
+  overflow-wrap: anywhere;
+}
+
+#sentence-text span {
+  display: inline;
+  opacity: 0;
+  filter: blur(3px);
+  animation: letter-appear 0.28s ease-out forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes letter-appear {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #sentence-text span {
+    animation: none;
+    opacity: 1;
+    filter: none;
+  }
+}
   </style>
 </head>
 
@@ -526,13 +558,35 @@ const sentenceCount = document.getElementById('sentence-count');
 function showSentence(index) {
   currentSentence = index;
 
-  sentenceText.textContent = sentences[currentSentence];
+  // Tách câu thành từng ký tự
+  const text = sentences[currentSentence];
+  sentenceText.replaceChildren();
 
+  const reduceMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
+  if (reduceMotion) {
+    sentenceText.textContent = text;
+  } else {
+    [...text].forEach((char, i) => {
+      const span = document.createElement('span');
+
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      span.style.setProperty('--delay', `${i * 0.025}s`);
+
+      sentenceText.appendChild(span);
+    });
+  }
+
+  // Cập nhật bộ đếm
   sentenceCount.textContent =
     `${currentSentence + 1} / ${sentences.length}`;
 
+  // Khóa nút ở đầu và cuối thư
   prevBtn.disabled = currentSentence === 0;
-  nextBtn.disabled = currentSentence === sentences.length - 1;
+  nextBtn.disabled =
+    currentSentence === sentences.length - 1;
 }
 
 prevBtn.addEventListener('click', () => {
