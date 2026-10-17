@@ -129,16 +129,17 @@
     h1 em {
       color: var(--deep-rose);
       font-weight: 600;
+      text-shadow: 0 0 32px #C9C4FF28;
     }
 
     .intro {
-      max-width: 430px;
-      margin: 0 auto 30px;
-      text-align: center;
-      font-size: 13px;
-      line-height: 1.9;
-      color: #8c746b;
-    }
+  max-width: 430px;
+  margin: 0 auto 30px;
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--muted);
+}
 
     .divider {
       display: flex;
@@ -192,10 +193,11 @@
     }
 
     footer {
-      text-align: center;
-      color: #a48d81;
-      font-size: 10px;
-      letter-spacing: .08em;
+  text-align: center;
+  color: #9998BD;
+  font-size: 10px;
+  letter-spacing: .08em;
+}tter-spacing: .08em;
     }
 
     footer .heart {
@@ -210,6 +212,10 @@
       .card {
         margin-top: 30px;
         padding: 30px 24px;
+        box-shadow:
+    0 18px 55px #07091D70,
+    0 0 35px #C9C4FF12;
+  animation: card-glow 5s ease-in-out infinite alternate;
       }
 
       .letter {
