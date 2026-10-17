@@ -146,11 +146,11 @@
       <div class="progress" aria-label="Tiến độ khám phá">
         <span id="dot1"></span><span id="dot2"></span><span id="dot3"></span>
       </div>
+      <p class="hint" id="hint" aria-live="polite">Ba bí mật đang chờ được tìm thấy… ✨</p>
 
       <div class="message" id="message" aria-live="polite">
-        <div class="tiny">a message for you</div>
-        <h3 id="messageTitle">Một điều dành cho bạn</h3>
-        <p id="messageText"></p>
+        <div class="tiny">a little wish for you</div>
+        <p id="messageText">Đã là năm thứ 3 tổ chức 20/10 ở lớp mình nhưng đây là lần đầu tiên tui viết thư nên có gì sai sót mong Hà Giang bỏ qua cho nha. Trước hết, tui xin chúc Hà Giang ngày càng xinh đẹp, giỏi giang. Cũng mong những ngày buồn của bạn sẽ ngắn lại, những ngày vui sẽ dài hơn và nụ cười luôn xuất hiện trên môi. Chúc cho bạn luôn mạnh mẽ để đối đầu với mọi khó khăn. Dù không con đường nào là màu hồng nhưng tui hy vọng chặn hành trình của Hà Giang sẽ gặp ít chông gai nhất có thể. Cuối cùng, tui mong rằng bức thư này sẽ tiếp thêm động lực để Hà Giang vượt qua những khó khăn mà mình không may gặp phải!</p>
       </div>
       <button class="reset" id="resetButton" type="button">Khám phá lại từ đầu ↺</button>
     </section>
@@ -167,58 +167,46 @@
       star.style.animationDelay = `${(i % 9) * -0.47}s`;
       sky.appendChild(star);
     }
-    const discoveries = {
-      star: {
-        title: 'Một ngôi sao nhỏ ✧',
-        text: 'chưa có'
-      },
-      planet: {
-        title: 'Một hành tinh bé xíu ♄',
-        text: 'chưa có'
-      },
-      moon: {
-        title: 'Bí mật dưới ánh trăng ☾',
-        text: 'chưa có'
-      }
-    };
-
     const found = new Set();
     const hint = document.getElementById('hint');
     const message = document.getElementById('message');
-    const messageTitle = document.getElementById('messageTitle');
-    const messageText = document.getElementById('messageText');
     const resetButton = document.getElementById('resetButton');
 
     document.querySelectorAll('.object').forEach((button) => {
       button.addEventListener('click', () => {
         const key = button.dataset.object;
         if (found.has(key)) return;
+
         found.add(key);
         button.classList.add('found');
         button.setAttribute('aria-pressed', 'true');
         document.getElementById(`dot${found.size}`).classList.add('active');
 
-        const item = discoveries[key];
-        messageTitle.textContent = item.title;
-        messageText.textContent = item.text;
-        message.classList.remove('show');
-        void message.offsetWidth;
-        message.classList.add('show');
-        hint.textContent = found.size === 3
-          ? 'Bạn đã tìm thấy cả ba mẩu bí mật. Mong những điều tốt đẹp cũng tìm thấy bạn. ✨'
-          : `Bạn đã tìm thấy ${found.size}/3 bí mật. Bầu trời vẫn còn điều muốn kể…`;
-
-        if (found.size === 3) resetButton.classList.add('show');
+        if (found.size < 3) {
+          hint.textContent = `Đã tìm thấy ${found.size}/3 bí mật. ✨`;
+        } else {
+          hint.textContent = 'Đã tìm thấy đủ cả ba bí mật! ✨';
+          message.classList.remove('show');
+          void message.offsetWidth;
+          message.classList.add('show');
+          resetButton.classList.add('show');
+        }
       });
     });
 
     resetButton.addEventListener('click', () => {
       found.clear();
+
       document.querySelectorAll('.object').forEach((button) => {
         button.classList.remove('found');
         button.removeAttribute('aria-pressed');
       });
-      document.querySelectorAll('.progress span').forEach((dot) => dot.classList.remove('active'));
+
+      document.querySelectorAll('.progress span').forEach((dot) => {
+        dot.classList.remove('active');
+      });
+
+      hint.textContent = 'Ba bí mật đang chờ được tìm thấy… ✨';
       message.classList.remove('show');
       resetButton.classList.remove('show');
     });
