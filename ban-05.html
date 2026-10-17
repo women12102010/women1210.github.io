@@ -365,23 +365,53 @@
       line-height: 1.6;
     }
 
-    .letter {
-      margin: 16px 0;
-      padding: 18px;
-      border: 2px dashed #d5a36d;
-      background: #fffdf6;
-      text-align: left;
-      font-family: Georgia, serif;
-      font-size: 16px;
-      line-height: 1.8;
-    }
+   
+.letter {
+  margin: 16px 0;
+  padding: 18px;
+  max-height: 220px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #c99565 #fff0cf;
 
-    .letter-sign {
-      display: block;
-      margin-top: 14px;
-      font-family: "Courier New", monospace;
-      font-size: 11px;
-    }
+  border: 2px dashed #d5a36d;
+  background: #fffdf6;
+  color: #34434a;
+
+  text-align: left;
+  font-family: Arial, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.9;
+
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  -webkit-overflow-scrolling: touch;
+}
+
+.letter::-webkit-scrollbar {
+  width: 8px;
+}
+
+.letter::-webkit-scrollbar-track {
+  background: #fff0cf;
+}
+
+.letter::-webkit-scrollbar-thumb {
+  background: #c99565;
+  border: 2px solid #fff0cf;
+  border-radius: 8px;
+}
+
+.letter-sign {
+  display: block;
+  margin-top: 14px;
+  font-family: Arial, "Segoe UI", sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
+  opacity: .75;
+}
+
 
     .footer-note {
       margin-top: 20px;
@@ -737,35 +767,31 @@
       }
 
       // Mở lá thư sau khi thắng.
-      function openLetter() {
-        const dialog = document.getElementById("result-dialog");
+      
+function openLetter() {
+  const dialog = document.getElementById("result-dialog");
 
-        dialog.innerHTML = `
-          <div class="dialog-icon" aria-hidden="true">💌🦆</div>
+  dialog.innerHTML = `
+    <div class="dialog-icon" aria-hidden="true">💌🦆</div>
 
-          <h2>Một lá thư dành cho bạn</h2>
+    <h2>Một lá thư dành cho bạn</h2>
 
-          <div class="letter">
-            thấm thoát ms chỉ 2 năm trôi qa mà chừ Trịnh Thúy Hiền đã thống nhất TCV r. Vậy là cbi ph xa nhau r bn tôi ơi, cx k lâu nx thì chúng mik ph bc đi trên đoạn đg tương lai của riêng mik r nên cơ hội để gặp lại nhau cs vẻ là rất khó nên qa ngày 20/10 này chúng mik cs lm vài món quà để gửi đến bn Hiền cùng lời chúc cùng lời chào trân trọng nhất. Chúc bn Hiền cs một ngày 20/10 tht là đáng nhớ, hạnh phúc và đầy niềm vui, mong cho phút giây này sẽ là 1 kỉ niệm đáng nhớ sẽ theo bn trên con đg tương lai. Chúc Hiền lun lun xinh đẹp, bùng nổ, đẳng cấp, sức khỏe mạnh mẽ bomchakalaka, đạt đc nguyện vọng là đi du hc Pháp để mở 1 quầy chuối chiên dưới tháp effiel nè và nhớ là luôn luôn ph giữ 1 tinh thần tích cực và nỡ nụ cười trên môi nha. Au revoir et à bientôt.
-          </div>
+    <div class="letter" tabindex="0"
+         aria-label="thấm thoát ms chỉ 2 năm trôi qa mà chừ Trịnh Thúy Hiền đã thống nhất TCV r. Vậy là cbi ph xa nhau r bn tôi ơi, cx k lâu nx thì chúng mik ph bc đi trên đoạn đg tương lai của riêng mik r nên cơ hội để gặp lại nhau cs vẻ là rất khó nên qa ngày 20/10 này chúng mik cs lm vài món quà để gửi đến bn Hiền cùng lời chúc cùng lời chào trân trọng nhất. Chúc bn Hiền cs một ngày 20/10 tht là đáng nhớ, hạnh phúc và đầy niềm vui, mong cho phút giây này sẽ là 1 kỉ niệm đáng nhớ sẽ theo bn trên con đg tương lai. Chúc Hiền lun lun xinh đẹp, bùng nổ, đẳng cấp, sức khỏe mạnh mẽ bomchakalaka, đạt đc nguyện vọng là đi du hc Pháp để mở 1 quầy chuối chiên dưới tháp effiel nè và nhớ là luôn luôn ph giữ 1 tinh thần tích cực và nỡ nụ cười trên môi nha. Au revoir et à bientôt.
+     
+    </div>
 
-          <div style="margin: 12px 0" aria-hidden="true">
-            🦆 🦆 🦆
-          </div>
-
-          <button
-            class="pixel-button"
+    <button class="pixel-button"
             id="letter-close-button"
-            type="button"
-          >
-            CHƠI LẠI ↻
-          </button>
-        `;
+            type="button">
+      CHƠI LẠI ↻
+    </button>
+  `;
 
-        document
-          .getElementById("letter-close-button")
-          .addEventListener("click", resetGame);
-      }
+  document
+    .getElementById("letter-close-button")
+    .addEventListener("click", resetGame);
+}
 
       // Trở về màn hình bắt đầu.
       function resetGame() {
