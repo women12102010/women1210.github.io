@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -15,14 +16,11 @@
   <style>
     :root {
       color-scheme: light;
-
       --cream: #f5f4e8;
       --rose: #d99b9b;
       --deep-rose: #a75f68;
       --brown: #354b38;
       --muted: #798a76;
-      --paper: #fffdf4;
-      --line: #9baa8745;
       --green: #65845c;
       --dark-green: #344d37;
     }
@@ -63,7 +61,7 @@
     }
 
     /* =========================
-       KHU VƯỜN
+       KHUNG CẢNH KHU VƯỜN
     ========================= */
 
     .garden {
@@ -73,8 +71,6 @@
       pointer-events: none;
       z-index: -1;
     }
-
-    /* Ánh nắng xuyên qua tán cây */
 
     .sunlight {
       position: absolute;
@@ -105,7 +101,7 @@
     }
 
     /* =========================
-       CÀNH CÂY
+       CÀNH CÂY ĐONG ĐƯA
     ========================= */
 
     .tree-branch {
@@ -164,7 +160,7 @@
       }
     }
 
-    /* Lá gắn trên cành */
+    /* Lá trên cành */
 
     .tree-leaf {
       position: absolute;
@@ -331,117 +327,150 @@
     }
 
     /* =========================
-       CỎ Ở HAI GÓC MÀN HÌNH
+       THẢM CỎ DÀY
     ========================= */
 
     .grass-patch {
-      position: absolute;
-      bottom: -4px;
-      width: 160px;
-      height: 110px;
+      position: fixed;
+      bottom: -5px;
+      width: 55%;
+      height: 180px;
+      pointer-events: none;
       transform-origin: bottom center;
+      z-index: 2;
     }
 
     .grass-left {
-      left: -18px;
-      animation: grass-sway 4s ease-in-out infinite alternate;
+      left: -25px;
     }
 
     .grass-right {
-      right: -18px;
+      right: -25px;
       transform: scaleX(-1);
-      animation: grass-sway 4.5s ease-in-out infinite alternate-reverse;
     }
+
+    /* Lớp cỏ thấp phủ nền */
+
+    .grass-patch::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 45px;
+      border-radius: 50% 50% 0 0;
+      background: linear-gradient(
+        180deg,
+        #91b879 0%,
+        #729b60 50%,
+        #557c49 100%
+      );
+    }
+
+    /* Các ngọn cỏ riêng lẻ */
 
     .grass-blade {
       position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 28px;
-      height: 75px;
+      bottom: 15px;
+      left: var(--x, 50%);
+      width: var(--w, 12px);
+      height: var(--h, 80px);
+
+      background: linear-gradient(
+        90deg,
+        var(--grass-dark, #638d50),
+        var(--grass-light, #a5c982)
+      );
+
       border-radius: 100% 0 0 0;
-      border-left: 6px solid #789b63;
-      transform-origin: bottom left;
+
+      clip-path: polygon(
+        0 100%,
+        0 35%,
+        100% 0,
+        70% 100%
+      );
+
+      transform-origin: bottom center;
+
+      animation: grass-blade-sway
+        var(--duration, 3s)
+        ease-in-out
+        var(--delay, 0s)
+        infinite alternate;
     }
 
-    .grass-blade:nth-child(1) {
-      transform: rotate(-38deg) scale(.8);
-      height: 60px;
+    .grass-blade:nth-child(3n) {
+      background: linear-gradient(
+        90deg,
+        #648d50,
+        #b4d28a
+      );
     }
 
-    .grass-blade:nth-child(2) {
-      transform: rotate(-22deg);
-      height: 83px;
+    .grass-blade:nth-child(4n) {
+      filter: brightness(.88);
     }
 
-    .grass-blade:nth-child(3) {
-      transform: rotate(-8deg) scale(.9);
-      height: 65px;
+    .grass-blade:nth-child(5n) {
+      filter: brightness(1.12);
     }
 
-    .grass-blade:nth-child(4) {
-      transform: rotate(10deg);
-      height: 94px;
-    }
+    /* Gió thổi qua cỏ */
 
-    .grass-blade:nth-child(5) {
-      transform: rotate(25deg) scale(.8);
-      height: 74px;
-    }
-
-    .grass-blade:nth-child(6) {
-      transform: rotate(40deg) scale(.7);
-      height: 58px;
-    }
-
-    @keyframes grass-sway {
-      from {
-        translate: -3px 0;
+    @keyframes grass-blade-sway {
+      0% {
+        transform: rotate(calc(var(--angle, 12deg) * -1));
       }
 
-      to {
-        translate: 5px 0;
+      50% {
+        transform: rotate(2deg);
+      }
+
+      100% {
+        transform: rotate(var(--angle, 12deg));
       }
     }
 
-    /* Hoa dại */
+    /* Hoa dại trong cỏ */
 
     .wildflower {
       position: absolute;
-      bottom: 25px;
-      font-size: 19px;
+      bottom: 45px;
+      font-size: 20px;
       transform-origin: bottom center;
-      animation: flower-sway 3.5s ease-in-out infinite alternate;
+      animation: flower-sway 3s ease-in-out infinite alternate;
+      z-index: 3;
     }
 
     .flower-a {
-      left: 45px;
+      left: 20%;
     }
 
     .flower-b {
-      left: 90px;
-      bottom: 42px;
+      left: 55%;
+      bottom: 65px;
       animation-delay: -1.5s;
     }
 
     .flower-c {
-      right: 45px;
-      font-size: 16px;
+      right: 20%;
+      font-size: 17px;
       animation-delay: -2s;
     }
 
     @keyframes flower-sway {
       from {
-        transform: rotate(-8deg);
+        transform: rotate(-10deg);
       }
 
       to {
-        transform: rotate(8deg);
+        transform: rotate(10deg);
       }
     }
 
     /* =========================
-       LÁ RỤNG VÀ CÁNH HOA
+       LÁ RỤNG THEO GIÓ
     ========================= */
 
     .falling-leaf {
@@ -477,7 +506,7 @@
       }
     }
 
-    /* Hạt bụi nắng */
+    /* Hạt bụi ánh nắng */
 
     .pollen {
       position: absolute;
@@ -503,7 +532,7 @@
     }
 
     /* =========================
-       PHẦN THƯ CHÚC
+       KHUNG THƯ
     ========================= */
 
     .wrap {
@@ -571,15 +600,6 @@
       }
     }
 
-    .eyebrow {
-      margin: 0 0 18px;
-      text-align: center;
-      font-size: 10px;
-      letter-spacing: .24em;
-      text-transform: uppercase;
-      color: var(--green);
-    }
-
     .flower {
       margin-bottom: 6px;
       text-align: center;
@@ -617,7 +637,7 @@
       content: "";
       width: 42px;
       height: 1px;
-      background: var(--line);
+      background: #9baa8745;
     }
 
     .letter {
@@ -639,6 +659,8 @@
       white-space: normal;
     }
 
+    /* Hiện từng ký tự */
+
     #sentence-text span {
       display: inline;
       opacity: 0;
@@ -658,6 +680,8 @@
         filter: blur(0);
       }
     }
+
+    /* Nút chuyển câu */
 
     .letter-nav {
       display: flex;
@@ -698,15 +722,6 @@
       white-space: nowrap;
     }
 
-    .sign {
-      margin-top: 26px;
-      text-align: right;
-      color: var(--deep-rose);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      font-style: italic;
-    }
-
     .back {
       display: block;
       margin: 17px auto 0;
@@ -733,7 +748,7 @@
     }
 
     /* =========================
-       ĐIỆN THOẠI
+       RESPONSIVE
     ========================= */
 
     @media (max-width: 480px) {
@@ -767,22 +782,24 @@
       }
 
       .grass-patch {
-        transform: scale(.8);
-        transform-origin: bottom left;
+        width: 75%;
+        height: 140px;
+      }
+
+      .grass-patch::before {
+        height: 35px;
+      }
+
+      .grass-blade {
+        bottom: 10px;
       }
 
       .grass-right {
-        transform: scaleX(-1) scale(.8);
-        transform-origin: bottom right;
-      }
-
-      .apple-hanger {
-        transform: scale(.85);
-        transform-origin: top center;
+        transform: scaleX(-1);
       }
     }
 
-    /* Tôn trọng thiết lập giảm chuyển động */
+    /* Hỗ trợ người dùng giảm chuyển động */
 
     @media (prefers-reduced-motion: reduce) {
       *,
@@ -804,15 +821,16 @@
 
 <body>
 
-  <!-- =====================
-       KHUNG CẢNH KHU VƯỜN
-  ====================== -->
+  <!-- =========================
+       KHU VƯỜN
+  ========================== -->
 
   <div class="garden" id="garden" aria-hidden="true">
 
     <div class="sunlight"></div>
 
-    <!-- Cành cây -->
+    <!-- Cành cây và quả táo -->
+
     <div class="tree-branch">
 
       <div class="branch-wood"></div>
@@ -824,7 +842,6 @@
       <span class="tree-leaf leaf-5"></span>
       <span class="tree-leaf leaf-6"></span>
 
-      <!-- Quả táo treo trên cành -->
       <div class="apple-hanger">
         <div class="apple-string"></div>
         <div class="apple">
@@ -835,35 +852,27 @@
     </div>
 
     <!-- Cỏ bên trái -->
+
     <div class="grass-patch grass-left">
-      <span class="grass-blade"></span>
-      <span class="grass-blade"></span>
-      <span class="grass-blade"></span>
-      <span class="grass-blade"></span>
-      <span class="grass-blade"></span>
-      <span class="grass-blade"></span>
 
       <span class="wildflower flower-a">🌼</span>
       <span class="wildflower flower-b">🌸</span>
+
     </div>
 
     <!-- Cỏ bên phải -->
+
     <div class="grass-patch grass-right">
-      <span class="grass-blade"></span>
-      <span class="grass-blade"></span>
-      <span class="grass-blade"></span>
-      <span class="grass-blade"></span>
-      <span class="grass-blade"></span>
-      <span class="grass-blade"></span>
 
       <span class="wildflower flower-c">🌼</span>
+
     </div>
 
   </div>
 
-  <!-- =====================
-       LÁ RỤNG
-  ====================== -->
+  <!-- =========================
+       LÁ THƯ CHÚC
+  ========================== -->
 
   <main class="wrap">
 
@@ -916,7 +925,7 @@
 
   <script>
     // =========================
-    // CẤU HÌNH CHUYỂN ĐỘNG
+    // KHỞI TẠO
     // =========================
 
     const garden = document.getElementById("garden");
@@ -926,11 +935,64 @@
     ).matches;
 
     // =========================
+    // TẠO THẢM CỎ DÀY
+    // =========================
+
+    document.querySelectorAll(".grass-patch").forEach((patch) => {
+
+      // 85 ngọn cỏ cho mỗi bên.
+      for (let i = 0; i < 85; i++) {
+
+        const blade = document.createElement("span");
+
+        blade.className = "grass-blade";
+
+        const height = 35 + Math.random() * 105;
+        const width = 7 + Math.random() * 10;
+        const angle = 8 + Math.random() * 17;
+        const duration = 2 + Math.random() * 3;
+        const delay = -Math.random() * 4;
+
+        const greens = [
+          "#638d50",
+          "#789f5f",
+          "#8eaf6d",
+          "#a5c982",
+          "#557c49"
+        ];
+
+        const dark =
+          greens[Math.floor(Math.random() * greens.length)];
+
+        const light =
+          greens[Math.floor(Math.random() * greens.length)];
+
+        blade.style.setProperty(
+          "--x",
+          `${Math.random() * 100}%`
+        );
+
+        blade.style.setProperty("--h", `${height}px`);
+        blade.style.setProperty("--w", `${width}px`);
+        blade.style.setProperty("--angle", `${angle}deg`);
+        blade.style.setProperty("--duration", `${duration}s`);
+        blade.style.setProperty("--delay", `${delay}s`);
+        blade.style.setProperty("--grass-dark", dark);
+        blade.style.setProperty("--grass-light", light);
+
+        patch.appendChild(blade);
+      }
+
+    });
+
+    // =========================
     // HẠT BỤI ÁNH NẮNG
     // =========================
 
     if (!reduceMotion) {
+
       for (let i = 0; i < 22; i++) {
+
         const pollen = document.createElement("span");
 
         pollen.className = "pollen";
@@ -946,15 +1008,19 @@
 
         garden.appendChild(pollen);
       }
+
     }
 
     // =========================
-    // LÁ RƠI THEO GIÓ
+    // LÁ RỤNG THEO GIÓ
     // =========================
 
     const leafTypes = ["🍃", "🍂", "🌿"];
 
+    let leafTimer;
+
     function createFallingLeaf() {
+
       if (reduceMotion || document.hidden) {
         scheduleNextLeaf();
         return;
@@ -985,31 +1051,37 @@
       scheduleNextLeaf();
     }
 
-    let leafTimer;
-
     function scheduleNextLeaf() {
+
       clearTimeout(leafTimer);
 
       leafTimer = setTimeout(
         createFallingLeaf,
         700 + Math.random() * 1600
       );
+
     }
 
     if (!reduceMotion) {
-      // Cho một vài chiếc lá xuất hiện ngay từ đầu.
+
       for (let i = 0; i < 4; i++) {
         setTimeout(createFallingLeaf, i * 900);
       }
+
     }
 
-    // Khi chuyển tab, tạm ngừng tạo lá mới.
     document.addEventListener("visibilitychange", () => {
+
       if (document.hidden) {
+
         clearTimeout(leafTimer);
+
       } else if (!reduceMotion) {
+
         scheduleNextLeaf();
+
       }
+
     });
 
     // =========================
@@ -1017,6 +1089,7 @@
     // =========================
 
     const sentences = [
+
       "Đã là năm thứ 3 tổ chức 20/10 ở lớp mình nhưng đây là lần đầu tiên tui viết thư nên có gì sai sót mong Hà Giang bỏ qua cho nha.",
 
       "Trước hết, tui xin chúc Hà Giang ngày càng xinh đẹp, giỏi giang.",
@@ -1028,20 +1101,29 @@
       "Dù không có con đường nào là màu hồng nhưng tui hy vọng chặng hành trình của Hà Giang sẽ gặp ít chông gai nhất có thể.",
 
       "Cuối cùng, tui mong rằng bức thư này sẽ tiếp thêm động lực để Hà Giang vượt qua những khó khăn mà mình không may gặp phải!"
+
     ];
 
     let currentSentence = 0;
 
-    const sentenceText = document.getElementById("sentence-text");
-    const prevBtn = document.getElementById("prev-btn");
-    const nextBtn = document.getElementById("next-btn");
-    const sentenceCount = document.getElementById("sentence-count");
+    const sentenceText =
+      document.getElementById("sentence-text");
+
+    const prevBtn =
+      document.getElementById("prev-btn");
+
+    const nextBtn =
+      document.getElementById("next-btn");
+
+    const sentenceCount =
+      document.getElementById("sentence-count");
 
     // =========================
     // HIỆU ỨNG HIỆN TỪNG CHỮ
     // =========================
 
     function showSentence(index) {
+
       currentSentence = index;
 
       const text = sentences[currentSentence];
@@ -1049,13 +1131,17 @@
       sentenceText.replaceChildren();
 
       if (reduceMotion) {
+
         sentenceText.textContent = text;
+
       } else {
+
         [...text].forEach((char, i) => {
+
           const span = document.createElement("span");
 
-          // Giữ khoảng trắng giữa các từ.
-          span.textContent = char === " " ? "\u00A0" : char;
+          span.textContent =
+            char === " " ? "\u00A0" : char;
 
           span.style.setProperty(
             "--delay",
@@ -1063,18 +1149,19 @@
           );
 
           sentenceText.appendChild(span);
+
         });
+
       }
 
-      // Cập nhật bộ đếm.
       sentenceCount.textContent =
         `${currentSentence + 1} / ${sentences.length}`;
 
-      // Khóa nút ở đầu và cuối thư.
       prevBtn.disabled = currentSentence === 0;
 
       nextBtn.disabled =
         currentSentence === sentences.length - 1;
+
     }
 
     // =========================
@@ -1082,20 +1169,27 @@
     // =========================
 
     prevBtn.addEventListener("click", () => {
+
       if (currentSentence > 0) {
         showSentence(currentSentence - 1);
       }
+
     });
 
     nextBtn.addEventListener("click", () => {
+
       if (currentSentence < sentences.length - 1) {
         showSentence(currentSentence + 1);
       }
+
     });
 
     // Hiển thị câu đầu tiên.
+
     showSentence(0);
+
   </script>
 
 </body>
 </html>
+```
