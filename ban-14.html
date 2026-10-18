@@ -227,7 +227,7 @@ footer .heart { color: var(--deep-rose); }
         </div>
         <div class="cup-rim"></div><div class="cup-lid"></div>
       </div>
-      <button class="stir-btn" id="stir-btn" type="button" aria-label="Khuấy ly trà sữa">🥤 Khuấy ly</button>
+      <button class="stir-btn" id="stir-btn" type="button" aria-label="Khuấy ly trà sữa">🥤 Khuấy</button>
     </div>
     <div class="divider" aria-hidden="true">♡</div>
     <section class="letter" aria-label="Lời chúc">
@@ -296,7 +296,7 @@ stirBtn.addEventListener('click', () => {
   clearTimeout(stirTimer);
   stirTimer = setTimeout(() => {
     drinkScene.classList.remove('stirring');
-    stirBtn.textContent = 'Khuấy';
+    stirBtn.textContent = '🥤 Khuấy';
   }, 720);
 });
 </script>
