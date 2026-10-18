@@ -23,24 +23,32 @@
       --muted: #9A805A;
       --paper: #FFFCF2;
       --line: #D7AF5B55;
-      --green: #68854B;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      min-height: 100%;
+      overflow-x: clip;
+      scrollbar-gutter: stable;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
+      min-height: 100svh;
       padding: 26px 18px;
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
       isolation: isolate;
-      overflow-x: hidden;
+      overflow-x: clip;
       color: var(--brown);
       font-family: 'Be Vietnam Pro', sans-serif;
+
       background:
         radial-gradient(
           ellipse at 50% 12%,
@@ -56,29 +64,29 @@
         );
     }
 
-    /* Ánh nắng dịu trên bầu trời */
+    /* TẤT CẢ CẢNH NỀN ĐƯỢC TÁCH KHỎI BỐ CỤC CHÍNH */
+
     .sun-glow {
       position: fixed;
-      width: 340px;
-      height: 340px;
-      top: -135px;
+      width: 300px;
+      height: 300px;
+      top: -130px;
       left: 50%;
       transform: translateX(-50%);
       border-radius: 50%;
       background: #FFF8C8;
-      opacity: .7;
-      filter: blur(55px);
+      opacity: .65;
+      filter: blur(45px);
       pointer-events: none;
-      z-index: -2;
+      z-index: -1;
     }
 
-    /* Những dải đồi phía xa */
     .hills {
       position: fixed;
       inset: 0;
       overflow: hidden;
       pointer-events: none;
-      z-index: -2;
+      z-index: -1;
     }
 
     .hill {
@@ -102,23 +110,25 @@
       transform: rotate(6deg);
     }
 
-    /* Cánh đồng hoa phía dưới */
+    /* CÁNH ĐỒNG HOA */
+
     .sunflower-field {
       position: fixed;
       left: 0;
       right: 0;
       bottom: 0;
-      height: 220px;
+      height: 210px;
       pointer-events: none;
       z-index: -1;
       overflow: hidden;
-      background:
-        linear-gradient(
-          180deg,
-          transparent 0%,
-          #C3A34722 25%,
-          #B3A04C66 100%
-        );
+      contain: strict;
+
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        #C3A34722 25%,
+        #B3A04C66 100%
+      );
     }
 
     .sunflower {
@@ -129,6 +139,7 @@
       transform: rotate(var(--tilt));
       transform-origin: bottom center;
       animation: sway var(--sway, 4s) ease-in-out infinite alternate;
+      will-change: rotate;
     }
 
     .stem {
@@ -174,7 +185,8 @@
     .petals {
       position: absolute;
       inset: 0;
-      animation: flower-turn 35s linear infinite;
+      animation: flower-turn 45s linear infinite;
+      will-change: transform;
     }
 
     .petal {
@@ -191,7 +203,6 @@
         #F7C735 65%,
         #E6A51C 100%
       );
-      box-shadow: inset 0 0 2px #FFF6B5;
     }
 
     .flower-center {
@@ -206,19 +217,28 @@
         radial-gradient(circle, #885024, #513017 75%);
       background-size: 5px 5px, 100% 100%;
       border: 2px solid #A36A2C;
-      box-shadow: 0 0 5px #7B4A2433;
     }
 
     @keyframes sway {
-      from { rotate: -3deg; }
-      to { rotate: 3deg; }
+      from { rotate: -2deg; }
+      to { rotate: 2deg; }
     }
 
     @keyframes flower-turn {
-      to { rotate: 360deg; }
+      to { transform: rotate(360deg); }
     }
 
-    /* Hoa và cánh hoa bay lên */
+    /* CÁNH HOA BAY - GIỚI HẠN SỐ LƯỢNG BẰNG JAVASCRIPT */
+
+    .floating-petals {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+      contain: strict;
+    }
+
     .floating-petal {
       position: absolute;
       bottom: -30px;
@@ -233,31 +253,39 @@
       );
       opacity: 0;
       animation: float-up var(--duration) linear forwards;
-      filter: drop-shadow(0 1px 2px #A8792033);
+      will-change: transform, opacity;
     }
 
     @keyframes float-up {
       0% {
         opacity: 0;
-        transform: translate(0, 0) rotate(0deg) scale(.7);
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(.7);
       }
+
       12% {
-        opacity: .9;
-      }
-      70% {
         opacity: .8;
       }
+
+      70% {
+        opacity: .7;
+      }
+
       100% {
         opacity: 0;
-        transform: translate(var(--drift), -110vh)
-          rotate(var(--rotation)) scale(1.1);
+        transform:
+          translate3d(var(--drift), -110vh, 0)
+          rotate(var(--rotation))
+          scale(1.1);
       }
     }
 
+    /* NỘI DUNG CHÍNH */
+
     .wrap {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       width: min(100%, 560px);
+      margin: auto;
     }
 
     .top {
@@ -288,10 +316,8 @@
       border: 1px solid #D9B96699;
       border-radius: 4px;
       box-shadow:
-        0 18px 55px #71512625,
-        0 0 35px #FFF4C544;
-      backdrop-filter: blur(10px);
-      animation: card-glow 5s ease-in-out infinite alternate;
+        0 18px 45px #71512622,
+        0 0 20px #FFF4C422;
     }
 
     .card::before {
@@ -300,21 +326,6 @@
       inset: 8px;
       border: 1px solid #D9B96666;
       pointer-events: none;
-    }
-
-    @keyframes card-glow {
-      from {
-        box-shadow:
-          0 18px 55px #71512620,
-          0 0 18px #FFF1B922;
-        border-color: #D9B96677;
-      }
-      to {
-        box-shadow:
-          0 18px 55px #71512635,
-          0 0 38px #FFF1B966;
-        border-color: #D4AC4A;
-      }
     }
 
     .eyebrow {
@@ -335,8 +346,8 @@
     }
 
     @keyframes flower-bob {
-      from { transform: rotate(-8deg) translateY(0); }
-      to { transform: rotate(8deg) translateY(-4px); }
+      from { transform: rotate(-5deg) translateY(0); }
+      to { transform: rotate(5deg) translateY(-3px); }
     }
 
     h1 {
@@ -351,7 +362,7 @@
     h1 em {
       color: #BD8B29;
       font-weight: 600;
-      text-shadow: 0 0 25px #F3D77B55;
+      text-shadow: 0 0 20px #F3D77B44;
     }
 
     .intro {
@@ -380,23 +391,50 @@
       background: var(--line);
     }
 
+    /* CHIỀU CAO CỐ ĐỊNH ĐỂ KHUNG THƯ KHÔNG NHẢY */
+
     .letter {
-      min-height: 100px;
+      height: 260px;
+      min-height: 260px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 4px 2px;
+      padding: 8px 2px;
       font-family: 'Cormorant Garamond', serif;
       font-size: 21px;
-      line-height: 1.65;
+      line-height: 1.55;
       text-align: center;
+      overflow: hidden;
       overflow-wrap: anywhere;
     }
 
     .letter p {
       width: 100%;
+      max-height: 100%;
       margin: 0;
       white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
+    /* HIỆU ỨNG CHỮ */
+
+    #sentence-text span {
+      display: inline;
+      opacity: 0;
+      animation: letter-appear .28s ease-out forwards;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes letter-appear {
+      from {
+        opacity: 0;
+        filter: blur(2px);
+      }
+
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
     }
 
     .letter-nav {
@@ -415,10 +453,7 @@
       color: var(--brown);
       font: 11px 'Be Vietnam Pro', sans-serif;
       cursor: pointer;
-      transition:
-        background .25s ease,
-        border-color .25s ease,
-        opacity .25s ease;
+      transition: background .2s ease, border-color .2s ease;
     }
 
     .letter-nav button:hover:not(:disabled) {
@@ -435,15 +470,6 @@
       color: var(--muted);
       font-size: 10px;
       white-space: nowrap;
-    }
-
-    .sign {
-      margin-top: 26px;
-      text-align: right;
-      color: #BD8B29;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      font-style: italic;
     }
 
     .back {
@@ -472,44 +498,28 @@
       color: #C9972D;
     }
 
-    /* Hiệu ứng chữ xuất hiện từng ký tự */
-    #sentence-text {
-      opacity: 1;
-      overflow-wrap: anywhere;
-    }
-
-    #sentence-text span {
-      display: inline;
-      opacity: 0;
-      filter: blur(3px);
-      animation: letter-appear .28s ease-out forwards;
-      animation-delay: var(--delay);
-    }
-
-    @keyframes letter-appear {
-      from {
-        opacity: 0;
-        filter: blur(3px);
-      }
-      to {
-        opacity: 1;
-        filter: blur(0);
-      }
-    }
+    /* ĐIỆN THOẠI */
 
     @media (max-width: 480px) {
       body {
-        padding: 14px 12px;
+        padding: 16px 12px;
+      }
+
+      .top {
+        font-size: 8px;
+        letter-spacing: .12em;
       }
 
       .card {
-        margin: 12px auto;
+        margin: 14px auto;
         padding: 24px 20px;
       }
 
       .letter {
-        min-height: 110px;
+        height: 290px;
+        min-height: 290px;
         font-size: 20px;
+        line-height: 1.5;
       }
 
       .letter-nav {
@@ -523,6 +533,25 @@
 
       .sunflower-field {
         height: 160px;
+      }
+    }
+
+    @media (max-height: 720px) and (min-width: 481px) {
+      body {
+        padding-top: 14px;
+        padding-bottom: 14px;
+      }
+
+      .card {
+        margin-top: 12px;
+        margin-bottom: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+
+      .letter {
+        height: 220px;
+        min-height: 220px;
       }
     }
 
@@ -563,14 +592,14 @@
     <article class="card">
       <div class="flower" aria-hidden="true">✿</div>
 
-      <h1>
-        <em>gâu gâu</em>
-      </h1>
+      <h1><em>gâu gâu</em></h1>
 
       <div class="divider" aria-hidden="true">♡</div>
 
       <section class="letter" aria-label="Lời chúc">
-        <p id="sentence-text" aria-live="polite">Nhân dịp 20/10 cuối cùng của lớp 12/10, tui rất hân hạnh được phân công viết cho bạn bức thư đầy ngôn từ hoa mĩ đẹp đẽ này🌹.</p>
+        <p id="sentence-text" aria-live="polite">
+          Nhân dịp 20/10 cuối cùng của lớp 12/10, tui rất hân hạnh được phân công viết cho bạn bức thư đầy ngôn từ hoa mĩ đẹp đẽ này🌹.
+        </p>
       </section>
 
       <div class="letter-nav">
@@ -578,7 +607,7 @@
           ← Câu trước
         </button>
 
-        <span id="sentence-count">1 / 6</span>
+        <span id="sentence-count">1 / 12</span>
 
         <button id="next-btn" type="button">
           Câu tiếp theo →
@@ -600,13 +629,12 @@
       '(prefers-reduced-motion: reduce)'
     ).matches;
 
-    // Tạo cánh đồng hoa hướng dương
+    // TẠO HOA HƯỚNG DƯƠNG
     const field = document.getElementById('sunflower-field');
 
     function createSunflower(left, size, tilt, delay) {
       const flower = document.createElement('div');
       flower.className = 'sunflower';
-
       flower.style.left = left + '%';
       flower.style.setProperty('--size', size + 'px');
       flower.style.setProperty('--head', (size * 1.2) + 'px');
@@ -649,8 +677,9 @@
       field.appendChild(flower);
     }
 
-    // Hoa nhỏ phía sau, hoa lớn phía trước
-    const flowerCount = window.innerWidth < 480 ? 17 : 29;
+    // Giảm số lượng hoa để tránh quá tải khi hiển thị
+    const isMobile = window.matchMedia('(max-width: 480px)').matches;
+    const flowerCount = isMobile ? 13 : 22;
 
     for (let i = 0; i < flowerCount; i++) {
       const left = (i / (flowerCount - 1)) * 108 - 4;
@@ -664,20 +693,24 @@
       );
     }
 
-    // Cánh hoa bay lên trời
+    // CÁNH HOA BAY - GIỚI HẠN SỐ LƯỢNG ĐANG HIỂN THỊ
     const floatingContainer = document.getElementById('floating-petals');
+    const MAX_PETALS = 10;
 
     function createFloatingPetal() {
       if (document.hidden || reduceMotion) return;
+
+      // Không tạo thêm nếu đã đủ cánh hoa
+      if (floatingContainer.childElementCount >= MAX_PETALS) return;
 
       const petal = document.createElement('span');
       petal.className = 'floating-petal';
 
       petal.style.left = (Math.random() * 100) + '%';
       petal.style.setProperty('--size', (7 + Math.random() * 9) + 'px');
-      petal.style.setProperty('--duration', (9 + Math.random() * 9) + 's');
-      petal.style.setProperty('--drift', (-100 + Math.random() * 200) + 'px');
-      petal.style.setProperty('--rotation', (180 + Math.random() * 540) + 'deg');
+      petal.style.setProperty('--duration', (10 + Math.random() * 7) + 's');
+      petal.style.setProperty('--drift', (-80 + Math.random() * 160) + 'px');
+      petal.style.setProperty('--rotation', (180 + Math.random() * 360) + 'deg');
 
       floatingContainer.appendChild(petal);
 
@@ -687,14 +720,16 @@
     }
 
     if (!reduceMotion) {
-      setInterval(createFloatingPetal, 850);
+      // Thưa hơn để giảm tải animation
+      setInterval(createFloatingPetal, 1400);
 
-      for (let i = 0; i < 10; i++) {
-        setTimeout(createFloatingPetal, i * 350);
+      // Chỉ tạo vài cánh ban đầu
+      for (let i = 0; i < 4; i++) {
+        setTimeout(createFloatingPetal, i * 500);
       }
     }
 
-    // Nội dung thư
+    // NỘI DUNG LỜI CHÚC
     const sentences = [
       "Nhân dịp 20/10 cuối cùng của lớp 12/10, tui rất hân hạnh được phân công viết cho bạn bức thư đầy ngôn từ hoa mĩ đẹp đẽ này🌹.",
 
@@ -707,11 +742,17 @@
       "Bây giờ là năm cuối mình được học chung với nhau, t xin tặng Linh những lời chúc sâu sắc nhất từ trong tâm.",
 
       "M là một người rất giỏi, chăm chỉ nên m hãy cứ tự tin bước tiếp trên con đường mà m chọn, bỏ qua những thứ làm bạn bị phân tâm khiến bạn ovtk xàm c.",
+
       "Cố gắng thực hiện được ước mơ của mình và đặc biệt mình mong bạn hãy luôn giữ nụ cười trên môi🌚🫵🏻",
+
       "I will forever be proud of you because I know how hard you try everyday:)🫪",
+
       "Linh có biết Linh chính là người bạn tuyệt vời nhất mà t từng gặp (bịp).",
+
       " Nếu sau này có ai hỏi t chọn 10 tỷ hay chọn Thuỳ Linh thì câu trả lời chắc chắc là 10 tỷ😘.",
+
       "Lời chúc của t tới đây là hết, chúc Linh có một ngày 20/10 vui vẻ và tràn đầy hạnh phúc nhaaa🤢",
+
       " Ma cherié👻"
     ];
 
@@ -731,14 +772,18 @@
       if (reduceMotion) {
         sentenceText.textContent = text;
       } else {
+        const fragment = document.createDocumentFragment();
+
         [...text].forEach((char, i) => {
           const span = document.createElement('span');
 
           span.textContent = char === ' ' ? '\u00A0' : char;
           span.style.setProperty('--delay', `${i * 0.025}s`);
 
-          sentenceText.appendChild(span);
+          fragment.appendChild(span);
         });
+
+        sentenceText.appendChild(fragment);
       }
 
       sentenceCount.textContent =
