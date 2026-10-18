@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -25,7 +24,9 @@
   --pixel: 4px;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -44,7 +45,9 @@ body {
       #d19ba3 100%);
 }
 
-button, a { -webkit-tap-highlight-color: transparent; }
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
 
 .game {
   position: fixed;
@@ -78,6 +81,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   opacity: .55;
   animation: cloud-drift 28s linear infinite alternate;
 }
+
 .cloud::before {
   content: "";
   position: absolute;
@@ -88,12 +92,26 @@ button, a { -webkit-tap-highlight-color: transparent; }
   background: inherit;
   box-shadow: 12px 0 inherit;
 }
-.cloud.one { top: 22%; left: 8%; }
-.cloud.two { top: 35%; right: 10%; transform: scale(.7); }
+
+.cloud.one {
+  top: 22%;
+  left: 8%;
+}
+
+.cloud.two {
+  top: 35%;
+  right: 10%;
+  transform: scale(.7);
+}
 
 @keyframes cloud-drift {
-  from { translate: -8px 0; }
-  to { translate: 18px 0; }
+  from {
+    translate: -8px 0;
+  }
+
+  to {
+    translate: 18px 0;
+  }
 }
 
 .mountain {
@@ -106,7 +124,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
   border-bottom: 130px solid #514568;
   opacity: .7;
 }
-.mountain.one { left: -50px; }
+
+.mountain.one {
+  left: -50px;
+}
+
 .mountain.two {
   left: 28%;
   bottom: 14%;
@@ -115,6 +137,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   border-bottom-width: 180px;
   border-bottom-color: #655373;
 }
+
 .mountain.three {
   right: -50px;
   border-bottom-color: #514568;
@@ -130,6 +153,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   border-top: 8px solid #718b78;
   box-shadow: inset 0 12px #455a54;
 }
+
 .ground::before {
   content: "";
   position: absolute;
@@ -154,9 +178,20 @@ button, a { -webkit-tap-highlight-color: transparent; }
     16px 0 #607f69,
     -8px 6px #607f69;
 }
-.grass.g1 { left: 8%; }
-.grass.g2 { left: 84%; transform: scale(1.3); }
-.grass.g3 { left: 47%; bottom: 13%; }
+
+.grass.g1 {
+  left: 8%;
+}
+
+.grass.g2 {
+  left: 84%;
+  transform: scale(1.3);
+}
+
+.grass.g3 {
+  left: 47%;
+  bottom: 13%;
+}
 
 .pixel-star {
   position: absolute;
@@ -167,20 +202,32 @@ button, a { -webkit-tap-highlight-color: transparent; }
   opacity: .7;
   animation: twinkle 3s steps(2, end) infinite alternate;
 }
+
 @keyframes twinkle {
-  from { opacity: .25; }
-  to { opacity: .9; }
+  from {
+    opacity: .25;
+  }
+
+  to {
+    opacity: .9;
+  }
 }
 
-/* Nhân vật nữ pixel art */
+/* =========================
+   NHÂN VẬT PIXEL ART
+   Đã chỉnh vị trí lên phía trên khung thư
+========================= */
 
 .hero {
   position: fixed;
   width: 100px;
   height: 142px;
-  left: 5%;
-  top: 30%;
-  z-index: 1;
+
+  /* Vị trí trên máy tính */
+  left: calc(50% + 170px);
+  top: 12%;
+
+  z-index: 3;
   image-rendering: pixelated;
   transform-origin: center;
   animation: flying 2.4s ease-in-out infinite;
@@ -193,47 +240,59 @@ button, a { -webkit-tap-highlight-color: transparent; }
   overflow: visible;
 }
 
+/* Hiệu ứng bay lơ lửng */
 @keyframes flying {
   0%, 100% {
     transform: translate(0, 0) rotate(-5deg);
   }
+
   25% {
     transform: translate(12px, -12px) rotate(-2deg);
   }
+
   50% {
     transform: translate(20px, 2px) rotate(4deg);
   }
+
   75% {
     transform: translate(8px, 10px) rotate(1deg);
   }
 }
 
+/* Tên nhân vật */
 .hero-label {
   position: fixed;
-  top: calc(30% - 20px);
-  left: 5%;
-  z-index: 1;
+
+  /* Căn theo nhân vật */
+  top: calc(12% - 20px);
+  left: calc(50% + 170px);
+
+  z-index: 3;
   font: 8px 'Press Start 2P', monospace;
   color: #fff0d9;
   text-shadow: 2px 2px #443852;
   white-space: nowrap;
 }
 
+/* Điều chỉnh nhân vật trên màn hình nhỏ */
 @media (max-width: 600px) {
   .hero {
     width: 65px;
     height: 92px;
-    left: 3%;
-    top: 23%;
+    left: calc(50% + 95px);
+    top: 9%;
   }
 
   .hero-label {
-    left: 3%;
-    top: calc(23% - 18px);
+    left: calc(50% + 95px);
+    top: calc(9% - 18px);
     font-size: 6px;
   }
 }
 
+/* =========================
+   KHUNG THƯ
+========================= */
 
 .wrap {
   width: min(100%, 570px);
@@ -270,8 +329,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 @keyframes card-idle {
-  from { box-shadow: 0 0 0 4px #453b60, 8px 8px 0 #29244255; }
-  to { box-shadow: 0 0 0 4px #645477, 8px 8px 0 #29244255; }
+  from {
+    box-shadow: 0 0 0 4px #453b60, 8px 8px 0 #29244255;
+  }
+
+  to {
+    box-shadow: 0 0 0 4px #645477, 8px 8px 0 #29244255;
+  }
 }
 
 .card::before {
@@ -302,7 +366,9 @@ h1 {
   text-shadow: 3px 3px #e9c2d0;
 }
 
-h1 span { color: #c56f96; }
+h1 span {
+  color: #c56f96;
+}
 
 .subtitle {
   margin: 6px 0 22px;
@@ -320,13 +386,16 @@ h1 span { color: #c56f96; }
   color: #c47798;
   font-size: 15px;
 }
-.divider::before, .divider::after {
+
+.divider::before,
+.divider::after {
   content: "";
   width: 42px;
   height: 3px;
   background: #e6c3d3;
 }
 
+/* Phần nội dung lời chúc */
 .letter {
   min-height: 142px;
   display: flex;
@@ -345,6 +414,7 @@ h1 span { color: #c56f96; }
   overflow-wrap: anywhere;
 }
 
+/* Hiệu ứng hiện từng chữ */
 #sentence-text span {
   display: inline;
   opacity: 0;
@@ -353,10 +423,16 @@ h1 span { color: #c56f96; }
 }
 
 @keyframes type-pixel {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
+/* Nút chuyển câu */
 .letter-nav {
   display: flex;
   justify-content: space-between;
@@ -398,6 +474,7 @@ h1 span { color: #c56f96; }
   white-space: nowrap;
 }
 
+/* Chữ ký */
 .sign {
   margin-top: 20px;
   text-align: right;
@@ -405,6 +482,7 @@ h1 span { color: #c56f96; }
   font: 24px 'VT323', monospace;
 }
 
+/* Nút quay lại */
 .back {
   display: block;
   width: fit-content;
@@ -413,7 +491,10 @@ h1 span { color: #c56f96; }
   font-size: 11px;
   text-decoration: none;
 }
-.back:hover { color: #bd7097; }
+
+.back:hover {
+  color: #bd7097;
+}
 
 footer {
   text-align: center;
@@ -421,24 +502,26 @@ footer {
   font: 8px 'Press Start 2P', monospace;
   line-height: 2;
 }
-footer span { color: #ffc6d7; }
 
+footer span {
+  color: #ffc6d7;
+}
+
+/* Responsive */
 @media (max-width: 600px) {
-  body { padding: 20px 17px; }
+  body {
+    padding: 20px 17px;
+  }
 
-  .card { padding: 27px 18px 21px; }
+  .card {
+    padding: 27px 18px 21px;
+  }
 
   .hero {
-    width: 65px;
-    height: 92px;
-    left: 2%;
-    bottom: 8%;
-    opacity: .8;
+    opacity: .9;
   }
 
   .hero-label {
-    left: 2%;
-    bottom: calc(8% + 94px);
     font-size: 6px;
   }
 
@@ -448,22 +531,41 @@ footer span { color: #ffc6d7; }
     right: 12%;
   }
 
-  .letter { min-height: 155px; }
-  #sentence-text { font-size: 25px; }
+  .letter {
+    min-height: 155px;
+  }
 
-  .letter-nav { gap: 5px; }
+  #sentence-text {
+    font-size: 25px;
+  }
+
+  .letter-nav {
+    gap: 5px;
+  }
+
   .letter-nav button {
     padding: 8px 6px;
     font-size: 6px;
   }
-  #sentence-count { font-size: 7px; }
 
-  .top { font-size: 6px; }
-  .pixel-tag { font-size: 7px; }
+  #sentence-count {
+    font-size: 7px;
+  }
+
+  .top {
+    font-size: 6px;
+  }
+
+  .pixel-tag {
+    font-size: 7px;
+  }
 }
 
+/* Tôn trọng cài đặt giảm chuyển động */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
@@ -474,7 +576,11 @@ footer span { color: #ffc6d7; }
     animation: none;
   }
 }
-  
+
+/* =========================
+   ĐẠN PIXEL
+========================= */
+
 .bullet {
   position: fixed;
   z-index: 1;
@@ -496,15 +602,18 @@ footer span { color: #ffc6d7; }
     opacity: 1;
     transform: translateX(0);
   }
+
   80% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
     transform: translateX(65vw);
   }
 }
 
+/* Tia sáng tại nòng súng */
 .muzzle-flash {
   position: fixed;
   z-index: 1;
@@ -525,6 +634,7 @@ footer span { color: #ffc6d7; }
     opacity: 1;
     transform: scale(1);
   }
+
   to {
     opacity: 0;
     transform: scale(.4);
@@ -535,6 +645,8 @@ footer span { color: #ffc6d7; }
 </head>
 
 <body>
+
+<!-- CẢNH GAME PIXEL -->
 <div class="game" id="game" aria-hidden="true">
   <div class="sun"></div>
   <div class="cloud one"></div>
@@ -548,54 +660,64 @@ footer span { color: #ffc6d7; }
   <div class="grass g3"></div>
 </div>
 
+<!-- TÊN NHÂN VẬT -->
 <div class="hero-label" aria-hidden="true">PLAYER 01</div>
 
+<!-- NHÂN VẬT NỮ PIXEL ART -->
 <div class="hero" aria-hidden="true">
   <svg viewBox="0 0 25 36" shape-rendering="crispEdges"
        xmlns="http://www.w3.org/2000/svg">
+
     <!-- Tóc -->
     <rect x="7" y="1" width="11" height="3" fill="#463044"/>
     <rect x="5" y="4" width="15" height="8" fill="#463044"/>
     <rect x="4" y="7" width="3" height="8" fill="#463044"/>
     <rect x="18" y="6" width="3" height="10" fill="#463044"/>
     <rect x="8" y="4" width="9" height="8" fill="#efb9a5"/>
+
     <!-- Mặt và mắt -->
     <rect x="8" y="9" width="2" height="2" fill="#463044"/>
     <rect x="15" y="9" width="2" height="2" fill="#463044"/>
     <rect x="11" y="12" width="3" height="1" fill="#bd7182"/>
+
     <!-- Áo khoác -->
     <rect x="7" y="14" width="11" height="3" fill="#d88fa9"/>
     <rect x="6" y="17" width="13" height="7" fill="#ad789f"/>
     <rect x="10" y="17" width="3" height="6" fill="#f6d6c8"/>
+
     <!-- Tay -->
     <rect x="3" y="17" width="3" height="7" fill="#efb9a5"/>
     <rect x="19" y="17" width="3" height="6" fill="#efb9a5"/>
+
     <!-- Súng pixel -->
     <rect x="19" y="20" width="5" height="2" fill="#d8d6e4"/>
     <rect x="22" y="19" width="3" height="2" fill="#8e8da8"/>
     <rect x="20" y="22" width="2" height="3" fill="#8e8da8"/>
+
     <!-- Quần -->
     <rect x="7" y="24" width="5" height="6" fill="#52506d"/>
     <rect x="13" y="24" width="5" height="6" fill="#52506d"/>
+
     <!-- Giày -->
     <rect x="5" y="30" width="7" height="3" fill="#e8b8bd"/>
     <rect x="13" y="30" width="7" height="3" fill="#e8b8bd"/>
     <rect x="4" y="33" width="8" height="2" fill="#f4d9c9"/>
     <rect x="13" y="33" width="8" height="2" fill="#f4d9c9"/>
+
   </svg>
 </div>
 
+<!-- NỘI DUNG KHUNG THƯ -->
 <main class="wrap">
+
   <header class="top">
     <span>20 · 10 · 2026</span>
     <span class="level">STAGE 01<br>HAPPY DAY</span>
   </header>
 
   <article class="card">
-    
 
     <h1>gâu <span>gâu</span></h1>
-    
 
     <div class="divider" aria-hidden="true">♥</div>
 
@@ -604,6 +726,7 @@ footer span { color: #ffc6d7; }
     </section>
 
     <div class="letter-nav">
+
       <button id="prev-btn" type="button" disabled>
         ◀ CÂU TRƯỚC
       </button>
@@ -613,6 +736,7 @@ footer span { color: #ffc6d7; }
       <button id="next-btn" type="button">
         CÂU TIẾP ▶
       </button>
+
     </div>
 
     <div class="sign">— gâu gâu</div>
@@ -621,6 +745,7 @@ footer span { color: #ffc6d7; }
        href="https://women12102010.github.io/women1210.github.io/">
       ← Quay lại phong bì
     </a>
+
   </article>
 </main>
 
@@ -631,15 +756,24 @@ const reduceMotion = window.matchMedia(
   '(prefers-reduced-motion: reduce)'
 ).matches;
 
-// Sao pixel trang trí
+// =========================
+// SAO PIXEL TRANG TRÍ
+// =========================
+
 for (let i = 0; i < 34; i++) {
   const star = document.createElement('span');
+
   star.className = 'pixel-star';
   star.style.left = `${(i * 37.71 + 7) % 100}%`;
   star.style.top = `${(i * 61.37 + 3) % 65}%`;
   star.style.animationDelay = `${(i % 7) * 0.3}s`;
+
   game.appendChild(star);
 }
+
+// =========================
+// NỘI DUNG LỜI CHÚC
+// =========================
 
 const sentences = [
   "Thời gian đồng hành cùng nhau không còn lâu nữa, mong những lời gửi gắm nhân dịp 20/10 trên lá thứ này sẽ giúp đỡ Ngọc Hân vượt qua mọi khó khăn mà bản thân gặp phải.",
@@ -651,7 +785,6 @@ const sentences = [
   "Tui cũng hy vọng bạn gặp những người bạn tốt để cho bạn không cảm thấy cô đơn hay tủi thân khi phải đổi mặt với khó khăn 1 mình nữa.",
 
   "Mà nè, bạn là 1 trong những người rực rỡ nhất mà tui từng gặp nên hãy luôn tích cực và tự tin về bản thân mình nhé. Và hãy luôn nhớ rằng bạn xứng đáng với mọi điều tốt đẹp trên đời này!"
-
 ];
 
 let currentSentence = 0;
@@ -661,8 +794,10 @@ const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const sentenceCount = document.getElementById('sentence-count');
 
+// Hiển thị câu chúc và hiệu ứng từng chữ
 function showSentence(index) {
   currentSentence = index;
+
   const text = sentences[index];
 
   sentenceText.replaceChildren();
@@ -672,8 +807,10 @@ function showSentence(index) {
   } else {
     [...text].forEach((char, i) => {
       const span = document.createElement('span');
+
       span.textContent = char === ' ' ? '\u00A0' : char;
       span.style.setProperty('--delay', `${i * 0.025}s`);
+
       sentenceText.appendChild(span);
     });
   }
@@ -685,20 +822,27 @@ function showSentence(index) {
   nextBtn.disabled = currentSentence === sentences.length - 1;
 }
 
+// Nút câu trước
 prevBtn.addEventListener('click', () => {
   if (currentSentence > 0) {
     showSentence(currentSentence - 1);
   }
 });
 
+// Nút câu tiếp theo
 nextBtn.addEventListener('click', () => {
   if (currentSentence < sentences.length - 1) {
     showSentence(currentSentence + 1);
   }
 });
 
+// Hiển thị câu đầu tiên
 showSentence(0);
-  
+
+// =========================
+// HIỆU ỨNG NHÂN VẬT BẮN SÚNG
+// =========================
+
 const hero = document.querySelector('.hero');
 
 function shootBullet() {
@@ -712,20 +856,24 @@ function shootBullet() {
 
   // Đạn pixel màu vàng
   const bullet = document.createElement('span');
+
   bullet.className = 'bullet';
   bullet.style.left = `${x}px`;
   bullet.style.top = `${y}px`;
+
   document.body.appendChild(bullet);
 
   bullet.addEventListener('animationend', () => {
     bullet.remove();
   }, { once: true });
 
-  // Tia lóe nhỏ ở nòng súng
+  // Tia lóe tại nòng súng
   const flash = document.createElement('span');
+
   flash.className = 'muzzle-flash';
   flash.style.left = `${x - 2}px`;
   flash.style.top = `${y - 4}px`;
+
   document.body.appendChild(flash);
 
   flash.addEventListener('animationend', () => {
@@ -733,11 +881,11 @@ function shootBullet() {
   }, { once: true });
 }
 
-// Bắn từng viên, cách nhau một khoảng vừa phải
+// Bắn từng viên, cách nhau 650ms
 if (!reduceMotion) {
   setInterval(shootBullet, 650);
 }
-
 </script>
+
 </body>
 </html>
