@@ -1,67 +1,421 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#F8F0E8">
+
+  <meta name="theme-color" content="#EDE3F7">
   <meta name="description" content="Một lời chúc nhỏ dành riêng cho bạn nhân ngày 20/10.">
 
   <title>gâu gâu · 20.10</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
     :root {
-      --cream: #F8F0E8;
-      --rose: #D9A1A5;
-      --deep-rose: #B8757F;
-      --brown: #72554D;
-      --muted: #987E73;
-      --paper: #FFFCF9;
-      --line: #E8D8C9;
+      color-scheme: light;
+
+      --lavender: #B69AD8;
+      --deep-lavender: #8063A9;
+      --purple: #6D547F;
+      --ink: #51415F;
+      --muted: #887995;
+      --paper: #FBF7FF;
+      --line: #B69AD855;
+      --cream: #F8F1FA;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      min-height: 100%;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
       padding: 26px 18px;
+
       display: grid;
       place-items: center;
-      color: var(--brown);
+
+      position: relative;
+      isolation: isolate;
+
+      overflow-x: hidden;
+
+      color: var(--ink);
       font-family: 'Be Vietnam Pro', sans-serif;
+
       background:
         radial-gradient(
-          ellipse at 15% 15%,
-          #fff9f3 0,
-          transparent 45%
+          ellipse at 50% 0%,
+          #FFFFFF 0%,
+          #F6EDFC 30%,
+          transparent 68%
         ),
-        radial-gradient(
-          ellipse at 90% 85%,
-          #efd9d7 0,
-          transparent 38%
-        ),
-        var(--cream);
+        linear-gradient(
+          180deg,
+          #EDE3F7 0%,
+          #E5D6F0 45%,
+          #D5C5E4 100%
+        );
     }
 
+    /* =====================================
+       THUNG LŨNG
+    ===================================== */
+
+    .valley {
+      position: fixed;
+      inset: 0;
+
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -2;
+
+      background:
+        radial-gradient(
+          ellipse at 50% 55%,
+          #FFFFFF35 0%,
+          transparent 55%
+        );
+    }
+
+    /* Ánh nắng dịu */
+
+    .sunlight {
+      position: absolute;
+
+      width: 460px;
+      height: 460px;
+
+      top: -240px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      border-radius: 50%;
+
+      background: #FFF8E8;
+      opacity: .48;
+
+      filter: blur(65px);
+    }
+
+    /* Những lớp đồi ở xa */
+
+    .hill {
+      position: absolute;
+
+      width: 150%;
+      left: -25%;
+
+      border-radius: 50% 50% 0 0;
+
+      transform-origin: center bottom;
+    }
+
+    .hill-back {
+      height: 42vh;
+      min-height: 220px;
+
+      bottom: 7vh;
+
+      background: linear-gradient(
+        180deg,
+        #C8B0D8 0%,
+        #B39BCB 100%
+      );
+
+      transform: rotate(-5deg);
+    }
+
+    .hill-middle {
+      height: 34vh;
+      min-height: 190px;
+
+      bottom: -3vh;
+      left: -35%;
+
+      width: 170%;
+
+      background: linear-gradient(
+        180deg,
+        #A78BB9 0%,
+        #8E789D 100%
+      );
+
+      transform: rotate(5deg);
+    }
+
+    .hill-front {
+      height: 28vh;
+      min-height: 160px;
+
+      bottom: -13vh;
+      left: -20%;
+
+      width: 145%;
+
+      background: linear-gradient(
+        180deg,
+        #8D7898 0%,
+        #6E647E 100%
+      );
+
+      transform: rotate(-4deg);
+    }
+
+    /* Lớp sương mỏng trên thung lũng */
+
+    .mist {
+      position: absolute;
+
+      width: 130%;
+      height: 100px;
+
+      left: -15%;
+      bottom: 19%;
+
+      background: #F8F1FF;
+
+      opacity: .2;
+      filter: blur(40px);
+
+      border-radius: 50%;
+
+      animation: mist-drift 16s ease-in-out infinite alternate;
+    }
+
+    @keyframes mist-drift {
+      from {
+        transform: translateX(-4%);
+      }
+
+      to {
+        transform: translateX(4%);
+      }
+    }
+
+    /* =====================================
+       HOA OẢI HƯƠNG
+    ===================================== */
+
+    .flower-field {
+      position: absolute;
+      inset: 0;
+
+      overflow: hidden;
+    }
+
+    .lavender {
+      position: absolute;
+
+      bottom: 0;
+
+      width: var(--size, 90px);
+      height: var(--height, 210px);
+
+      transform-origin: center bottom;
+
+      animation: flower-sway var(--sway, 4s) ease-in-out infinite alternate;
+
+      animation-delay: var(--delay, 0s);
+    }
+
+    @keyframes flower-sway {
+      0% {
+        transform: rotate(-5deg);
+      }
+
+      100% {
+        transform: rotate(5deg);
+      }
+    }
+
+    /* Thân hoa */
+
+    .stem {
+      position: absolute;
+
+      bottom: 0;
+      left: 50%;
+
+      width: 2px;
+      height: 72%;
+
+      transform: translateX(-50%);
+
+      border-radius: 50%;
+
+      background: linear-gradient(
+        180deg,
+        #73865F,
+        #536D52
+      );
+
+      transform-origin: center bottom;
+    }
+
+    /* Lá hoa */
+
+    .leaf {
+      position: absolute;
+
+      width: 17px;
+      height: 6px;
+
+      background: #748966;
+
+      border-radius: 100% 0 100% 0;
+    }
+
+    .leaf-left {
+      left: -14px;
+      bottom: 28%;
+
+      transform: rotate(22deg);
+    }
+
+    .leaf-right {
+      right: -14px;
+      bottom: 42%;
+
+      transform: rotate(75deg) scaleX(-1);
+    }
+
+    /* Cụm hoa */
+
+    .blossom {
+      position: absolute;
+
+      left: 50%;
+      top: 3%;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+
+      transform: translateX(-50%);
+    }
+
+    .petal-row {
+      display: flex;
+      justify-content: center;
+      gap: 1px;
+    }
+
+    .petal {
+      width: 8px;
+      height: 12px;
+
+      border-radius: 70% 70% 45% 45%;
+
+      background: linear-gradient(
+        180deg,
+        #C8A6EA,
+        #8D69B5
+      );
+
+      box-shadow: 0 1px 4px #73518D25;
+    }
+
+    .petal:nth-child(2n) {
+      background: linear-gradient(
+        180deg,
+        #D8BDF2,
+        #A485C8
+      );
+    }
+
+    .petal-row:nth-child(2) .petal {
+      width: 7px;
+      height: 11px;
+    }
+
+    .petal-row:nth-child(3) .petal {
+      width: 6px;
+      height: 9px;
+    }
+
+    /* =====================================
+       NHỮNG ĐỐM SÁNG
+    ===================================== */
+
+    .fireflies {
+      position: absolute;
+      inset: 0;
+    }
+
+    .firefly {
+      position: absolute;
+
+      width: 4px;
+      height: 4px;
+
+      border-radius: 50%;
+
+      background: #FFF7D8;
+
+      box-shadow:
+        0 0 8px 2px #FFF5D855,
+        0 0 16px #FFF7E455;
+
+      animation: firefly-float var(--duration, 5s) ease-in-out infinite alternate;
+
+      animation-delay: var(--delay, 0s);
+    }
+
+    @keyframes firefly-float {
+      0% {
+        opacity: .15;
+        transform: translate(0, 0) scale(.7);
+      }
+
+      50% {
+        opacity: .8;
+      }
+
+      100% {
+        opacity: .4;
+        transform: translate(12px, -20px) scale(1.2);
+      }
+    }
+
+    /* =====================================
+       NỘI DUNG
+    ===================================== */
+
     .wrap {
-      width: min(100%, 720px);
-      margin: auto;
+      position: relative;
+      z-index: 1;
+
+      width: min(100%, 560px);
     }
 
     .top {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       gap: 12px;
+
       font-size: 10px;
       letter-spacing: .2em;
-      color: var(--muted);
+
+      color: #786789;
+
       text-transform: uppercase;
     }
 
@@ -69,186 +423,674 @@
       letter-spacing: .12em;
     }
 
+    /* Lá thư */
+
     .card {
       position: relative;
-      margin: 42px auto 24px;
-      padding: clamp(28px, 7vw, 62px);
-      background: rgba(255, 252, 249, .82);
-      border: 1px solid #fff;
-      border-radius: 3px;
-      box-shadow: 0 18px 55px #72554d12;
+
+      width: 100%;
+
+      margin: 22px auto 14px;
+      padding: 30px 32px;
+
+      background: linear-gradient(
+        145deg,
+        #FFFCFFFF,
+        #F8F0FCF5
+      );
+
+      border: 1px solid #B69AD877;
+      border-radius: 5px;
+
+      box-shadow:
+        0 18px 55px #55426920,
+        0 0 35px #C7A8E522;
+
+      backdrop-filter: blur(12px);
+
+      animation: card-glow 5s ease-in-out infinite alternate;
     }
 
     .card::before {
       content: '';
+
       position: absolute;
-      inset: 10px;
-      border: 1px solid #e8d8c98c;
+      inset: 8px;
+
+      border: 1px solid #B69AD844;
+
       pointer-events: none;
+    }
+
+    @keyframes card-glow {
+      0% {
+        box-shadow:
+          0 18px 55px #55426920,
+          0 0 18px #C7A8E510;
+
+        border-color: #B69AD855;
+      }
+
+      100% {
+        box-shadow:
+          0 18px 55px #55426925,
+          0 0 38px #B69AD844;
+
+        border-color: #B69AD899;
+      }
     }
 
     .eyebrow {
       margin: 0 0 18px;
+
       text-align: center;
+
       font-size: 10px;
       letter-spacing: .24em;
+
       text-transform: uppercase;
-      color: var(--deep-rose);
+
+      color: var(--deep-lavender);
     }
 
     .flower {
-      margin-bottom: 14px;
+      margin-bottom: 6px;
+
       text-align: center;
-      font-size: 26px;
-      color: var(--rose);
+
+      font-size: 25px;
+      color: var(--lavender);
     }
 
     h1 {
-      margin: 0 0 22px;
+      margin: 0 0 12px;
+
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(42px, 8vw, 66px);
+
+      font-size: clamp(38px, 7vw, 56px);
       font-weight: 500;
-      line-height: .98;
+
+      line-height: 1;
       text-align: center;
+
+      color: #59466A;
     }
 
     h1 em {
-      color: var(--deep-rose);
+      color: #9475B6;
+
       font-weight: 600;
+      font-style: italic;
+
+      text-shadow: 0 0 25px #C9AFE833;
     }
 
     .intro {
       max-width: 430px;
+
       margin: 0 auto 30px;
+
       text-align: center;
+
       font-size: 13px;
       line-height: 1.9;
-      color: #8c746b;
+
+      color: var(--muted);
     }
+
+    /* Đường phân cách */
 
     .divider {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 14px;
-      margin: 26px 0;
-      color: var(--rose);
+
+      gap: 12px;
+
+      margin: 14px 0;
+
+      color: #B293D0;
     }
 
     .divider::before,
     .divider::after {
       content: '';
-      width: 60px;
+
+      width: 42px;
       height: 1px;
+
       background: var(--line);
     }
 
+    /* =====================================
+       LỜI CHÚC
+    ===================================== */
+
     .letter {
+      min-height: 130px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 4px 2px;
+
       font-family: 'Cormorant Garamond', serif;
-      font-size: 21px;
-      line-height: 1.75;
-      white-space: pre-line;
+
+      font-size: 23px;
+      line-height: 1.65;
+
+      text-align: center;
+
+      overflow-wrap: anywhere;
     }
 
     .letter p {
-      margin: 0 0 18px;
+      width: 100%;
+      margin: 0;
+
+      white-space: normal;
     }
+
+    #sentence-text {
+      opacity: 1;
+      overflow-wrap: anywhere;
+    }
+
+    #sentence-text span {
+      display: inline;
+
+      opacity: 0;
+      filter: blur(3px);
+
+      animation: letter-appear .28s ease-out forwards;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes letter-appear {
+      from {
+        opacity: 0;
+        filter: blur(3px);
+      }
+
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    /* =====================================
+       NÚT CHUYỂN CÂU
+    ===================================== */
+
+    .letter-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+
+      margin-top: 14px;
+    }
+
+    .letter-nav button {
+      padding: 9px 12px;
+
+      border: 1px solid #B69AD877;
+      border-radius: 4px;
+
+      background: #B69AD812;
+
+      color: #665275;
+
+      font: 11px 'Be Vietnam Pro', sans-serif;
+
+      cursor: pointer;
+
+      transition:
+        background .25s ease,
+        border-color .25s ease,
+        opacity .25s ease,
+        transform .25s ease;
+    }
+
+    .letter-nav button:hover:not(:disabled) {
+      background: #B69AD830;
+      border-color: #9475B6;
+
+      transform: translateY(-1px);
+    }
+
+    .letter-nav button:disabled {
+      opacity: .35;
+      cursor: default;
+    }
+
+    #sentence-count {
+      color: #94849F;
+
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    /* Chữ ký */
 
     .sign {
       margin-top: 26px;
+
       text-align: right;
-      color: var(--deep-rose);
+
+      color: #9475B6;
+
       font-family: 'Cormorant Garamond', serif;
+
       font-size: 24px;
       font-style: italic;
     }
 
+    /* Quay lại */
+
     .back {
       display: block;
-      margin: 26px auto 0;
+
+      margin: 17px auto 0;
+
       text-align: center;
       text-decoration: none;
-      color: var(--muted);
+
+      color: #94849F;
+
       font-size: 11px;
-      letter-spacing: .06em;
+      letter-spacing: .04em;
+
+      transition: color .25s ease;
     }
 
     .back:hover {
-      color: var(--deep-rose);
+      color: #8063A9;
     }
 
     footer {
       text-align: center;
-      color: #a48d81;
+
+      color: #7D6D8B;
+
       font-size: 10px;
       letter-spacing: .08em;
     }
 
     footer .heart {
-      color: var(--deep-rose);
+      color: #A98AC7;
     }
+
+    /* =====================================
+       ĐIỆN THOẠI
+    ===================================== */
 
     @media (max-width: 480px) {
       body {
-        padding: 20px 14px;
+        padding: 14px 12px;
       }
 
       .card {
-        margin-top: 30px;
-        padding: 30px 24px;
+        margin: 12px auto;
+        padding: 24px 20px;
       }
 
       .letter {
-        font-size: 19px;
+        min-height: 140px;
+        font-size: 21px;
+      }
+
+      .letter-nav {
+        gap: 6px;
+      }
+
+      .letter-nav button {
+        padding: 9px 8px;
+        font-size: 10px;
+      }
+
+      .hill-back {
+        height: 35vh;
+      }
+
+      .hill-middle {
+        height: 28vh;
+      }
+
+      .hill-front {
+        height: 23vh;
+      }
+    }
+
+    /* =====================================
+       HẠN CHẾ CHUYỂN ĐỘNG
+    ===================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+      .card,
+      .lavender,
+      .firefly,
+      .mist {
+        animation: none !important;
+      }
+
+      #sentence-text span {
+        animation: none;
+        opacity: 1;
+        filter: none;
       }
     }
   </style>
 </head>
 
 <body>
+
+  <!-- THUNG LŨNG HOA TÍM -->
+
+  <div class="valley" aria-hidden="true">
+
+    <div class="sunlight"></div>
+
+    <div class="hill hill-back"></div>
+    <div class="hill hill-middle"></div>
+    <div class="hill hill-front"></div>
+
+    <div class="mist"></div>
+
+    <div class="flower-field" id="flower-field"></div>
+    <div class="fireflies" id="fireflies"></div>
+
+  </div>
+
+  <!-- NỘI DUNG CHÍNH -->
+
   <main class="wrap">
 
     <header class="top">
       <span>20 · 10 · 2026</span>
+      <span>✿ Lavender valley</span>
     </header>
 
     <article class="card">
 
-      <p class="eyebrow">gâu gâu</p>
-
       <div class="flower" aria-hidden="true">❀</div>
 
       <h1>
-        gâu gâu,<br>
         <em>gâu gâu</em>
       </h1>
 
-      <p class="intro">
-        gâu gâu
-      </p>
-
       <div class="divider" aria-hidden="true">♡</div>
 
-      <section class="letter" aria-label="gâu gâu">
+      <section class="letter" aria-label="Lời chúc">
 
-        <p>
-          đéo có
+        <p id="sentence-text" aria-live="polite">
+         Sắp hết 3 năm đồng hành rồi, tui xin phép gửi lời chúc cũng như tình cảm của mình nhân dịp 20/10 này nhe.
         </p>
 
       </section>
 
-      <p class="sign">gâu gâu</p>
+      <div class="letter-nav">
 
-      <a class="back" href="../index.html">
+        <button id="prev-btn" type="button" disabled>
+          ← Câu trước
+        </button>
+
+        <span id="sentence-count">1 / 6</span>
+
+        <button id="next-btn" type="button">
+          Câu tiếp theo →
+        </button>
+
+      </div>
+
+      <a
+        class="back"
+        href="https://women12102010.github.io/women1210.github.io/"
+      >
         ← Quay lại phong bì
       </a>
 
     </article>
 
     <footer>
-      gâu gâu<span class="heart">gâu</span>
+      gâu gâu <span class="heart">♡</span> gâu
     </footer>
 
   </main>
+
+  <script>
+    /* =====================================
+       TẠO HOA OẢI HƯƠNG
+    ===================================== */
+
+    const flowerField = document.getElementById('flower-field');
+
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    // Tạo một bông hoa bằng các cánh hoa CSS
+    function createLavender(x, size, height, delay, sway) {
+      const flower = document.createElement('div');
+
+      flower.className = 'lavender';
+
+      flower.style.left = `${x}%`;
+      flower.style.setProperty('--size', `${size}px`);
+      flower.style.setProperty('--height', `${height}px`);
+      flower.style.setProperty('--delay', `${delay}s`);
+      flower.style.setProperty('--sway', `${sway}s`);
+
+      const stem = document.createElement('div');
+      stem.className = 'stem';
+
+      const leafLeft = document.createElement('div');
+      leafLeft.className = 'leaf leaf-left';
+
+      const leafRight = document.createElement('div');
+      leafRight.className = 'leaf leaf-right';
+
+      const blossom = document.createElement('div');
+      blossom.className = 'blossom';
+
+      // Các tầng cánh hoa
+      const rows = [3, 3, 2, 2, 1];
+
+      rows.forEach((count) => {
+        const row = document.createElement('div');
+        row.className = 'petal-row';
+
+        for (let i = 0; i < count; i++) {
+          const petal = document.createElement('span');
+          petal.className = 'petal';
+
+          row.appendChild(petal);
+        }
+
+        blossom.appendChild(row);
+      });
+
+      stem.appendChild(leafLeft);
+      stem.appendChild(leafRight);
+
+      flower.appendChild(stem);
+      flower.appendChild(blossom);
+
+      flowerField.appendChild(flower);
+    }
+
+    // Các hàng hoa được bố trí theo chiều sâu:
+    // Hoa phía xa nhỏ hơn, hoa phía trước lớn hơn.
+
+    function createFlowerField() {
+      const width = window.innerWidth;
+
+      // Hàng xa
+      const farCount = Math.ceil(width / 48);
+
+      for (let i = 0; i < farCount; i++) {
+        const x = (i / farCount) * 100;
+
+        createLavender(
+          x,
+          28 + Math.random() * 10,
+          70 + Math.random() * 35,
+          Math.random() * -5,
+          3 + Math.random() * 3
+        );
+      }
+
+      // Hàng giữa
+      const middleCount = Math.ceil(width / 38);
+
+      for (let i = 0; i < middleCount; i++) {
+        const x = (i / middleCount) * 100;
+
+        createLavender(
+          x,
+          36 + Math.random() * 14,
+          110 + Math.random() * 55,
+          Math.random() * -5,
+          3 + Math.random() * 2.5
+        );
+      }
+
+      // Hàng gần
+      const nearCount = Math.ceil(width / 65);
+
+      for (let i = 0; i < nearCount; i++) {
+        const x = (i / nearCount) * 100;
+
+        createLavender(
+          x,
+          48 + Math.random() * 18,
+          155 + Math.random() * 65,
+          Math.random() * -5,
+          3.5 + Math.random() * 2
+        );
+      }
+    }
+
+    createFlowerField();
+
+    // Vẽ lại đồng hoa khi thay đổi kích thước màn hình
+    let resizeTimer;
+
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+
+      resizeTimer = setTimeout(() => {
+        flowerField.replaceChildren();
+        createFlowerField();
+      }, 200);
+    });
+
+    /* =====================================
+       ĐOM ĐÓM
+    ===================================== */
+
+    const fireflies = document.getElementById('fireflies');
+
+    for (let i = 0; i < 32; i++) {
+      const light = document.createElement('span');
+
+      light.className = 'firefly';
+
+      light.style.left = `${Math.random() * 100}%`;
+      light.style.top = `${25 + Math.random() * 65}%`;
+
+      light.style.setProperty(
+        '--duration',
+        `${4 + Math.random() * 6}s`
+      );
+
+      light.style.setProperty(
+        '--delay',
+        `${Math.random() * -8}s`
+      );
+
+      fireflies.appendChild(light);
+    }
+
+    /* =====================================
+       NỘI DUNG LÁ THƯ
+    ===================================== */
+
+    const sentences = [
+      "Sắp hết 3 năm đồng hành rồi, tui xin phép gửi lời chúc cũng như tình cảm của mình nhân dịp 20/10 này nhe.",
+
+      "Chúc Gia Linh ngày càng rực rỡ về ngoại hình và tự tin trong công việc, học tập.",
+
+      "Chúc bạn sẽ thành công với những dự định của mình và mong cuộc sống sẽ đối xử nhẹ nhàng với bạn hơn.",
+
+      "Có một sức hút rất riêng ở dáng vẻ bạn nghiêm túc theo đuổi mục tiêu của mình.",
+
+      "Vì vậy, hãy luôn nỗ lực như hiện tại nha.",
+
+      "Cũng đừng cảm thấy lạc lỏng hay cô đơn khi đối mặt với khó khăn đấy nè, bọn mình luôn ở đây để cổ vũ cho bạn mà. ",
+      "Sau cùng, mong lá thư này sẽ là chiếc thuyền giúp bạn vượt qua mọi giông bão trong tương lai nhé!"
+    ];
+
+    let currentSentence = 0;
+
+    const sentenceText = document.getElementById('sentence-text');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const sentenceCount = document.getElementById('sentence-count');
+
+    function showSentence(index) {
+      currentSentence = index;
+
+      const text = sentences[currentSentence];
+
+      sentenceText.replaceChildren();
+
+      if (reduceMotion) {
+        sentenceText.textContent = text;
+      } else {
+        // Tách từng ký tự để tạo hiệu ứng xuất hiện
+        [...text].forEach((char, i) => {
+          const span = document.createElement('span');
+
+          span.textContent = char === ' ' ? '\u00A0' : char;
+
+          span.style.setProperty(
+            '--delay',
+            `${i * 0.025}s`
+          );
+
+          sentenceText.appendChild(span);
+        });
+      }
+
+      // Cập nhật bộ đếm
+      sentenceCount.textContent =
+        `${currentSentence + 1} / ${sentences.length}`;
+
+      // Khóa nút khi ở đầu hoặc cuối thư
+      prevBtn.disabled = currentSentence === 0;
+
+      nextBtn.disabled =
+        currentSentence === sentences.length - 1;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentSentence > 0) {
+        showSentence(currentSentence - 1);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentSentence < sentences.length - 1) {
+        showSentence(currentSentence + 1);
+      }
+    });
+
+    showSentence(0);
+  </script>
+
 </body>
 </html>
+```
