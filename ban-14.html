@@ -213,9 +213,8 @@ footer .heart { color: var(--deep-rose); }
 </head>
 <body>
 <main class="wrap">
-  <header class="top"><span>20 · 10 · 2026</span><span>một chút ngọt ngào</span></header>
+  <header class="top"><span>20 · 10 · 2026</span></header>
   <article class="card">
-    <p class="eyebrow">a little wish for you</p>
     <h1><em>gâu gâu</em></h1>
     <div class="drink-scene" id="drink-scene" aria-label="Ly trà sữa có đá, trân châu và ống hút">
       <div class="cup-wrap">
@@ -232,7 +231,7 @@ footer .heart { color: var(--deep-rose); }
     </div>
     <div class="divider" aria-hidden="true">♡</div>
     <section class="letter" aria-label="Lời chúc">
-      <p id="sentence-text" aria-live="polite">Đã là năm thứ 3 tổ chức 20/10 ở lớp mình nhưng đây là lần đầu tiên tui viết thư nên có gì sai sót mong Hà Giang bỏ qua cho nha.</p>
+      <p id="sentence-text" aria-live="polite">20/10 tới rồi, thật lòng tui không thể chúc Tô Uyên ngày càng học giỏi hay xinh đẹp được vì bạn đã có hết tất cả rồi,</p>
     </section>
     <div class="letter-nav">
       <button id="prev-btn" type="button" disabled>← Câu trước</button>
@@ -241,16 +240,16 @@ footer .heart { color: var(--deep-rose); }
     </div>
     <a class="back" href="https://women12102010.github.io/women1210.github.io/">← Quay lại phong bì</a>
   </article>
-  <footer>gâu gâu <span class="heart">♡</span> gửi chút ngọt ngào</footer>
+  <footer>gâu gâu <span class="heart">♡</span> gâu</footer>
 </main>
 <script>
 const sentences = [
-  "Đã là năm thứ 3 tổ chức 20/10 ở lớp mình nhưng đây là lần đầu tiên tui viết thư nên có gì sai sót mong Hà Giang bỏ qua cho nha.",
-  "Trước hết, tui xin chúc Hà Giang ngày càng xinh đẹp, giỏi giang.",
-  "Cũng mong những ngày buồn của bạn sẽ ngắn lại, những ngày vui sẽ dài hơn và nụ cười luôn xuất hiện trên môi.",
-  "Chúc cho bạn luôn mạnh mẽ để đối đầu với mọi khó khăn.",
-  "Dù không có con đường nào là màu hồng nhưng tui hy vọng chặng hành trình của Hà Giang sẽ gặp ít chông gai nhất có thể.",
-  "Cuối cùng, tui mong rằng bức thư này sẽ tiếp thêm động lực để Hà Giang vượt qua những khó khăn mà mình không may gặp phải!"
+  "20/10 tới rồi, thật lòng tui không thể chúc Tô Uyên ngày càng học giỏi hay xinh đẹp được vì bạn đã có hết tất cả rồi,",
+  "vậy nên tui chỉ muốn gửi gắm 1 vài tình cảm chân thành của mình.",
+  "Bạn tuyệt vời hơn bạn nghĩ rất nhiều nên đừng có mà tự ti về bản thân đấy nhé.",
+  "Cứ tin tưởng vào hành trình bản thân đã chọn nhé và đừng bao giờ bỏ cuộc nè, bạn sẽ chẳng biết bản thân giỏi đến mức nào nếu chưa cố gắng hết mình đâu.",
+  "Cũng luôn nhớ rằng là bọn tui luôn ủng hộ bạn dù ở bất cứ đâu đấy.",
+  "Và hãy cười nhiều lên nhé, bạn cười đẹp lắm đó!"
 ];
 let currentSentence = 0;
 const sentenceText = document.getElementById('sentence-text');
@@ -293,11 +292,11 @@ stirBtn.addEventListener('click', () => {
   // Khởi động lại animation để mỗi lần bấm đều khuấy thêm một lượt.
   void drinkScene.offsetWidth;
   drinkScene.classList.add('stirring');
-  stirBtn.textContent = '🥤 Đang khuấy...';
+  stirBtn.textContent = 'Đang khuấy;
   clearTimeout(stirTimer);
   stirTimer = setTimeout(() => {
     drinkScene.classList.remove('stirring');
-    stirBtn.textContent = '🥤 Khuấy thêm';
+    stirBtn.textContent = 'Khuấy';
   }, 720);
 });
 </script>
