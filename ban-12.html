@@ -1,842 +1,449 @@
-
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#fff0f5">
-  <meta name="description" content="Một lời chúc nhỏ dành riêng cho bạn nhân ngày 20/10.">
-  <title>gâu gâu · 20.10</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      color-scheme: light;
-      --pink: #e8a4ba;
-      --deep-pink: #b65f82;
-      --cream: #fff9f4;
-      --ink: #644552;
-      --muted: #a17b8a;
-      --green: #88b98a;
-      --dark-green: #557e5a;
-      --line: #e8b7c9;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 26px 18px 85px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      isolation: isolate;
-      overflow-x: hidden;
-      color: var(--ink);
-      font-family: 'Be Vietnam Pro', sans-serif;
-      background:
-        radial-gradient(ellipse at 50% 15%, #ffffff 0%, transparent 42%),
-        linear-gradient(180deg, #ffe8f0 0%, #fff1f4 53%, #d8edcf 100%);
-    }
-
-    /* BẦU TRỜI VƯỜN ANH ĐÀO */
-    .garden-sky {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: -2;
-      background:
-        radial-gradient(ellipse at 50% 30%, #fffaf9a8, transparent 58%),
-        linear-gradient(180deg, #fbdce8 0%, #fff0f5 68%, #dcefd2 100%);
-    }
-
-    /* THẢM CỎ */
-    .ground {
-      position: fixed;
-      z-index: -1;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 18vh;
-      min-height: 100px;
-      background:
-        radial-gradient(ellipse at 20% 5%, #c0dfa6 0%, transparent 42%),
-        radial-gradient(ellipse at 80% 0%, #b1d59b 0%, transparent 40%),
-        linear-gradient(180deg, #a9d49b 0%, #80b97c 100%);
-      border-radius: 48% 48% 0 0 / 12% 12% 0 0;
-    }
-
-    .ground::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: .55;
-      background:
-        radial-gradient(ellipse at 10% 30%, #e1f0bc 0 2px, transparent 3px),
-        radial-gradient(ellipse at 25% 65%, #e1f0bc 0 2px, transparent 3px),
-        radial-gradient(ellipse at 43% 35%, #e1f0bc 0 2px, transparent 3px),
-        radial-gradient(ellipse at 63% 70%, #e1f0bc 0 2px, transparent 3px),
-        radial-gradient(ellipse at 82% 35%, #e1f0bc 0 2px, transparent 3px),
-        radial-gradient(ellipse at 94% 60%, #e1f0bc 0 2px, transparent 3px);
-    }
-
-    /* HAI CÂY ANH ĐÀO */
-    .tree {
-      position: fixed;
-      z-index: 0;
-      bottom: 8vh;
-      width: 310px;
-      height: 520px;
-      pointer-events: none;
-      transform-origin: bottom center;
-      animation: tree-sway 7s ease-in-out infinite alternate;
-    }
-
-    .tree.left {
-      left: -28px;
-    }
-
-    .tree.right {
-      right: -28px;
-      transform: scaleX(-1);
-      animation-name: tree-sway-right;
-    }
-
-    @keyframes tree-sway {
-      from { margin-left: -2px; }
-      to { margin-left: 5px; }
-    }
-
-    @keyframes tree-sway-right {
-      from { margin-right: -2px; }
-      to { margin-right: 5px; }
-    }
-
-    /* THÂN CÂY */
-    .trunk {
-      position: absolute;
-      bottom: 0;
-      left: 39%;
-      width: 30px;
-      height: 345px;
-      border-radius: 48% 48% 5px 5px;
-      background:
-        linear-gradient(
-          90deg,
-          #795347 0%,
-          #a77965 25%,
-          #bd9279 48%,
-          #946651 75%,
-          #704b40 100%
-        );
-      transform: rotate(-5deg);
-      transform-origin: bottom center;
-      box-shadow: inset 3px 0 4px #e5b59a35;
-    }
-
-    /* RỄ CÂY */
-    .roots {
-      position: absolute;
-      bottom: 0;
-      left: -20px;
-      width: 70px;
-      height: 22px;
-      background: #926750;
-      clip-path: polygon(35% 0, 60% 0, 100% 100%, 0 100%);
-    }
-
-    /* CÀNH CHÍNH */
-    .trunk::before {
-      content: '';
-      position: absolute;
-      width: 19px;
-      height: 225px;
-      left: -10px;
-      top: -10px;
-      border-radius: 80% 10% 0 0;
-      background: linear-gradient(90deg, #805646, #b98a70);
-      transform: rotate(-34deg);
-      transform-origin: bottom center;
-    }
-
-    .trunk::after {
-      content: '';
-      position: absolute;
-      width: 17px;
-      height: 235px;
-      left: 19px;
-      top: -35px;
-      border-radius: 10% 80% 0 0;
-      background: linear-gradient(90deg, #b58970, #805646);
-      transform: rotate(32deg);
-      transform-origin: bottom center;
-    }
-
-    /* CÀNH NHỎ */
-    .branch {
-      position: absolute;
-      width: 9px;
-      height: 155px;
-      border-radius: 100% 0 0 0;
-      background: linear-gradient(90deg, #825847, #b68a70);
-      transform-origin: bottom center;
-    }
-
-    .branch-one {
-      left: 23%;
-      bottom: 220px;
-      transform: rotate(-49deg);
-    }
-
-    .branch-two {
-      left: 55%;
-      bottom: 245px;
-      height: 175px;
-      transform: rotate(43deg);
-    }
-
-    .branch-three {
-      left: 25%;
-      bottom: 290px;
-      height: 110px;
-      transform: rotate(-35deg);
-    }
-
-    .branch-four {
-      left: 55%;
-      bottom: 310px;
-      height: 115px;
-      transform: rotate(35deg);
-    }
-
-    /* TÁN HOA ANH ĐÀO */
-    .blossom {
-      position: absolute;
-      width: 115px;
-      height: 100px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 25% 36%, #fff9fc 0 12%, transparent 13%),
-        radial-gradient(circle at 62% 25%, #f9d5e2 0 17%, transparent 18%),
-        radial-gradient(circle at 75% 59%, #efa9c5 0 18%, transparent 19%),
-        radial-gradient(circle at 35% 68%, #f8c7d9 0 22%, transparent 23%),
-        radial-gradient(circle at 50% 45%, #f6bdd2 0 48%, #eaa1bd 75%, transparent 77%);
-      filter: drop-shadow(0 4px 7px #b8789325);
-      animation: blossom-sway 5s ease-in-out infinite alternate;
-    }
-
-    .blossom::before,
-    .blossom::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 28% 28%, #fff9fc 0 10%, transparent 11%),
-        radial-gradient(circle at 72% 40%, #f4b3cc 0 18%, transparent 19%),
-        radial-gradient(circle at 45% 72%, #f8d0df 0 20%, transparent 21%),
-        #f5bfd2;
-    }
-
-    .blossom::before {
-      width: 78px;
-      height: 76px;
-      top: -28px;
-      left: -18px;
-    }
-
-    .blossom::after {
-      width: 82px;
-      height: 76px;
-      top: -12px;
-      right: -26px;
-    }
-
-    @keyframes blossom-sway {
-      from { translate: -2px 0; }
-      to { translate: 3px 3px; }
-    }
-
-    .b1 { top: 40px; left: 0; transform: rotate(-15deg); }
-    .b2 { top: 105px; left: 80px; transform: scale(.8) rotate(18deg); }
-    .b3 { top: 155px; left: -10px; transform: scale(.76) rotate(40deg); }
-    .b4 { top: 10px; left: 145px; transform: scale(.7) rotate(-35deg); }
-    .b5 { top: 190px; left: 105px; transform: scale(.65) rotate(12deg); }
-    .b6 { top: 80px; left: 190px; transform: scale(.7) rotate(-20deg); }
-
-    /* HOA NHỎ TRÊN CỎ */
-    .grass-flower {
-      position: fixed;
-      z-index: 1;
-      bottom: 4vh;
-      font-size: 15px;
-      opacity: .85;
-      pointer-events: none;
-      animation: ground-flower-sway 3s ease-in-out infinite alternate;
-    }
-
-    .gf1 { left: 12%; }
-    .gf2 { left: 29%; bottom: 7vh; font-size: 11px; }
-    .gf3 { right: 15%; bottom: 6vh; }
-    .gf4 { right: 31%; font-size: 12px; }
-
-    @keyframes ground-flower-sway {
-      from { transform: rotate(-8deg) translateY(0); }
-      to { transform: rotate(8deg) translateY(-3px); }
-    }
-
-    /* KHUNG THƯ */
-    .wrap {
-      position: relative;
-      z-index: 2;
-      width: min(100%, 560px);
-    }
-
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      font-size: 10px;
-      letter-spacing: .2em;
-      color: #a67589;
-      text-transform: uppercase;
-      padding: 0 4px;
-    }
-
-    .top span:last-child {
-      letter-spacing: .12em;
-    }
-
-    .card {
-      position: relative;
-      width: 100%;
-      margin: 22px auto 14px;
-      padding: 30px 32px;
-      background: linear-gradient(145deg, #fffaf8f5, #fff1f5f2);
-      border: 1px solid #eab9cb;
-      border-radius: 8px;
-      box-shadow:
-        0 18px 55px #ad718529,
-        0 0 35px #fff9f9a8;
-      backdrop-filter: blur(8px);
-      animation: card-glow 5s ease-in-out infinite alternate;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: 8px;
-      border: 1px solid #e7b5c8a3;
-      border-radius: 4px;
-      pointer-events: none;
-    }
-
-    @keyframes card-glow {
-      0% {
-        box-shadow: 0 18px 55px #ad718529, 0 0 18px #f4c5d42b;
-        border-color: #eab9cb;
-      }
-      100% {
-        box-shadow: 0 18px 55px #ad718529, 0 0 38px #e6a6c24d;
-        border-color: #d994b0;
-      }
-    }
-
-    .flower {
-      margin-bottom: 6px;
-      text-align: center;
-      font-size: 25px;
-      color: var(--pink);
-      animation: flower-sway 4s ease-in-out infinite;
-    }
-
-    @keyframes flower-sway {
-      0%, 100% { transform: rotate(-5deg); }
-      50% { transform: rotate(5deg); }
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(38px, 7vw, 56px);
-      font-weight: 500;
-      line-height: 1;
-      text-align: center;
-      color: #755060;
-    }
-
-    h1 em {
-      color: var(--deep-pink);
-      font-weight: 600;
-      text-shadow: 0 0 25px #e9b2c72e;
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin: 14px 0;
-      color: var(--pink);
-    }
-
-    .divider::before,
-    .divider::after {
-      content: '';
-      width: 42px;
-      height: 1px;
-      background: var(--line);
-    }
-
-    .letter {
-      min-height: 145px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 2px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 23px;
-      line-height: 1.65;
-      text-align: center;
-      overflow-wrap: anywhere;
-    }
-
-    .letter p {
-      width: 100%;
-      margin: 0;
-      white-space: normal;
-    }
-
-    /* HIỆU ỨNG TỪNG CHỮ */
-    #sentence-text span {
-      display: inline;
-      opacity: 0;
-      filter: blur(3px);
-      animation: letter-appear .28s ease-out forwards;
-      animation-delay: var(--delay);
-    }
-
-    @keyframes letter-appear {
-      from {
-        opacity: 0;
-        filter: blur(3px);
-      }
-      to {
-        opacity: 1;
-        filter: blur(0);
-      }
-    }
-
-    /* NÚT CHUYỂN CÂU */
-    .letter-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .letter-nav button {
-      padding: 10px 12px;
-      border: 1px solid #e5b2c6;
-      border-radius: 5px;
-      background: #fce8ef;
-      color: #87576a;
-      font: 11px 'Be Vietnam Pro', sans-serif;
-      cursor: pointer;
-      transition: background .25s ease, border-color .25s ease, opacity .25s ease;
-    }
-
-    .letter-nav button:hover:not(:disabled) {
-      background: #f8d6e3;
-      border-color: var(--deep-pink);
-    }
-
-    .letter-nav button:disabled {
-      opacity: .35;
-      cursor: default;
-    }
-
-    #sentence-count {
-      color: var(--muted);
-      font-size: 10px;
-      white-space: nowrap;
-    }
-
-    .back {
-      display: block;
-      margin: 17px auto 0;
-      text-align: center;
-      text-decoration: none;
-      color: #a17b8a;
-      font-size: 11px;
-      letter-spacing: .04em;
-      transition: color .2s ease;
-    }
-
-    .back:hover {
-      color: var(--deep-pink);
-    }
-
-    footer {
-      text-align: center;
-      color: #9c7887;
-      font-size: 10px;
-      letter-spacing: .08em;
-    }
-
-    footer .heart {
-      color: var(--deep-pink);
-    }
-
-    /* CÁNH HOA ANH ĐÀO RƠI */
-    .petal {
-      position: fixed;
-      top: -25px;
-      z-index: 3;
-      width: 12px;
-      height: 17px;
-      border-radius: 80% 15% 75% 20%;
-      background: linear-gradient(135deg, #fff9fc, #f7bfd4 65%, #e89bb8);
-      box-shadow: 0 2px 5px #bd7c9620;
-      pointer-events: none;
-      will-change: transform, opacity;
-      animation: petal-fall var(--duration) linear forwards;
-    }
-
-    .petal:nth-child(3n) {
-      width: 8px;
-      height: 12px;
-      background: linear-gradient(135deg, #fff8fb, #f2b3cc);
-    }
-
-    .petal:nth-child(4n) {
-      width: 15px;
-      height: 12px;
-      border-radius: 70% 30% 60% 35%;
-    }
-
-    @keyframes petal-fall {
-      0% {
-        transform: translate3d(0, -5vh, 0) rotate(0deg);
-        opacity: 0;
-      }
-
-      10% { opacity: .9; }
-
-      30% {
-        transform: translate3d(calc(var(--drift) * .65), 30vh, 0)
-          rotate(160deg);
-      }
-
-      60% {
-        transform: translate3d(calc(var(--drift) * -.3), 65vh, 0)
-          rotate(380deg);
-      }
-
-      85% { opacity: .75; }
-
-      100% {
-        transform: translate3d(var(--drift), 110vh, 0)
-          rotate(650deg);
-        opacity: 0;
-      }
-    }
-
-    /* ĐIỆN THOẠI VÀ MÀN HÌNH NHỎ */
-    @media (max-width: 700px) {
-      .tree {
-        transform: scale(.72);
-        transform-origin: bottom left;
-        bottom: 8vh;
-      }
-
-      .tree.left { left: -70px; }
-
-      .tree.right {
-        right: -70px;
-        transform: scaleX(-1) scale(.72);
-        transform-origin: bottom center;
-      }
-
-      .ground {
-        height: 14vh;
-      }
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 14px 12px 70px;
-      }
-
-      .card {
-        margin: 12px auto;
-        padding: 24px 20px;
-      }
-
-      .letter {
-        min-height: 155px;
-        font-size: 22px;
-      }
-
-      .letter-nav {
-        gap: 6px;
-      }
-
-      .letter-nav button {
-        padding: 9px 8px;
-        font-size: 10px;
-      }
-
-      .tree {
-        opacity: .88;
-        transform: scale(.52);
-        bottom: 7vh;
-      }
-
-      .tree.left { left: -100px; }
-
-      .tree.right {
-        right: -100px;
-        transform: scaleX(-1) scale(.52);
-      }
-
-      .top {
-        font-size: 9px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .card, .flower, .tree, .blossom, .grass-flower {
-        animation: none;
-      }
-
-      #sentence-text span {
-        animation: none;
-        opacity: 1;
-        filter: none;
-      }
-
-      .petal {
-        display: none;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="garden-sky" aria-hidden="true"></div>
-
-  <!-- CÂY ANH ĐÀO BÊN TRÁI -->
-  <div class="tree left" aria-hidden="true">
-    <div class="trunk">
-      <div class="roots"></div>
-    </div>
-
-    <div class="branch branch-one"></div>
-    <div class="branch branch-two"></div>
-    <div class="branch branch-three"></div>
-    <div class="branch branch-four"></div>
-
-    <div class="blossom b1"></div>
-    <div class="blossom b2"></div>
-    <div class="blossom b3"></div>
-    <div class="blossom b4"></div>
-    <div class="blossom b5"></div>
-    <div class="blossom b6"></div>
-  </div>
-
-  <!-- CÂY ANH ĐÀO BÊN PHẢI -->
-  <div class="tree right" aria-hidden="true">
-    <div class="trunk">
-      <div class="roots"></div>
-    </div>
-
-    <div class="branch branch-one"></div>
-    <div class="branch branch-two"></div>
-    <div class="branch branch-three"></div>
-    <div class="branch branch-four"></div>
-
-    <div class="blossom b1"></div>
-    <div class="blossom b2"></div>
-    <div class="blossom b3"></div>
-    <div class="blossom b4"></div>
-    <div class="blossom b5"></div>
-    <div class="blossom b6"></div>
-  </div>
-
-  <!-- CỎ VÀ HOA -->
-  <div class="ground" aria-hidden="true"></div>
-  <div class="grass-flower gf1" aria-hidden="true">🌸</div>
-  <div class="grass-flower gf2" aria-hidden="true">✿</div>
-  <div class="grass-flower gf3" aria-hidden="true">🌸</div>
-  <div class="grass-flower gf4" aria-hidden="true">✿</div>
-
-  <!-- BỨC THƯ -->
-  <main class="wrap">
-    <header class="top">
-      <span>20 · 10 · 2026</span>
-    </header>
-
-    <article class="card">
-      <div class="flower" aria-hidden="true">❀</div>
-
-      <h1><em>gâu gâu</em></h1>
-
-      <div class="divider" aria-hidden="true">♡</div>
-
-      <section class="letter" aria-label="Lời chúc">
-        <p id="sentence-text" aria-live="polite">
-          Chào Nàng công chúa của tôi, tôi là một trong những chàng hoàng tử của lớp 12.10.
-        </p>
-      </section>
-
-      <div class="letter-nav">
-        <button id="prev-btn" type="button" disabled>
-          ← Câu trước
-        </button>
-
-        <span id="sentence-count">1 / 10</span>
-
-        <button id="next-btn" type="button">
-          Câu tiếp theo →
-        </button>
-      </div>
-
-      <a class="back" href="https://women12102010.github.io/women12102010.github.io/">
-        ← Quay lại phong bì
-      </a>
-    </article>
-
-    <footer>
-      gâu gâu <span class="heart">♡</span> with love
-    </footer>
-  </main>
-
-  <script>
-    const reduceMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
-
-    // TẠO CÁNH HOA RƠI
-    const MAX_PETALS = 35;
-    let petalTimer = null;
-
-    function createPetal() {
-      if (document.hidden || reduceMotion) return;
-
-      if (document.querySelectorAll('.petal').length >= MAX_PETALS) {
-        return;
-      }
-
-      const petal = document.createElement('span');
-      petal.className = 'petal';
-
-      petal.style.left = `${Math.random() * 100}%`;
-
-      petal.style.setProperty(
-        '--duration',
-        `${7 + Math.random() * 7}s`
-      );
-
-      petal.style.setProperty(
-        '--drift',
-        `${-120 + Math.random() * 240}px`
-      );
-
-      document.body.appendChild(petal);
-
-      petal.addEventListener('animationend', () => {
-        petal.remove();
-      }, { once: true });
-    }
-
-    if (!reduceMotion) {
-      // Rải hoa lúc mới mở trang
-      for (let i = 0; i < 18; i++) {
-        setTimeout(createPetal, i * 250);
-      }
-
-      // Hoa tiếp tục rơi đều
-      petalTimer = setInterval(createPetal, 420);
-    }
-
-    // TẠM NGỪNG TẠO HOA KHI CHUYỂN TAB
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        document.querySelectorAll('.petal').forEach(petal => {
-          petal.remove();
-        });
-      }
-    });
-
-    // NỘI DUNG LÁ THƯ
-    const sentences = [
-      "Chào Nàng công chúa của tôi, tôi là một trong những chàng hoàng tử của lớp 12.10.",
-      "Thời gian thấm thoát thoi đưa, ngày để tôi được bên cạnh em không còn nhiều nữa.",
-      "Nhân dịp ngày mai là ngày 20/10, tôi một gửi cho em những lời nhắc nhở khi không có tôi ở cạnh em.",
-      "BThy à, em là một cô gái dễ thương, hoà đồng và đối với tôi em là nàng công chúa khiến tôi ấn tượng nhất trong 14 công chúa.",
-      "Học lực của em rất tốt nhưng em lại luôn tự ti về bản thân mình (nhất là trước giờ kiểm tra như “T chưa học bài m ơi, bài ni t k bt làmm, …) nhưng phát bài ra toàn 9,10đ 🙂.",
-      "Trước khi đi có vài lời nhắn nhủ tôi muốn gửi đến em:",
-      "Trời bắt đầu trở lạnh rồi ra đường nhớ phải mặc áo ấm;",
-      "Học tập thật chăm chỉ cho kì thi quan trọng nhất của mình;",
-      "Cuối cùng là phải giữ gìn sức khoẻ.",
-      "Đến giờ tôi phải đi rồi, tạm biệt nha nàng công chúa của tôi!"
-    ];
-
-    let currentSentence = 0;
-
-    const sentenceText = document.getElementById('sentence-text');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const sentenceCount = document.getElementById('sentence-count');
-
-    function showSentence(index) {
-      currentSentence = index;
-      const text = sentences[currentSentence];
-
-      sentenceText.replaceChildren();
-
-      if (reduceMotion) {
-        sentenceText.textContent = text;
-      } else {
-        [...text].forEach((char, i) => {
-          const span = document.createElement('span');
-
-          span.textContent = char === ' ' ? '\u00A0' : char;
-          span.style.setProperty('--delay', `${i * 0.025}s`);
-
-          sentenceText.appendChild(span);
-        });
-      }
-
-      sentenceCount.textContent =
-        `${currentSentence + 1} / ${sentences.length}`;
-
-      prevBtn.disabled = currentSentence === 0;
-      nextBtn.disabled = currentSentence === sentences.length - 1;
-    }
-
-    prevBtn.addEventListener('click', () => {
-      if (currentSentence > 0) {
-        showSentence(currentSentence - 1);
-      }
-    });
-
-    nextBtn.addEventListener('click', () => {
-      if (currentSentence < sentences.length - 1) {
-        showSentence(currentSentence + 1);
-      }
-    });
-
-    showSentence(0);
-  </script>
-</body>
-</html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F7C9D9">
+<meta name="description" content="Một lời chúc nhỏ dành riêng cho Hà Giang nhân ngày 20/10.">
+<title>gâu gâu · 20.10</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #49394e;
+  --paper: #fffaf4;
+  --rose: #d78cae;
+  --muted: #9a8297;
+  --line: #e9d6e1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px 16px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  color: var(--ink);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: #f8dce2;
+}
+
+/* =========================
+   KHUNG CẢNH TRƯỜNG HỌC
+========================= */
+
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    #91d4f5 0%,
+    #d4efff 55%,
+    #ffe4d5 100%
+  );
+  animation: sky-cycle 36s ease-in-out infinite;
+}
+
+/* Bầu trời: sáng -> chiều -> tối nhẹ -> sáng */
+
+@keyframes sky-cycle {
+  0%, 100% {
+    background: linear-gradient(
+      to bottom,
+      #91d4f5 0%,
+      #d4efff 55%,
+      #ffe4d5 100%
+    );
+  }
+
+  25% {
+    background: linear-gradient(
+      to bottom,
+      #6fa9e5 0%,
+      #f0c4dc 58%,
+      #ffd5a8 100%
+    );
+  }
+
+  50% {
+    background: linear-gradient(
+      to bottom,
+      #e98caa 0%,
+      #f8c4b4 58%,
+      #f7d6b0 100%
+    );
+  }
+
+  75% {
+    background: linear-gradient(
+      to bottom,
+      #e8b8d9 0%,
+      #c7d9f5 58%,
+      #ffe8d1 100%
+    );
+  }
+}
+
+/* Mặt trời chạy ngang bầu trời */
+
+.sun {
+  position: absolute;
+  top: 9%;
+  left: 8%;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #fff1a8;
+  box-shadow: 0 0 35px #fff2a888;
+  animation: sun-travel 36s ease-in-out infinite;
+}
+
+@keyframes sun-travel {
+  0%, 100% {
+    left: 8%;
+    top: 12%;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  25% {
+    left: 45%;
+    top: 6%;
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  50% {
+    left: 82%;
+    top: 38%;
+    opacity: .8;
+    transform: scale(.85);
+  }
+
+  75% {
+    left: 48%;
+    top: 15%;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Mây trôi */
+
+.cloud {
+  position: absolute;
+  width: 100px;
+  height: 28px;
+  border-radius: 40px;
+  background: #ffffffbd;
+  opacity: .85;
+  animation: cloud-drift 28s linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.cloud::before {
+  width: 40px;
+  height: 40px;
+  left: 15px;
+  top: -18px;
+}
+
+.cloud::after {
+  width: 52px;
+  height: 52px;
+  right: 13px;
+  top: -27px;
+}
+
+.cloud-1 {
+  top: 16%;
+  left: -130px;
+}
+
+.cloud-2 {
+  top: 31%;
+  left: -220px;
+  transform: scale(.7);
+  animation-delay: -12s;
+}
+
+.cloud-3 {
+  top: 8%;
+  left: -180px;
+  transform: scale(.55);
+  animation-delay: -21s;
+}
+
+@keyframes cloud-drift {
+  from {
+    margin-left: 0;
+  }
+
+  to {
+    margin-left: calc(100vw + 350px);
+  }
+}
+
+/* =========================
+   NGÔI TRƯỜNG
+========================= */
+
+.school {
+  position: absolute;
+  width: min(620px, 82vw);
+  height: 220px;
+  left: 50%;
+  top: 21%;
+  transform: translateX(-50%);
+  animation: school-light 36s ease-in-out infinite;
+}
+
+@keyframes school-light {
+  0%, 100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(.88);
+  }
+}
+
+.roof {
+  position: absolute;
+  top: 0;
+  left: -4%;
+  width: 108%;
+  height: 40px;
+  background: #cb777f;
+  clip-path: polygon(4% 100%, 50% 0, 96% 100%);
+  filter: drop-shadow(0 4px 0 #9f596c);
+}
+
+.school-body {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 34px;
+  height: 150px;
+  background: #fff1d5;
+  border: 5px solid #dca5a0;
+  border-bottom: 9px solid #c47c83;
+}
+
+.school-sign {
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  transform: translateX(-50%);
+  width: 72%;
+  text-align: center;
+  color: #a95d68;
+  font-size: clamp(9px, 1.8vw, 13px);
+  font-weight: 600;
+  letter-spacing: .13em;
+  white-space: nowrap;
+}
+
+.windows {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 47px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.window {
+  width: 12%;
+  height: 48px;
+  border: 4px solid #d7a19a;
+  background: #9dd8ef;
+  box-shadow: inset 0 0 0 2px #fff1d5;
+}
+
+.window::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 2px;
+  margin: auto;
+  background: #fff1d5;
+}
+
+.door {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 65px;
+  background: #9a6970;
+  border: 4px solid #f8d9ae;
+  border-bottom: 0;
+  border-radius: 22px 22px 0 0;
+}
+
+.door::after {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: 35px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffe7a8;
+}
+
+.school-steps {
+  position: absolute;
+  left: 50%;
+  top: 184px;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 12px;
+  background: #e5b2a0;
+  box-shadow: 0 12px 0 #d49b92, 0 24px 0 #c98e8a;
+}
+
+/* Lá cờ trên nóc trường */
+
+.flag-pole {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  width: 3px;
+  height: 30px;
+  background: #8c6c78;
+}
+
+.flag {
+  position: absolute;
+  top: 0;
+  left: 3px;
+  width: 27px;
+  height: 17px;
+  background: #e66e7c;
+  transform-origin: left center;
+  animation: flag-wave 1.5s ease-in-out infinite alternate;
+}
+
+.flag::after {
+  content: '★';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff1b2;
+  font-size: 11px;
+}
+
+@keyframes flag-wave {
+  from {
+    transform: skewY(0deg);
+  }
+
+  to {
+    transform: skewY(8deg);
+  }
+}
+
+/* =========================
+   SÂN TRƯỜNG
+========================= */
+
+.yard {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 37%;
+  min-height: 180px;
+  background: linear-gradient(
+    to bottom,
+    #9acb91 0%,
+    #7fba79 17%,
+    #e8bd9f 18%,
+    #d9a98f 100%
+  );
+}
+
+.yard::before {
+  content: '';
+  position: absolute;
+  top: 18%;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #fff0cf80;
+}
+
+.yard-line {
+  position: absolute;
+  top: 19%;
+  left: 0;
+  right: 0;
+  height: 80%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0 95px,
+    #fff1d540 96px 98px
+  );
+  opacity: .55;
+}
+
+/* Bồn cây */
+
+.tree {
+  position: absolute;
+  bottom: 79%;
+  width: 16px;
+  height: 66px;
+  background: #936b58;
+}
+
+.tree::before {
+  content: '';
+  position: absolute;
+  width: 62px;
+  height: 66px;
+  left: 50%;
+  top: -44px;
+  transform: translateX(-50%);
+  border-radius: 48% 52% 43% 57%;
+  background: #6ca879;
+  box-shadow:
+    -18px 12px 0 #82bb84,
+    16px 16px 0 #8ac58a;
+}
+
+.tree-1 {
+  left: 8%;
+}
+
+.tree-2 {
+  right: 8%;
+}
+
+/* =========================
+   HỌC SINH CHẠY LOẠN
+================
