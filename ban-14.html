@@ -1,257 +1,305 @@
-
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#F8F0E8">
-  <meta name="description" content="Một lời chúc nhỏ dành riêng cho bạn nhân ngày 20/10.">
-
-  <title>gâu gâu · 20.10</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --cream: #F8F0E8;
-      --rose: #D9A1A5;
-      --deep-rose: #B8757F;
-      --brown: #72554D;
-      --muted: #987E73;
-      --paper: #FFFCF9;
-      --line: #E8D8C9;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 26px 18px;
-      display: grid;
-      place-items: center;
-      color: var(--brown);
-      font-family: 'Be Vietnam Pro', sans-serif;
-      background:
-        radial-gradient(
-          ellipse at 15% 15%,
-          #fff9f3 0,
-          transparent 45%
-        ),
-        radial-gradient(
-          ellipse at 90% 85%,
-          #efd9d7 0,
-          transparent 38%
-        ),
-        var(--cream);
-    }
-
-    .wrap {
-      width: min(100%, 720px);
-      margin: auto;
-    }
-
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      font-size: 10px;
-      letter-spacing: .2em;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-
-    .top span:last-child {
-      letter-spacing: .12em;
-    }
-
-    .card {
-      position: relative;
-      margin: 42px auto 24px;
-      padding: clamp(28px, 7vw, 62px);
-      background: rgba(255, 252, 249, .82);
-      border: 1px solid #fff;
-      border-radius: 3px;
-      box-shadow: 0 18px 55px #72554d12;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: 10px;
-      border: 1px solid #e8d8c98c;
-      pointer-events: none;
-    }
-
-    .eyebrow {
-      margin: 0 0 18px;
-      text-align: center;
-      font-size: 10px;
-      letter-spacing: .24em;
-      text-transform: uppercase;
-      color: var(--deep-rose);
-    }
-
-    .flower {
-      margin-bottom: 14px;
-      text-align: center;
-      font-size: 26px;
-      color: var(--rose);
-    }
-
-    h1 {
-      margin: 0 0 22px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(42px, 8vw, 66px);
-      font-weight: 500;
-      line-height: .98;
-      text-align: center;
-    }
-
-    h1 em {
-      color: var(--deep-rose);
-      font-weight: 600;
-    }
-
-    .intro {
-      max-width: 430px;
-      margin: 0 auto 30px;
-      text-align: center;
-      font-size: 13px;
-      line-height: 1.9;
-      color: #8c746b;
-    }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin: 26px 0;
-      color: var(--rose);
-    }
-
-    .divider::before,
-    .divider::after {
-      content: '';
-      width: 60px;
-      height: 1px;
-      background: var(--line);
-    }
-
-    .letter {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 21px;
-      line-height: 1.75;
-      white-space: pre-line;
-    }
-
-    .letter p {
-      margin: 0 0 18px;
-    }
-
-    .sign {
-      margin-top: 26px;
-      text-align: right;
-      color: var(--deep-rose);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      font-style: italic;
-    }
-
-    .back {
-      display: block;
-      margin: 26px auto 0;
-      text-align: center;
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: .06em;
-    }
-
-    .back:hover {
-      color: var(--deep-rose);
-    }
-
-    footer {
-      text-align: center;
-      color: #a48d81;
-      font-size: 10px;
-      letter-spacing: .08em;
-    }
-
-    footer .heart {
-      color: var(--deep-rose);
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 20px 14px;
-      }
-
-      .card {
-        margin-top: 30px;
-        padding: 30px 24px;
-      }
-
-      .letter {
-        font-size: 19px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8f0e8">
+<meta name="description" content="Một lời chúc nhỏ dành riêng cho bạn nhân ngày 20/10.">
+<title>gâu gâu · 20.10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --cream: #f8f0e8;
+  --rose: #d5a98b;
+  --deep-rose: #a87958;
+  --brown: #594333;
+  --muted: #947b68;
+  --paper: #fffaf3;
+  --line: #cba98766;
+  --milk: #d9b995;
+  --milk-light: #f2dfc7;
+  --pearl: #493027;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 26px 18px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+  color: var(--brown);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 5%, #fffaf1 0%, transparent 42%),
+    radial-gradient(ellipse at 8% 70%, #ead8c5 0%, transparent 38%),
+    linear-gradient(155deg, #f8f0e8 0%, #f3e4d4 55%, #e9d4bf 100%);
+}
+.top {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; font-size: 10px; letter-spacing: .2em;
+  color: var(--muted); text-transform: uppercase;
+}
+.card {
+  position: relative; width: min(100%, 560px); margin: 22px auto 14px;
+  padding: 28px 32px 25px;
+  background: linear-gradient(145deg, #fffaf3f5, #f8eee3f2);
+  border: 1px solid #cba98780; border-radius: 8px;
+  box-shadow: 0 18px 45px #79583b1c, 0 0 25px #fff8ef99;
+  animation: card-glow 5s ease-in-out infinite alternate;
+}
+.card::before {
+  content: ''; position: absolute; inset: 8px;
+  border: 1px solid #cba98755; border-radius: 4px; pointer-events: none;
+}
+@keyframes card-glow {
+  from { box-shadow: 0 18px 45px #79583b1c, 0 0 18px #d7b28b18; border-color: #cba98770; }
+  to { box-shadow: 0 18px 45px #79583b25, 0 0 35px #d7b28b35; border-color: #b9916d; }
+}
+@media (prefers-reduced-motion: reduce) { .card { animation: none; } }
+.eyebrow {
+  margin: 0 0 12px; text-align: center; font-size: 10px;
+  letter-spacing: .24em; text-transform: uppercase; color: var(--deep-rose);
+}
+h1 {
+  margin: 0 0 8px; font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 7vw, 56px); font-weight: 500; line-height: 1; text-align: center;
+}
+h1 em { color: var(--deep-rose); font-weight: 600; }
+.drink-scene {
+  display: flex; flex-direction: column; align-items: center;
+  margin: 4px auto 8px; position: relative; z-index: 1;
+}
+.cup-wrap {
+  position: relative; width: 170px; height: 190px;
+  display: flex; justify-content: center; align-items: flex-end;
+}
+.cup {
+  position: absolute; bottom: 5px; width: 126px; height: 142px;
+  overflow: hidden; clip-path: polygon(4% 0, 96% 0, 84% 100%, 16% 100%);
+  border: 2px solid #b9916d99;
+  background: linear-gradient(90deg, #c59c72aa, #f2dfc7dd 20%, #e4c5a1e8 68%, #c49a70bb);
+  box-shadow: inset 8px 0 12px #fff8ed70, inset -9px 0 12px #8b604022;
+}
+.cup::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, #f4e2cb 0%, #e8cba8 38%, #d6b18a 100%);
+  opacity: .94;
+}
+.cup-rim {
+  position: absolute; z-index: 5; bottom: 143px; width: 132px; height: 13px;
+  border-radius: 50%; background: linear-gradient(#fff3e1, #d8b58f);
+  border: 2px solid #b9916d; box-shadow: 0 3px 5px #79583b22;
+}
+.cup-lid {
+  position: absolute; z-index: 6; bottom: 149px; width: 138px; height: 12px;
+  border-radius: 50%; border: 2px solid #c6a27d; background: #f8ead7;
+}
+.straw {
+  position: absolute; z-index: 7; width: 13px; height: 105px;
+  left: 100px; top: 1px; border: 1px solid #b77d62;
+  border-radius: 4px 4px 2px 2px;
+  background: repeating-linear-gradient(135deg, #e8a4a0 0 8px, #fff0dc 8px 16px);
+  transform-origin: 50% 90%; transform: rotate(9deg);
+  transition: transform .2s ease;
+  box-shadow: 2px 2px 3px #79583b18;
+}
+.straw::before {
+  content: ''; position: absolute; top: -4px; left: -2px; width: 13px; height: 6px;
+  border: 1px solid #b77d62; border-radius: 50%; background: #f8e5d0;
+}
+.ice {
+  position: absolute; z-index: 3; width: 28px; height: 25px;
+  border: 1.5px solid #fff9edc9; border-radius: 7px;
+  background: linear-gradient(135deg, #ffffffb8, #d9e7e6a1 65%, #fff9ed99);
+  box-shadow: inset 3px 3px 4px #fffdf7aa, 2px 2px 4px #986f4930;
+  transform: rotate(20deg); transition: transform .65s cubic-bezier(.2,.8,.2,1);
+}
+.ice.one { top: 25px; left: 28px; }
+.ice.two { top: 44px; left: 67px; width: 25px; height: 22px; transform: rotate(-17deg); }
+.ice.three { top: 18px; left: 75px; width: 22px; height: 20px; transform: rotate(35deg); }
+.pearl {
+  position: absolute; z-index: 4; width: 15px; height: 15px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #92715b, #493027 55%, #241712 100%);
+  box-shadow: inset -2px -2px 3px #120b0880, 1px 2px 3px #77503533;
+  transition: transform .65s cubic-bezier(.2,.8,.2,1);
+}
+.p1 { bottom: 10px; left: 29px; }
+.p2 { bottom: 13px; left: 50px; width: 17px; height: 17px; }
+.p3 { bottom: 10px; left: 73px; }
+.p4 { bottom: 31px; left: 43px; width: 13px; height: 13px; }
+.p5 { bottom: 32px; left: 67px; width: 12px; height: 12px; }
+.p6 { bottom: 9px; left: 91px; width: 12px; height: 12px; }
+.cup-shine {
+  position: absolute; z-index: 5; bottom: 23px; left: 39px; width: 5px; height: 65px;
+  border-radius: 8px; background: #fff8e9aa; transform: rotate(5deg); pointer-events: none;
+}
+.cup-label {
+  position: absolute; z-index: 5; bottom: 68px; left: 43px; width: 82px;
+  padding: 6px 2px; border: 1px solid #fff4e1aa; border-radius: 5px;
+  color: #8d684b; text-align: center; font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-style: italic; background: #fff4e17a;
+}
+.stir-btn {
+  margin: 2px 0 3px; padding: 8px 14px; border: 1px solid #b9916d;
+  border-radius: 30px; background: #fff8ef; color: #805c42;
+  font: 11px 'Be Vietnam Pro', sans-serif; cursor: pointer;
+  box-shadow: 0 3px 10px #79583b14; transition: background .2s, transform .2s;
+}
+.stir-btn:hover { background: #f0dfcb; transform: translateY(-1px); }
+.drink-scene.stirring .straw { animation: straw-stir .7s ease-in-out; }
+.drink-scene.stirring .ice.one { transform: translate(27px, 13px) rotate(115deg); }
+.drink-scene.stirring .ice.two { transform: translate(-25px, -8px) rotate(155deg); }
+.drink-scene.stirring .ice.three { transform: translate(-8px, 27px) rotate(140deg); }
+.drink-scene.stirring .p1 { transform: translate(23px, -23px); }
+.drink-scene.stirring .p2 { transform: translate(-12px, -36px); }
+.drink-scene.stirring .p3 { transform: translate(-36px, -19px); }
+.drink-scene.stirring .p4 { transform: translate(35px, 4px); }
+.drink-scene.stirring .p5 { transform: translate(-30px, -2px); }
+.drink-scene.stirring .p6 { transform: translate(-22px, -43px); }
+@keyframes straw-stir {
+  0%, 100% { transform: rotate(9deg); }
+  20% { transform: rotate(-17deg); }
+  45% { transform: rotate(25deg); }
+  70% { transform: rotate(-12deg); }
+}
+.intro {
+  max-width: 430px; margin: 0 auto 20px; text-align: center;
+  font-size: 13px; line-height: 1.9; color: var(--muted);
+}
+.divider { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 14px 0; color: var(--rose); }
+.divider::before, .divider::after { content: ''; width: 42px; height: 1px; background: var(--line); }
+.letter {
+  min-height: 100px; display: flex; align-items: center; justify-content: center;
+  padding: 4px 2px; font-family: 'Cormorant Garamond', serif; font-size: 21px;
+  line-height: 1.65; text-align: center; overflow-wrap: anywhere;
+}
+.letter p { width: 100%; margin: 0; white-space: normal; }
+.letter-nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; }
+.letter-nav button {
+  padding: 9px 12px; border: 1px solid #cba98799; border-radius: 4px;
+  background: #e8d4bf55; color: var(--brown); font: 11px 'Be Vietnam Pro', sans-serif;
+  cursor: pointer; transition: background .25s, border-color .25s, opacity .25s;
+}
+.letter-nav button:hover:not(:disabled) { background: #e8d4bfaa; border-color: var(--deep-rose); }
+.letter-nav button:disabled { opacity: .3; cursor: default; }
+#sentence-count { color: var(--muted); font-size: 10px; white-space: nowrap; }
+.sign { margin-top: 26px; text-align: right; color: var(--deep-rose); font-family: 'Cormorant Garamond', serif; font-size: 24px; font-style: italic; }
+.back { display: block; margin: 17px auto 0; text-align: center; text-decoration: none; color: var(--muted); font-size: 11px; letter-spacing: .04em; }
+.back:hover { color: var(--deep-rose); }
+footer { text-align: center; color: #a38c76; font-size: 10px; letter-spacing: .08em; }
+footer .heart { color: var(--deep-rose); }
+@media (max-width: 480px) {
+  body { padding: 14px 12px; }
+  .card { margin: 12px auto; padding: 24px 20px; }
+  .letter { min-height: 110px; font-size: 20px; }
+  .letter-nav { gap: 6px; }
+  .letter-nav button { padding: 9px 8px; font-size: 10px; }
+}
+#sentence-text { opacity: 1; overflow-wrap: anywhere; }
+#sentence-text span { display: inline; opacity: 0; filter: blur(3px); animation: letter-appear .28s ease-out forwards; animation-delay: var(--delay); }
+@keyframes letter-appear { from { opacity: 0; filter: blur(3px); } to { opacity: 1; filter: blur(0); } }
+@media (prefers-reduced-motion: reduce) {
+  #sentence-text span { animation: none; opacity: 1; filter: none; }
+  .drink-scene.stirring .straw { animation: none; transform: rotate(9deg); }
+  .ice, .pearl, .straw { transition: none; }
+}
+</style>
 </head>
-
 <body>
-  <main class="wrap">
+<main class="wrap">
+  <header class="top"><span>20 · 10 · 2026</span><span>một chút ngọt ngào</span></header>
+  <article class="card">
+    <p class="eyebrow">a little wish for you</p>
+    <h1><em>gâu gâu</em></h1>
+    <div class="drink-scene" id="drink-scene" aria-label="Ly trà sữa có đá, trân châu và ống hút">
+      <div class="cup-wrap">
+        <div class="straw" id="straw"></div>
+        <div class="cup">
+          <span class="ice one"></span><span class="ice two"></span><span class="ice three"></span>
+          <span class="pearl p1"></span><span class="pearl p2"></span><span class="pearl p3"></span>
+          <span class="pearl p4"></span><span class="pearl p5"></span><span class="pearl p6"></span>
+          <span class="cup-shine"></span><span class="cup-label">sweet day</span>
+        </div>
+        <div class="cup-rim"></div><div class="cup-lid"></div>
+      </div>
+      <button class="stir-btn" id="stir-btn" type="button" aria-label="Khuấy ly trà sữa">🥤 Khuấy ly</button>
+    </div>
+    <div class="divider" aria-hidden="true">♡</div>
+    <section class="letter" aria-label="Lời chúc">
+      <p id="sentence-text" aria-live="polite">Đã là năm thứ 3 tổ chức 20/10 ở lớp mình nhưng đây là lần đầu tiên tui viết thư nên có gì sai sót mong Hà Giang bỏ qua cho nha.</p>
+    </section>
+    <div class="letter-nav">
+      <button id="prev-btn" type="button" disabled>← Câu trước</button>
+      <span id="sentence-count">1 / 6</span>
+      <button id="next-btn" type="button">Câu tiếp theo →</button>
+    </div>
+    <a class="back" href="https://women12102010.github.io/women1210.github.io/">← Quay lại phong bì</a>
+  </article>
+  <footer>gâu gâu <span class="heart">♡</span> gửi chút ngọt ngào</footer>
+</main>
+<script>
+const sentences = [
+  "Đã là năm thứ 3 tổ chức 20/10 ở lớp mình nhưng đây là lần đầu tiên tui viết thư nên có gì sai sót mong Hà Giang bỏ qua cho nha.",
+  "Trước hết, tui xin chúc Hà Giang ngày càng xinh đẹp, giỏi giang.",
+  "Cũng mong những ngày buồn của bạn sẽ ngắn lại, những ngày vui sẽ dài hơn và nụ cười luôn xuất hiện trên môi.",
+  "Chúc cho bạn luôn mạnh mẽ để đối đầu với mọi khó khăn.",
+  "Dù không có con đường nào là màu hồng nhưng tui hy vọng chặng hành trình của Hà Giang sẽ gặp ít chông gai nhất có thể.",
+  "Cuối cùng, tui mong rằng bức thư này sẽ tiếp thêm động lực để Hà Giang vượt qua những khó khăn mà mình không may gặp phải!"
+];
+let currentSentence = 0;
+const sentenceText = document.getElementById('sentence-text');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const sentenceCount = document.getElementById('sentence-count');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    <header class="top">
-      <span>20 · 10 · 2026</span>
-    </header>
+function showSentence(index) {
+  currentSentence = index;
+  const text = sentences[currentSentence];
+  sentenceText.replaceChildren();
+  if (reduceMotion) {
+    sentenceText.textContent = text;
+  } else {
+    [...text].forEach((char, i) => {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      span.style.setProperty('--delay', `${i * 0.025}s`);
+      sentenceText.appendChild(span);
+    });
+  }
+  sentenceCount.textContent = `${currentSentence + 1} / ${sentences.length}`;
+  prevBtn.disabled = currentSentence === 0;
+  nextBtn.disabled = currentSentence === sentences.length - 1;
+}
+prevBtn.addEventListener('click', () => {
+  if (currentSentence > 0) showSentence(currentSentence - 1);
+});
+nextBtn.addEventListener('click', () => {
+  if (currentSentence < sentences.length - 1) showSentence(currentSentence + 1);
+});
+showSentence(0);
 
-    <article class="card">
-
-      <p class="eyebrow">gâu gâu</p>
-
-      <div class="flower" aria-hidden="true">❀</div>
-
-      <h1>
-        gâu gâu,<br>
-        <em>gâu gâu</em>
-      </h1>
-
-      <p class="intro">
-        gâu gâu
-      </p>
-
-      <div class="divider" aria-hidden="true">♡</div>
-
-      <section class="letter" aria-label="gâu gâu">
-
-        <p>
-          đéo có
-        </p>
-
-      </section>
-
-      <p class="sign">gâu gâu</p>
-
-      <a class="back" href="../index.html">
-        ← Quay lại phong bì
-      </a>
-
-    </article>
-
-    <footer>
-      gâu gâu<span class="heart">gâu</span>
-    </footer>
-
-  </main>
+const drinkScene = document.getElementById('drink-scene');
+const stirBtn = document.getElementById('stir-btn');
+let stirTimer;
+stirBtn.addEventListener('click', () => {
+  drinkScene.classList.remove('stirring');
+  // Khởi động lại animation để mỗi lần bấm đều khuấy thêm một lượt.
+  void drinkScene.offsetWidth;
+  drinkScene.classList.add('stirring');
+  stirBtn.textContent = '🥤 Đang khuấy...';
+  clearTimeout(stirTimer);
+  stirTimer = setTimeout(() => {
+    drinkScene.classList.remove('stirring');
+    stirBtn.textContent = '🥤 Khuấy thêm';
+  }, 720);
+});
+</script>
 </body>
 </html>
