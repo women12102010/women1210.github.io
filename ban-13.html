@@ -14,14 +14,10 @@
 
   <style>
     :root {
-      color-scheme: light;
       --pink: #e8a4ba;
       --deep-pink: #b65f82;
-      --cream: #fff9f4;
       --ink: #644552;
       --muted: #a17b8a;
-      --green: #88b98a;
-      --dark-green: #557e5a;
       --line: #e8b7c9;
     }
 
@@ -40,18 +36,19 @@
       overflow-x: hidden;
       color: var(--ink);
       font-family: 'Be Vietnam Pro', sans-serif;
+
       background:
         radial-gradient(ellipse at 50% 15%, #ffffff 0%, transparent 42%),
         linear-gradient(180deg, #ffe8f0 0%, #fff1f4 53%, #d8edcf 100%);
     }
 
-    /* BẦU TRỜI VƯỜN ANH ĐÀO */
+    /* BẦU TRỜI PASTEL */
     .garden-sky {
       position: fixed;
       inset: 0;
-      overflow: hidden;
-      pointer-events: none;
       z-index: -2;
+      pointer-events: none;
+
       background:
         radial-gradient(ellipse at 50% 30%, #fffaf9a8, transparent 58%),
         linear-gradient(180deg, #fbdce8 0%, #fff0f5 68%, #dcefd2 100%);
@@ -66,10 +63,13 @@
       width: 100%;
       height: 18vh;
       min-height: 100px;
+      pointer-events: none;
+
       background:
         radial-gradient(ellipse at 20% 5%, #c0dfa6 0%, transparent 42%),
         radial-gradient(ellipse at 80% 0%, #b1d59b 0%, transparent 40%),
         linear-gradient(180deg, #a9d49b 0%, #80b97c 100%);
+
       border-radius: 48% 48% 0 0 / 12% 12% 0 0;
     }
 
@@ -78,6 +78,7 @@
       position: absolute;
       inset: 0;
       opacity: .55;
+
       background:
         radial-gradient(ellipse at 10% 30%, #e1f0bc 0 2px, transparent 3px),
         radial-gradient(ellipse at 25% 65%, #e1f0bc 0 2px, transparent 3px),
@@ -86,189 +87,6 @@
         radial-gradient(ellipse at 82% 35%, #e1f0bc 0 2px, transparent 3px),
         radial-gradient(ellipse at 94% 60%, #e1f0bc 0 2px, transparent 3px);
     }
-
-    /* HAI CÂY ANH ĐÀO */
-    .tree {
-      position: fixed;
-      z-index: 0;
-      bottom: 8vh;
-      width: 310px;
-      height: 520px;
-      pointer-events: none;
-      transform-origin: bottom center;
-      animation: tree-sway 7s ease-in-out infinite alternate;
-    }
-
-    .tree.left {
-      left: -28px;
-    }
-
-    .tree.right {
-      right: -28px;
-      transform: scaleX(-1);
-      animation-name: tree-sway-right;
-    }
-
-    @keyframes tree-sway {
-      from { margin-left: -2px; }
-      to { margin-left: 5px; }
-    }
-
-    @keyframes tree-sway-right {
-      from { margin-right: -2px; }
-      to { margin-right: 5px; }
-    }
-
-    /* THÂN CÂY */
-    .trunk {
-      position: absolute;
-      bottom: 0;
-      left: 39%;
-      width: 30px;
-      height: 345px;
-      border-radius: 48% 48% 5px 5px;
-      background:
-        linear-gradient(
-          90deg,
-          #795347 0%,
-          #a77965 25%,
-          #bd9279 48%,
-          #946651 75%,
-          #704b40 100%
-        );
-      transform: rotate(-5deg);
-      transform-origin: bottom center;
-      box-shadow: inset 3px 0 4px #e5b59a35;
-    }
-
-    /* RỄ CÂY */
-    .roots {
-      position: absolute;
-      bottom: 0;
-      left: -20px;
-      width: 70px;
-      height: 22px;
-      background: #926750;
-      clip-path: polygon(35% 0, 60% 0, 100% 100%, 0 100%);
-    }
-
-    /* CÀNH CHÍNH */
-    .trunk::before {
-      content: '';
-      position: absolute;
-      width: 19px;
-      height: 225px;
-      left: -10px;
-      top: -10px;
-      border-radius: 80% 10% 0 0;
-      background: linear-gradient(90deg, #805646, #b98a70);
-      transform: rotate(-34deg);
-      transform-origin: bottom center;
-    }
-
-    .trunk::after {
-      content: '';
-      position: absolute;
-      width: 17px;
-      height: 235px;
-      left: 19px;
-      top: -35px;
-      border-radius: 10% 80% 0 0;
-      background: linear-gradient(90deg, #b58970, #805646);
-      transform: rotate(32deg);
-      transform-origin: bottom center;
-    }
-
-    /* CÀNH NHỎ */
-    .branch {
-      position: absolute;
-      width: 9px;
-      height: 155px;
-      border-radius: 100% 0 0 0;
-      background: linear-gradient(90deg, #825847, #b68a70);
-      transform-origin: bottom center;
-    }
-
-    .branch-one {
-      left: 23%;
-      bottom: 220px;
-      transform: rotate(-49deg);
-    }
-
-    .branch-two {
-      left: 55%;
-      bottom: 245px;
-      height: 175px;
-      transform: rotate(43deg);
-    }
-
-    .branch-three {
-      left: 25%;
-      bottom: 290px;
-      height: 110px;
-      transform: rotate(-35deg);
-    }
-
-    .branch-four {
-      left: 55%;
-      bottom: 310px;
-      height: 115px;
-      transform: rotate(35deg);
-    }
-
-    /* TÁN HOA ANH ĐÀO */
-    .blossom {
-      position: absolute;
-      width: 115px;
-      height: 100px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 25% 36%, #fff9fc 0 12%, transparent 13%),
-        radial-gradient(circle at 62% 25%, #f9d5e2 0 17%, transparent 18%),
-        radial-gradient(circle at 75% 59%, #efa9c5 0 18%, transparent 19%),
-        radial-gradient(circle at 35% 68%, #f8c7d9 0 22%, transparent 23%),
-        radial-gradient(circle at 50% 45%, #f6bdd2 0 48%, #eaa1bd 75%, transparent 77%);
-      filter: drop-shadow(0 4px 7px #b8789325);
-      animation: blossom-sway 5s ease-in-out infinite alternate;
-    }
-
-    .blossom::before,
-    .blossom::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 28% 28%, #fff9fc 0 10%, transparent 11%),
-        radial-gradient(circle at 72% 40%, #f4b3cc 0 18%, transparent 19%),
-        radial-gradient(circle at 45% 72%, #f8d0df 0 20%, transparent 21%),
-        #f5bfd2;
-    }
-
-    .blossom::before {
-      width: 78px;
-      height: 76px;
-      top: -28px;
-      left: -18px;
-    }
-
-    .blossom::after {
-      width: 82px;
-      height: 76px;
-      top: -12px;
-      right: -26px;
-    }
-
-    @keyframes blossom-sway {
-      from { translate: -2px 0; }
-      to { translate: 3px 3px; }
-    }
-
-    .b1 { top: 40px; left: 0; transform: rotate(-15deg); }
-    .b2 { top: 105px; left: 80px; transform: scale(.8) rotate(18deg); }
-    .b3 { top: 155px; left: -10px; transform: scale(.76) rotate(40deg); }
-    .b4 { top: 10px; left: 145px; transform: scale(.7) rotate(-35deg); }
-    .b5 { top: 190px; left: 105px; transform: scale(.65) rotate(12deg); }
-    .b6 { top: 80px; left: 190px; transform: scale(.7) rotate(-20deg); }
 
     /* HOA NHỎ TRÊN CỎ */
     .grass-flower {
@@ -287,8 +105,12 @@
     .gf4 { right: 31%; font-size: 12px; }
 
     @keyframes ground-flower-sway {
-      from { transform: rotate(-8deg) translateY(0); }
-      to { transform: rotate(8deg) translateY(-3px); }
+      from {
+        transform: rotate(-8deg) translateY(0);
+      }
+      to {
+        transform: rotate(8deg) translateY(-3px);
+      }
     }
 
     /* KHUNG THƯ */
@@ -303,15 +125,11 @@
       justify-content: space-between;
       align-items: center;
       gap: 12px;
+      padding: 0 4px;
       font-size: 10px;
       letter-spacing: .2em;
       color: #a67589;
       text-transform: uppercase;
-      padding: 0 4px;
-    }
-
-    .top span:last-child {
-      letter-spacing: .12em;
     }
 
     .card {
@@ -319,12 +137,15 @@
       width: 100%;
       margin: 22px auto 14px;
       padding: 30px 32px;
+
       background: linear-gradient(145deg, #fffaf8f5, #fff1f5f2);
       border: 1px solid #eab9cb;
       border-radius: 8px;
+
       box-shadow:
         0 18px 55px #ad718529,
         0 0 35px #fff9f9a8;
+
       backdrop-filter: blur(8px);
       animation: card-glow 5s ease-in-out infinite alternate;
     }
@@ -358,8 +179,12 @@
     }
 
     @keyframes flower-sway {
-      0%, 100% { transform: rotate(-5deg); }
-      50% { transform: rotate(5deg); }
+      0%, 100% {
+        transform: rotate(-5deg);
+      }
+      50% {
+        transform: rotate(5deg);
+      }
     }
 
     h1 {
@@ -395,12 +220,14 @@
       background: var(--line);
     }
 
+    /* NỘI DUNG LÁ THƯ */
     .letter {
       min-height: 145px;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 10px 2px;
+
       font-family: 'Cormorant Garamond', serif;
       font-size: 23px;
       line-height: 1.65;
@@ -451,7 +278,11 @@
       color: #87576a;
       font: 11px 'Be Vietnam Pro', sans-serif;
       cursor: pointer;
-      transition: background .25s ease, border-color .25s ease, opacity .25s ease;
+
+      transition:
+        background .25s ease,
+        border-color .25s ease,
+        opacity .25s ease;
     }
 
     .letter-nav button:hover:not(:disabled) {
@@ -504,10 +335,13 @@
       width: 12px;
       height: 17px;
       border-radius: 80% 15% 75% 20%;
+
       background: linear-gradient(135deg, #fff9fc, #f7bfd4 65%, #e89bb8);
       box-shadow: 0 2px 5px #bd7c9620;
+
       pointer-events: none;
       will-change: transform, opacity;
+
       animation: petal-fall var(--duration) linear forwards;
     }
 
@@ -529,7 +363,9 @@
         opacity: 0;
       }
 
-      10% { opacity: .9; }
+      10% {
+        opacity: .9;
+      }
 
       30% {
         transform: translate3d(calc(var(--drift) * .65), 30vh, 0)
@@ -541,7 +377,9 @@
           rotate(380deg);
       }
 
-      85% { opacity: .75; }
+      85% {
+        opacity: .75;
+      }
 
       100% {
         transform: translate3d(var(--drift), 110vh, 0)
@@ -550,27 +388,7 @@
       }
     }
 
-    /* ĐIỆN THOẠI VÀ MÀN HÌNH NHỎ */
-    @media (max-width: 700px) {
-      .tree {
-        transform: scale(.72);
-        transform-origin: bottom left;
-        bottom: 8vh;
-      }
-
-      .tree.left { left: -70px; }
-
-      .tree.right {
-        right: -70px;
-        transform: scaleX(-1) scale(.72);
-        transform-origin: bottom center;
-      }
-
-      .ground {
-        height: 14vh;
-      }
-    }
-
+    /* RESPONSIVE */
     @media (max-width: 480px) {
       body {
         padding: 14px 12px 70px;
@@ -595,17 +413,8 @@
         font-size: 10px;
       }
 
-      .tree {
-        opacity: .88;
-        transform: scale(.52);
-        bottom: 7vh;
-      }
-
-      .tree.left { left: -100px; }
-
-      .tree.right {
-        right: -100px;
-        transform: scaleX(-1) scale(.52);
+      .ground {
+        height: 14vh;
       }
 
       .top {
@@ -613,8 +422,11 @@
       }
     }
 
+    /* TÔN TRỌNG CÀI ĐẶT GIẢM CHUYỂN ĐỘNG */
     @media (prefers-reduced-motion: reduce) {
-      .card, .flower, .tree, .blossom, .grass-flower {
+      .card,
+      .flower,
+      .grass-flower {
         animation: none;
       }
 
@@ -634,46 +446,10 @@
 <body>
   <div class="garden-sky" aria-hidden="true"></div>
 
-  <!-- CÂY ANH ĐÀO BÊN TRÁI -->
-  <div class="tree left" aria-hidden="true">
-    <div class="trunk">
-      <div class="roots"></div>
-    </div>
-
-    <div class="branch branch-one"></div>
-    <div class="branch branch-two"></div>
-    <div class="branch branch-three"></div>
-    <div class="branch branch-four"></div>
-
-    <div class="blossom b1"></div>
-    <div class="blossom b2"></div>
-    <div class="blossom b3"></div>
-    <div class="blossom b4"></div>
-    <div class="blossom b5"></div>
-    <div class="blossom b6"></div>
-  </div>
-
-  <!-- CÂY ANH ĐÀO BÊN PHẢI -->
-  <div class="tree right" aria-hidden="true">
-    <div class="trunk">
-      <div class="roots"></div>
-    </div>
-
-    <div class="branch branch-one"></div>
-    <div class="branch branch-two"></div>
-    <div class="branch branch-three"></div>
-    <div class="branch branch-four"></div>
-
-    <div class="blossom b1"></div>
-    <div class="blossom b2"></div>
-    <div class="blossom b3"></div>
-    <div class="blossom b4"></div>
-    <div class="blossom b5"></div>
-    <div class="blossom b6"></div>
-  </div>
-
-  <!-- CỎ VÀ HOA -->
+  <!-- THẢM CỎ -->
   <div class="ground" aria-hidden="true"></div>
+
+  <!-- HOA NHỎ TRÊN CỎ -->
   <div class="grass-flower gf1" aria-hidden="true">🌸</div>
   <div class="grass-flower gf2" aria-hidden="true">✿</div>
   <div class="grass-flower gf3" aria-hidden="true">🌸</div>
@@ -693,9 +469,7 @@
       <div class="divider" aria-hidden="true">♡</div>
 
       <section class="letter" aria-label="Lời chúc">
-        <p id="sentence-text" aria-live="polite">
-          Nhân dịp 20/10, tui xin chúc Tố Trinh ngày càng xinh đẹp và thật nhiều sức khỏe, gặp nhiều may mắn trong cuộc sống.
-        </p>
+        <p id="sentence-text" aria-live="polite">Nhân dịp 20/10, tui xin chúc Tố Trinh ngày càng xinh đẹp và thật nhiều sức khỏe, gặp nhiều may mắn trong cuộc sống.</p>
       </section>
 
       <div class="letter-nav">
@@ -710,7 +484,7 @@
         </button>
       </div>
 
-      <a class="back" href="https://women12102010.github.io/women12102010.github.io/">
+      <a class="back" href="https://women12102010.github.io/women1210.github.io/">
         ← Quay lại phong bì
       </a>
     </article>
@@ -727,7 +501,6 @@
 
     // TẠO CÁNH HOA RƠI
     const MAX_PETALS = 35;
-    let petalTimer = null;
 
     function createPetal() {
       if (document.hidden || reduceMotion) return;
@@ -759,16 +532,16 @@
     }
 
     if (!reduceMotion) {
-      // Rải hoa lúc mới mở trang
+      // Tạo một đợt hoa ngay khi mở trang
       for (let i = 0; i < 18; i++) {
         setTimeout(createPetal, i * 250);
       }
 
-      // Hoa tiếp tục rơi đều
-      petalTimer = setInterval(createPetal, 420);
+      // Sau đó tiếp tục thả hoa
+      setInterval(createPetal, 420);
     }
 
-    // TẠM NGỪNG TẠO HOA KHI CHUYỂN TAB
+    // Dọn cánh hoa khi chuyển sang tab khác
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         document.querySelectorAll('.petal').forEach(petal => {
@@ -779,10 +552,10 @@
 
     // NỘI DUNG LÁ THƯ
     const sentences = [
-      "Nhân dịp 20/10, tui xin chúc Tố Trinh ngày càng xinh đẹp và thật nhiều sức khỏe, gặp nhiều may mắn trong cuộc sống.",
+      "Nhân dịp 20/10, tui xin chúc Tố Trinh ngày càng xinh đẹp và thật nhiều sức khỏe, gặp nhiều may mắn trong cuộc sống. ",
       "Mong mọi thứ từ gia đình, tình cảm, học tập,... của bạn sẽ đều thuận lợi.",
       "Chúc bạn sẽ luôn mạnh mẽ và không bao giờ bỏ cuộc trên hành trình của mình.",
-      " Hy vọng bạn sẽ gặt hái được nhiều thành công trong tương lai! "
+      "Hy vọng bạn sẽ gặt hái được nhiều thành công trong tương lai!"
     ];
 
     let currentSentence = 0;
@@ -792,10 +565,11 @@
     const nextBtn = document.getElementById('next-btn');
     const sentenceCount = document.getElementById('sentence-count');
 
+    // HIỆN TỪNG CHỮ
     function showSentence(index) {
       currentSentence = index;
-      const text = sentences[currentSentence];
 
+      const text = sentences[currentSentence];
       sentenceText.replaceChildren();
 
       if (reduceMotion) {
@@ -818,18 +592,21 @@
       nextBtn.disabled = currentSentence === sentences.length - 1;
     }
 
+    // CÂU TRƯỚC
     prevBtn.addEventListener('click', () => {
       if (currentSentence > 0) {
         showSentence(currentSentence - 1);
       }
     });
 
+    // CÂU TIẾP THEO
     nextBtn.addEventListener('click', () => {
       if (currentSentence < sentences.length - 1) {
         showSentence(currentSentence + 1);
       }
     });
 
+    // HIỆN CÂU ĐẦU TIÊN
     showSentence(0);
   </script>
 </body>
