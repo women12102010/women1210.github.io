@@ -1,12 +1,9 @@
-
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#F8F0E8">
+  <meta name="theme-color" content="#FFF5D6">
   <meta name="description" content="Một lời chúc nhỏ dành riêng cho bạn nhân ngày 20/10.">
 
   <title>gâu gâu · 20.10</title>
@@ -17,17 +14,24 @@
 
   <style>
     :root {
-      --cream: #F8F0E8;
-      --rose: #D9A1A5;
-      --deep-rose: #B8757F;
-      --brown: #72554D;
-      --muted: #987E73;
-      --paper: #FFFCF9;
-      --line: #E8D8C9;
+      color-scheme: light;
+
+      --cream: #FFF8E7;
+      --yellow: #F5CB57;
+      --deep-yellow: #DDAA32;
+      --brown: #57452D;
+      --muted: #95805D;
+      --paper: #FFFCF3;
+      --green: #718653;
+      --line: #DDBD7045;
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
     }
 
     body {
@@ -36,25 +40,283 @@
       padding: 26px 18px;
       display: grid;
       place-items: center;
+      position: relative;
+      isolation: isolate;
+      overflow-x: hidden;
+
       color: var(--brown);
       font-family: 'Be Vietnam Pro', sans-serif;
+
       background:
         radial-gradient(
-          ellipse at 15% 15%,
-          #fff9f3 0,
-          transparent 45%
+          circle at 50% 12%,
+          #FFFBE8 0%,
+          transparent 32%
         ),
-        radial-gradient(
-          ellipse at 90% 85%,
-          #efd9d7 0,
-          transparent 38%
-        ),
-        var(--cream);
+        linear-gradient(
+          180deg,
+          #FFE9A6 0%,
+          #FFF3CC 43%,
+          #F5E8B6 72%,
+          #D9DDA5 100%
+        );
     }
 
+    /* =========================
+       BẦU TRỜI VÀ ÁNH NẮNG
+    ========================= */
+
+    .sky {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .sun {
+      position: absolute;
+      top: 7%;
+      right: 12%;
+
+      width: clamp(75px, 13vw, 130px);
+      aspect-ratio: 1;
+
+      border-radius: 50%;
+
+      background: radial-gradient(
+        circle at 35% 35%,
+        #FFFDE1 0%,
+        #FFE995 42%,
+        #F8CE65 100%
+      );
+
+      box-shadow:
+        0 0 35px #FFE69A80,
+        0 0 90px #FFDF8270,
+        0 0 150px #FFF0B840;
+
+      animation: sunshine 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes sunshine {
+      from {
+        box-shadow:
+          0 0 35px #FFE69A80,
+          0 0 90px #FFDF8270,
+          0 0 150px #FFF0B840;
+      }
+
+      to {
+        box-shadow:
+          0 0 45px #FFE69AAA,
+          0 0 110px #FFDF8290,
+          0 0 175px #FFF0B860;
+      }
+    }
+
+    /* Những đám mây mờ */
+
+    .cloud {
+      position: absolute;
+      width: 125px;
+      height: 32px;
+
+      border-radius: 50px;
+
+      background: #FFFCED65;
+      filter: blur(5px);
+
+      animation: cloud-drift 28s linear infinite;
+    }
+
+    .cloud::before,
+    .cloud::after {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+
+      border-radius: 50%;
+      background: inherit;
+    }
+
+    .cloud::before {
+      left: 20px;
+      width: 45px;
+      height: 45px;
+    }
+
+    .cloud::after {
+      left: 55px;
+      width: 55px;
+      height: 55px;
+    }
+
+    .cloud-one {
+      top: 15%;
+      left: -150px;
+    }
+
+    .cloud-two {
+      top: 35%;
+      left: -220px;
+      opacity: .6;
+      transform: scale(.7);
+      animation-delay: -12s;
+    }
+
+    @keyframes cloud-drift {
+      from {
+        translate: 0 0;
+      }
+
+      to {
+        translate: calc(100vw + 350px) 0;
+      }
+    }
+
+    /* =========================
+       CÁNH ĐỒNG HOA HƯỚNG DƯƠNG
+    ========================= */
+
+    .field {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Lớp đồi xa */
+
+    .hill {
+      position: absolute;
+      bottom: -65px;
+
+      width: 125%;
+      height: 230px;
+
+      border-radius: 50% 50% 0 0;
+    }
+
+    .hill-back {
+      left: -15%;
+      bottom: -100px;
+
+      background: linear-gradient(
+        180deg,
+        #B9C68A,
+        #8FA36A
+      );
+
+      transform: rotate(-4deg);
+    }
+
+    .hill-front {
+      left: -10%;
+      bottom: -155px;
+
+      height: 270px;
+
+      background: linear-gradient(
+        180deg,
+        #93A96C,
+        #718A50
+      );
+
+      transform: rotate(3deg);
+    }
+
+    /* Hoa hướng dương */
+
+    .sunflower {
+      position: absolute;
+      bottom: var(--bottom, -8px);
+      left: var(--left, 50%);
+
+      font-size: var(--size, 36px);
+
+      transform-origin: 50% 100%;
+
+      animation:
+        flower-sway var(--duration, 4s)
+        ease-in-out infinite alternate;
+
+      animation-delay: var(--delay, 0s);
+
+      filter: drop-shadow(0 3px 3px #46542A20);
+
+      user-select: none;
+    }
+
+    @keyframes flower-sway {
+      from {
+        transform: rotate(-5deg);
+      }
+
+      to {
+        transform: rotate(5deg);
+      }
+    }
+
+    /* =========================
+       CÁNH HOA BAY
+    ========================= */
+
+    .petal {
+      position: absolute;
+      top: -30px;
+      left: var(--left);
+
+      width: 9px;
+      height: 13px;
+
+      border-radius: 80% 20% 80% 20%;
+
+      background: linear-gradient(
+        135deg,
+        #FFEBA0,
+        #E9B944
+      );
+
+      opacity: var(--opacity, .7);
+
+      animation: petal-fall var(--duration, 12s) linear infinite;
+
+      animation-delay: var(--delay, 0s);
+    }
+
+    @keyframes petal-fall {
+      0% {
+        transform: translate3d(0, -20px, 0) rotate(0deg);
+      }
+
+      25% {
+        transform: translate3d(35px, 25vh, 0) rotate(120deg);
+      }
+
+      50% {
+        transform: translate3d(-20px, 50vh, 0) rotate(240deg);
+      }
+
+      75% {
+        transform: translate3d(40px, 75vh, 0) rotate(330deg);
+      }
+
+      100% {
+        transform: translate3d(-15px, 110vh, 0) rotate(480deg);
+      }
+    }
+
+    /* =========================
+       NỘI DUNG CHÍNH
+    ========================= */
+
     .wrap {
-      width: min(100%, 720px);
-      margin: auto;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 600px;
     }
 
     .top {
@@ -62,153 +324,394 @@
       justify-content: space-between;
       align-items: center;
       gap: 12px;
+
       font-size: 10px;
       letter-spacing: .2em;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
 
-    .top span:last-child {
-      letter-spacing: .12em;
+      color: #8B764F;
+      text-transform: uppercase;
     }
 
     .card {
       position: relative;
-      margin: 42px auto 24px;
-      padding: clamp(28px, 7vw, 62px);
-      background: rgba(255, 252, 249, .82);
-      border: 1px solid #fff;
-      border-radius: 3px;
-      box-shadow: 0 18px 55px #72554d12;
+
+      width: min(100%, 560px);
+      margin: 22px auto 14px;
+      padding: 30px 32px;
+
+      background: linear-gradient(
+        145deg,
+        #FFFCF3F5,
+        #FFF8E9F2
+      );
+
+      border: 1px solid #DDBD7080;
+      border-radius: 4px;
+
+      box-shadow:
+        0 18px 55px #79602A20,
+        0 0 35px #FFF4C950;
+
+      backdrop-filter: blur(10px);
+
+      animation: card-glow 5s ease-in-out infinite alternate;
     }
+
+    /* Khung viền trang trí */
 
     .card::before {
       content: '';
+
       position: absolute;
-      inset: 10px;
-      border: 1px solid #e8d8c98c;
+      inset: 8px;
+
+      border: 1px solid #DDBD7055;
+
       pointer-events: none;
+    }
+
+    @keyframes card-glow {
+      0% {
+        box-shadow:
+          0 18px 55px #79602A20,
+          0 0 20px #FFE7A020;
+
+        border-color: #DDBD7060;
+      }
+
+      50% {
+        box-shadow:
+          0 18px 55px #79602A25,
+          0 0 35px #FFE7A055;
+
+        border-color: #E3C56D;
+      }
+
+      100% {
+        box-shadow:
+          0 18px 55px #79602A20,
+          0 0 45px #FFE7A065;
+
+        border-color: #DDBD70A0;
+      }
     }
 
     .eyebrow {
       margin: 0 0 18px;
+
       text-align: center;
       font-size: 10px;
       letter-spacing: .24em;
       text-transform: uppercase;
-      color: var(--deep-rose);
+
+      color: var(--deep-yellow);
     }
 
     .flower {
-      margin-bottom: 14px;
+      margin-bottom: 6px;
+
       text-align: center;
-      font-size: 26px;
-      color: var(--rose);
+      font-size: 27px;
+
+      color: var(--yellow);
+
+      animation: flower-sway 4s ease-in-out infinite alternate;
     }
 
     h1 {
-      margin: 0 0 22px;
+      margin: 0 0 12px;
+
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(42px, 8vw, 66px);
+      font-size: clamp(38px, 7vw, 56px);
       font-weight: 500;
-      line-height: .98;
+
+      line-height: 1;
       text-align: center;
+
+      color: #68502E;
     }
 
     h1 em {
-      color: var(--deep-rose);
+      color: #C99A36;
       font-weight: 600;
+      font-style: italic;
+
+      text-shadow: 0 0 32px #F5D77B40;
     }
 
     .intro {
       max-width: 430px;
       margin: 0 auto 30px;
+
       text-align: center;
       font-size: 13px;
       line-height: 1.9;
-      color: #8c746b;
+
+      color: var(--muted);
     }
+
+    /* Đường phân cách */
 
     .divider {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 14px;
-      margin: 26px 0;
-      color: var(--rose);
+      gap: 12px;
+
+      margin: 14px 0;
+
+      color: #D6A93F;
     }
 
     .divider::before,
     .divider::after {
       content: '';
-      width: 60px;
+
+      width: 42px;
       height: 1px;
+
       background: var(--line);
     }
 
+    /* =========================
+       LỜI CHÚC
+    ========================= */
+
     .letter {
+      min-height: 120px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 4px 2px;
+
       font-family: 'Cormorant Garamond', serif;
       font-size: 21px;
-      line-height: 1.75;
-      white-space: pre-line;
+      line-height: 1.65;
+
+      text-align: center;
+      overflow-wrap: anywhere;
+
+      color: #665238;
     }
 
     .letter p {
-      margin: 0 0 18px;
+      width: 100%;
+      margin: 0;
+      white-space: normal;
     }
+
+    /* Hiệu ứng từng chữ */
+
+    #sentence-text {
+      opacity: 1;
+      overflow-wrap: anywhere;
+    }
+
+    #sentence-text span {
+      display: inline;
+
+      opacity: 0;
+      filter: blur(3px);
+
+      animation: letter-appear .28s ease-out forwards;
+      animation-delay: var(--delay);
+    }
+
+    @keyframes letter-appear {
+      from {
+        opacity: 0;
+        filter: blur(3px);
+      }
+
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    /* =========================
+       NÚT CHUYỂN CÂU
+    ========================= */
+
+    .letter-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+
+      margin-top: 14px;
+    }
+
+    .letter-nav button {
+      padding: 9px 12px;
+
+      border: 1px solid #DDBD7080;
+      border-radius: 3px;
+
+      background: #E9C86B15;
+      color: var(--brown);
+
+      font: 11px 'Be Vietnam Pro', sans-serif;
+
+      cursor: pointer;
+
+      transition:
+        background .25s ease,
+        border-color .25s ease,
+        transform .25s ease,
+        opacity .25s ease;
+    }
+
+    .letter-nav button:hover:not(:disabled) {
+      background: #E9C86B35;
+      border-color: #C99A36;
+
+      transform: translateY(-2px);
+    }
+
+    .letter-nav button:disabled {
+      opacity: .3;
+      cursor: default;
+    }
+
+    #sentence-count {
+      color: var(--muted);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    /* Chữ ký */
 
     .sign {
       margin-top: 26px;
+
       text-align: right;
-      color: var(--deep-rose);
+
+      color: #C99A36;
+
       font-family: 'Cormorant Garamond', serif;
       font-size: 24px;
       font-style: italic;
     }
 
+    /* Quay lại */
+
     .back {
       display: block;
-      margin: 26px auto 0;
+
+      margin: 17px auto 0;
+
       text-align: center;
       text-decoration: none;
-      color: var(--muted);
+
+      color: #95805D;
+
       font-size: 11px;
-      letter-spacing: .06em;
+      letter-spacing: .04em;
+
+      transition: color .25s ease;
     }
 
     .back:hover {
-      color: var(--deep-rose);
+      color: #C99A36;
     }
 
     footer {
       text-align: center;
-      color: #a48d81;
+
+      color: #82794F;
+
       font-size: 10px;
       letter-spacing: .08em;
     }
 
     footer .heart {
-      color: var(--deep-rose);
+      color: #D6A93F;
     }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
 
     @media (max-width: 480px) {
       body {
-        padding: 20px 14px;
+        padding: 14px 12px;
+      }
+
+      .sun {
+        top: 5%;
+        right: 5%;
       }
 
       .card {
-        margin-top: 30px;
-        padding: 30px 24px;
+        margin: 12px auto;
+        padding: 24px 20px;
       }
 
       .letter {
-        font-size: 19px;
+        min-height: 125px;
+        font-size: 20px;
+      }
+
+      .letter-nav {
+        gap: 6px;
+      }
+
+      .letter-nav button {
+        padding: 9px 8px;
+        font-size: 10px;
+      }
+
+      .sunflower {
+        font-size: calc(var(--size, 36px) * .8);
+      }
+
+      .hill {
+        height: 180px;
+      }
+    }
+
+    /* Tôn trọng cài đặt giảm chuyển động */
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+
+      #sentence-text span {
+        animation: none;
+        opacity: 1;
+        filter: none;
       }
     }
   </style>
 </head>
 
 <body>
+
+  <!-- BẦU TRỜI -->
+  <div class="sky" aria-hidden="true">
+    <div class="sun"></div>
+    <div class="cloud cloud-one"></div>
+    <div class="cloud cloud-two"></div>
+  </div>
+
+  <!-- CÁNH ĐỒNG -->
+  <div class="field" id="field" aria-hidden="true">
+    <div class="hill hill-back"></div>
+    <div class="hill hill-front"></div>
+  </div>
+
+  <!-- CÁNH HOA BAY -->
+  <div class="petal-container" id="petals" aria-hidden="true"></div>
+
+  <!-- NỘI DUNG -->
   <main class="wrap">
 
     <header class="top">
@@ -217,41 +720,213 @@
 
     <article class="card">
 
-      <p class="eyebrow">gâu gâu</p>
-
-      <div class="flower" aria-hidden="true">❀</div>
+      <div class="flower" aria-hidden="true">🌻</div>
 
       <h1>
-        gâu gâu,<br>
         <em>gâu gâu</em>
       </h1>
 
-      <p class="intro">
-        gâu gâu
-      </p>
-
       <div class="divider" aria-hidden="true">♡</div>
 
-      <section class="letter" aria-label="gâu gâu">
-
-        <p>
-          đéo có
+      <section class="letter" aria-label="Lời chúc">
+        <p id="sentence-text" aria-live="polite">
+          Nhân dịp 20/10 cuối cùng của lớp 12/10, tui rất hân hạnh được phân công viết cho bạn bức thư đầy ngôn từ hoa mĩ đẹp đẽ này🌹.
         </p>
-
       </section>
 
-      <p class="sign">gâu gâu</p>
+      <div class="letter-nav">
 
-      <a class="back" href="../index.html">
+        <button id="prev-btn" type="button" disabled>
+          ← Câu trước
+        </button>
+
+        <span id="sentence-count">1 / 6</span>
+
+        <button id="next-btn" type="button">
+          Câu tiếp theo →
+        </button>
+
+      </div>
+
+      <a
+        class="back"
+        href="https://women12102010.github.io/women1210.github.io/"
+      >
         ← Quay lại phong bì
       </a>
 
     </article>
 
     <footer>
-      gâu gâu<span class="heart">gâu</span>
+      gâu gâu <span class="heart">♥</span> gâu
     </footer>
 
   </main>
+
+  <script>
+    // =========================
+    // TẠO CÁNH ĐỒNG HOA
+    // =========================
+
+    const field = document.getElementById('field');
+
+    const flowerCount = window.innerWidth < 480 ? 20 : 34;
+
+    for (let i = 0; i < flowerCount; i++) {
+      const flower = document.createElement('span');
+
+      flower.className = 'sunflower';
+      flower.textContent = '🌻';
+
+      const left = (i / flowerCount) * 110 - 5;
+      const size = 22 + Math.random() * 32;
+      const bottom = -8 + Math.random() * 65;
+      const duration = 3 + Math.random() * 4;
+      const delay = Math.random() * -5;
+
+      flower.style.setProperty('--left', `${left}%`);
+      flower.style.setProperty('--size', `${size}px`);
+      flower.style.setProperty('--bottom', `${bottom}px`);
+      flower.style.setProperty('--duration', `${duration}s`);
+      flower.style.setProperty('--delay', `${delay}s`);
+
+      // Hoa ở xa nhỏ và mờ hơn
+      flower.style.opacity = 0.45 + Math.random() * 0.55;
+
+      field.appendChild(flower);
+    }
+
+    // =========================
+    // TẠO CÁNH HOA BAY
+    // =========================
+
+    const petals = document.getElementById('petals');
+
+    const petalCount = window.innerWidth < 480 ? 10 : 18;
+
+    for (let i = 0; i < petalCount; i++) {
+      const petal = document.createElement('span');
+
+      petal.className = 'petal';
+
+      petal.style.setProperty(
+        '--left',
+        `${Math.random() * 100}%`
+      );
+
+      petal.style.setProperty(
+        '--duration',
+        `${9 + Math.random() * 12}s`
+      );
+
+      petal.style.setProperty(
+        '--delay',
+        `${-Math.random() * 20}s`
+      );
+
+      petal.style.setProperty(
+        '--opacity',
+        `${0.3 + Math.random() * 0.5}`
+      );
+
+      petals.appendChild(petal);
+    }
+
+    // =========================
+    // NỘI DUNG LỜI CHÚC
+    // =========================
+
+    const sentences = [
+      "Nhân dịp 20/10 cuối cùng của lớp 12/10, tui rất hân hạnh được phân công viết cho bạn bức thư đầy ngôn từ hoa mĩ đẹp đẽ này🌹.",
+
+      " Mình xin gửi bức thư này cho bạn có cơ thể mang trên mình hình hài đất nước⚡️.",
+
+      "Đầu tiên tui cảm ơn Nguyễn Hoàng Thuỳ Linh rất nhiều vì đã kết bạn, đồng hành với tui từ những ngày đầu bước chân vào cấp 3,",
+
+      "m là người chủ động bắt chuyện và giới thiệu t với mọi người, t rất cảm kíck tấm lòng nhân hậu của m😏.",
+
+      "Bây giờ là năm cuối mình được học chung với nhau, t xin tặng Linh những lời chúc sâu sắc nhất từ trong tâm.",
+
+      "M là một người rất giỏi, chăm chỉ nên m hãy cứ tự tin bước tiếp trên con đường mà m chọn, bỏ qua những thứ làm bạn bị phân tâm khiến bạn ovtk xàm c.",
+      "Cố gắng thực hiện được ước mơ của mình và đặc biệt mình mong bạn hãy luôn giữ nụ cười trên môi🌚🫵🏻",
+      "I will forever be proud of you because I know how hard you try everyday:)🫪",
+      "Linh có biết Linh chính là người bạn tuyệt vời nhất mà t từng gặp (bịp).",
+      " Nếu sau này có ai hỏi t chọn 10 tỷ hay chọn Thuỳ Linh thì câu trả lời chắc chắc là 10 tỷ😘.:,
+      "Lời chúc của t tới đây là hết, chúc Linh có một ngày 20/10 vui vẻ và tràn đầy hạnh phúc nhaaa🤢",
+      " Ma cherié👻"
+    ];
+
+    // =========================
+    // HIỆU ỨNG HIỆN TỪNG CHỮ
+    // =========================
+
+    let currentSentence = 0;
+
+    const sentenceText = document.getElementById('sentence-text');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const sentenceCount = document.getElementById('sentence-count');
+
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    function showSentence(index) {
+      currentSentence = index;
+
+      const text = sentences[currentSentence];
+
+      sentenceText.replaceChildren();
+
+      if (reduceMotion) {
+        sentenceText.textContent = text;
+      } else {
+        [...text].forEach((char, i) => {
+          const span = document.createElement('span');
+
+          // Giữ khoảng trắng giữa các từ
+          span.textContent = char === ' ' ? '\u00A0' : char;
+
+          // Mỗi chữ xuất hiện cách nhau 25ms
+          span.style.setProperty(
+            '--delay',
+            `${i * 0.025}s`
+          );
+
+          sentenceText.appendChild(span);
+        });
+      }
+
+      // Cập nhật số câu
+      sentenceCount.textContent =
+        `${currentSentence + 1} / ${sentences.length}`;
+
+      // Khóa nút khi ở đầu hoặc cuối thư
+      prevBtn.disabled = currentSentence === 0;
+
+      nextBtn.disabled =
+        currentSentence === sentences.length - 1;
+    }
+
+    // =========================
+    // ĐIỀU HƯỚNG LỜI CHÚC
+    // =========================
+
+    prevBtn.addEventListener('click', () => {
+      if (currentSentence > 0) {
+        showSentence(currentSentence - 1);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentSentence < sentences.length - 1) {
+        showSentence(currentSentence + 1);
+      }
+    });
+
+    // Hiển thị câu đầu tiên
+    showSentence(0);
+  </script>
+
 </body>
 </html>
