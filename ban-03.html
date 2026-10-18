@@ -222,11 +222,8 @@ button, a {
   position: fixed;
   width: 100px;
   height: 142px;
-
-  /* Vị trí trên máy tính */
-  left: calc(50% + 170px);
-  top: 12%;
-
+  left: 3%;
+  bottom: 8%;
   z-index: 3;
   image-rendering: pixelated;
   transform-origin: center;
@@ -262,11 +259,8 @@ button, a {
 /* Tên nhân vật */
 .hero-label {
   position: fixed;
-
-  /* Căn theo nhân vật */
-  top: calc(12% - 20px);
-  left: calc(50% + 170px);
-
+  left: 3%;
+  bottom: calc(8% + 145px);
   z-index: 3;
   font: 8px 'Press Start 2P', monospace;
   color: #fff0d9;
@@ -279,13 +273,14 @@ button, a {
   .hero {
     width: 65px;
     height: 92px;
-    left: calc(50% + 95px);
-    top: 9%;
+    left: 2%;
+    bottom: 8%;
+    opacity: .9;
   }
 
   .hero-label {
-    left: calc(50% + 95px);
-    top: calc(9% - 18px);
+    left: 2%;
+    bottom: calc(8% + 94px);
     font-size: 6px;
   }
 }
