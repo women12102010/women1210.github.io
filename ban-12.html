@@ -446,4 +446,598 @@ body {
 
 /* =========================
    HỌC SINH CHẠY LOẠN
-================
+========================= */
+
+.students {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.student {
+  position: absolute;
+  bottom: 8%;
+  left: -60px;
+  font-size: 29px;
+  line-height: 1;
+  white-space: nowrap;
+  will-change: transform;
+  animation: student-run var(--speed, 7s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.student:nth-child(2n) {
+  bottom: 30%;
+  font-size: 24px;
+}
+
+.student:nth-child(3n) {
+  bottom: 17%;
+  font-size: 34px;
+}
+
+.student:nth-child(4n) {
+  bottom: 48%;
+  font-size: 22px;
+}
+
+.student:nth-child(5n) {
+  animation-name: student-hop;
+}
+
+@keyframes student-run {
+  0% {
+    transform: translateX(-80px) translateY(0) rotate(-5deg);
+  }
+
+  20% {
+    transform: translateX(20vw) translateY(-8px) rotate(5deg);
+  }
+
+  45% {
+    transform: translateX(48vw) translateY(2px) rotate(-3deg);
+  }
+
+  70% {
+    transform: translateX(76vw) translateY(-10px) rotate(5deg);
+  }
+
+  100% {
+    transform: translateX(calc(100vw + 100px)) translateY(0) rotate(-5deg);
+  }
+}
+
+@keyframes student-hop {
+  0% {
+    transform: translateX(-80px) translateY(0);
+  }
+
+  25% {
+    transform: translateX(25vw) translateY(-18px);
+  }
+
+  50% {
+    transform: translateX(50vw) translateY(0);
+  }
+
+  75% {
+    transform: translateX(75vw) translateY(-15px);
+  }
+
+  100% {
+    transform: translateX(calc(100vw + 100px)) translateY(0);
+  }
+}
+
+/* =========================
+   TRANG THƯ
+========================= */
+
+.wrap {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 560px);
+  margin: auto;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: #fffaf5;
+  text-shadow: 0 1px 5px #74556a;
+  text-transform: uppercase;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  margin: 18px auto 14px;
+  padding: 30px 32px;
+  background: #fffaf4ed;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow:
+    0 18px 55px #5b52602c,
+    0 0 0 5px #fffaf440;
+  backdrop-filter: blur(8px);
+  animation: card-float 5s ease-in-out infinite;
+}
+
+@keyframes card-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid #e8ccd9;
+  pointer-events: none;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+.flower {
+  margin-bottom: 6px;
+  text-align: center;
+  font-size: 23px;
+  color: var(--rose);
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 7vw, 56px);
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+}
+
+h1 em {
+  color: #c17d9e;
+  font-weight: 600;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 14px 0;
+  color: var(--rose);
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  width: 42px;
+  height: 1px;
+  background: var(--line);
+}
+
+.letter {
+  min-height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 2px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 21px;
+  line-height: 1.65;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.letter p {
+  width: 100%;
+  margin: 0;
+  white-space: normal;
+}
+
+.letter-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.letter-nav button {
+  padding: 9px 12px;
+  border: 1px solid #e4c4d5;
+  border-radius: 3px;
+  background: #f9edf3;
+  color: var(--ink);
+  font: 11px 'Be Vietnam Pro', sans-serif;
+  cursor: pointer;
+  transition: background .25s ease, border-color .25s ease;
+}
+
+.letter-nav button:hover:not(:disabled) {
+  background: #f2dce8;
+  border-color: var(--rose);
+}
+
+.letter-nav button:disabled {
+  opacity: .3;
+  cursor: default;
+}
+
+#sentence-count {
+  color: var(--muted);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.sign {
+  margin-top: 26px;
+  text-align: right;
+  color: #c17d9e;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-style: italic;
+}
+
+.back {
+  display: block;
+  margin: 17px auto 0;
+  text-align: center;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: .04em;
+}
+
+.back:hover {
+  color: var(--rose);
+}
+
+footer {
+  text-align: center;
+  color: #fffaf5;
+  text-shadow: 0 1px 5px #74556a;
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+footer .heart {
+  color: #ffe2ee;
+}
+
+/* Chữ xuất hiện lần lượt */
+
+#sentence-text {
+  overflow-wrap: anywhere;
+}
+
+#sentence-text span {
+  display: inline;
+  opacity: 0;
+  filter: blur(3px);
+  animation: letter-appear .28s ease-out forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes letter-appear {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 480px) {
+  body {
+    padding: 14px 12px;
+  }
+
+  .school {
+    top: 12%;
+    transform: translateX(-50%) scale(.78);
+    transform-origin: top center;
+    width: 100vw;
+  }
+
+  .yard {
+    height: 32%;
+  }
+
+  .card {
+    margin: 12px auto;
+    padding: 24px 20px;
+  }
+
+  .letter {
+    min-height: 125px;
+    font-size: 20px;
+  }
+
+  .letter-nav {
+    gap: 6px;
+  }
+
+  .letter-nav button {
+    padding: 9px 8px;
+    font-size: 10px;
+  }
+
+  .student {
+    font-size: 24px;
+  }
+}
+
+/* Tôn trọng cài đặt giảm chuyển động */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+
+  #sentence-text span {
+    animation: none;
+    opacity: 1;
+    filter: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BẦU TRỜI -->
+<div class="scene" aria-hidden="true">
+  <div class="sun"></div>
+
+  <div class="cloud cloud-1"></div>
+  <div class="cloud cloud-2"></div>
+  <div class="cloud cloud-3"></div>
+
+  <!-- NGÔI TRƯỜNG -->
+  <div class="school">
+    <div class="flag-pole">
+      <div class="flag"></div>
+    </div>
+
+    <div class="roof"></div>
+
+    <div class="school-body">
+      <div class="school-sign">TRƯỜNG THÂN YÊU</div>
+
+      <div class="windows">
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+        <div class="window"></div>
+      </div>
+
+      <div class="door"></div>
+    </div>
+
+    <div class="school-steps"></div>
+  </div>
+
+  <!-- SÂN TRƯỜNG -->
+  <div class="yard">
+    <div class="yard-line"></div>
+
+    <div class="tree tree-1"></div>
+    <div class="tree tree-2"></div>
+
+    <!-- Học sinh được tạo bằng JavaScript -->
+    <div class="students" id="students"></div>
+  </div>
+</div>
+
+<!-- LÁ THƯ -->
+<main class="wrap">
+  <header class="top">
+    <span>20 · 10 · 2026</span>
+    <span>♡ Một chút yêu thương</span>
+  </header>
+
+  <article class="card">
+    <div class="flower" aria-hidden="true">❀</div>
+
+    <h1><em>gâu gâu</em></h1>
+
+    <div class="divider" aria-hidden="true">♡</div>
+
+    <section class="letter" aria-label="Lời chúc">
+      <p id="sentence-text" aria-live="polite">
+       Chào Nàng công chúa của tôi, tôi là một trong những chàng hoàng tử của lớp 12.10.
+      </p>
+    </section>
+
+    <div class="letter-nav">
+      <button id="prev-btn" type="button" disabled>
+        ← Câu trước
+      </button>
+
+      <span id="sentence-count">1 / 6</span>
+
+      <button id="next-btn" type="button">
+        Câu tiếp theo →
+      </button>
+    </div>
+
+    <a class="back"
+       href="https://women12102010.github.io/women1210.github.io/">
+      ← Quay lại phong bì
+    </a>
+  </article>
+
+  <footer>
+    gâu gâu <span class="heart">♡</span>
+  </footer>
+</main>
+
+<script>
+/* =========================
+   TẠO HỌC SINH CHẠY LOẠN
+========================= */
+
+const students = document.getElementById('students');
+
+const characters = [
+  '🏃🏻‍♂️',
+  '🏃🏻‍♀️',
+  '🧑🏻‍🎓',
+  '👩🏻‍🎓',
+  '🏃🏼‍♂️',
+  '🏃🏼‍♀️',
+  '🧒🏻',
+  '👧🏻',
+  '🏃🏻',
+  '🧑🏻‍🏫',
+  '🏃🏽‍♂️',
+  '👦🏻'
+];
+
+for (let i = 0; i < 16; i++) {
+  const person = document.createElement('span');
+
+  person.className = 'student';
+  person.textContent =
+    characters[i % characters.length];
+
+  person.style.setProperty(
+    '--speed',
+    `${5 + Math.random() * 8}s`
+  );
+
+  person.style.setProperty(
+    '--delay',
+    `${-Math.random() * 12}s`
+  );
+
+  // Một số học sinh chạy ngược chiều để sân trường
+  // trông đông vui và hỗn loạn hơn.
+  if (i % 6 === 0) {
+    person.style.animationDirection = 'reverse';
+  }
+
+  students.appendChild(person);
+}
+
+/* =========================
+   CHUYỂN TỪNG CÂU THƯ
+========================= */
+
+const sentences = [
+  "Chào Nàng công chúa của tôi, tôi là một trong những chàng hoàng tử của lớp 12.10.",
+
+  "Thời gian thấm thoát thoi đưa, ngày để tôi được bên cạnh em không còn nhiều nữa.",
+
+  "Nhân dịp ngày mai là ngày 20/10, tôi một gửi cho em những lời nhắc nhở khi không có tôi ở cạnh em.",
+
+  "BThy à, em là một cô gái dễ thương, hoà đồng và đối với tôi em là nàng công chúa khiến tôi ấn tượng nhất trong 14 công chúa.",
+
+  "Học lực của em rất tốt nhưng em lại luôn tự ti về bản thân mình (nhất là trước giờ kiểm tra như “T chưa học bài m ơi, bài ni t k bt làmm, …) nhưng phát bài ra toàn 9,10đ 🙂..",
+
+  "Trước khi đi có vài lời nhắn nhủ tôi muốn gửi đến em:",
+  "Trời bắt đầu trở lạnh rồi ra đường nhớ phải mặc áo ấm;",
+  "Học tập thật chăm chỉ cho kì thi quan trọng nhất của mình;",
+  "Cuối cùng là phải giữ gìn sức khoẻ.",
+  "Đến giờ tôi phải đi rồi, tạm biệt nha nàng công chúa của tôi!"
+];
+
+let currentSentence = 0;
+
+const sentenceText =
+  document.getElementById('sentence-text');
+
+const prevBtn =
+  document.getElementById('prev-btn');
+
+const nextBtn =
+  document.getElementById('next-btn');
+
+const sentenceCount =
+  document.getElementById('sentence-count');
+
+const reduceMotion = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+).matches;
+
+function showSentence(index) {
+  currentSentence = index;
+
+  const text = sentences[currentSentence];
+
+  sentenceText.replaceChildren();
+
+  if (reduceMotion) {
+    sentenceText.textContent = text;
+  } else {
+    [...text].forEach((char, i) => {
+      const span = document.createElement('span');
+
+      // Giữ khoảng trắng giữa các từ.
+      span.textContent =
+        char === ' ' ? '\u00A0' : char;
+
+      span.style.setProperty(
+        '--delay',
+        `${i * 0.025}s`
+      );
+
+      sentenceText.appendChild(span);
+    });
+  }
+
+  sentenceCount.textContent =
+    `${currentSentence + 1} / ${sentences.length}`;
+
+  prevBtn.disabled = currentSentence === 0;
+
+  nextBtn.disabled =
+    currentSentence === sentences.length - 1;
+}
+
+prevBtn.addEventListener('click', () => {
+  if (currentSentence > 0) {
+    showSentence(currentSentence - 1);
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  if (currentSentence < sentences.length - 1) {
+    showSentence(currentSentence + 1);
+  }
+});
+
+showSentence(0);
+</script>
+
+</body>
+</html>
+```
